@@ -11,11 +11,15 @@
     "url": "https://github.com/zeke/marky-markdown"
   },
   "keywords": [
-    "markdown",
-    "html",
     "readme",
-    "npm",
-    "documentation"
+    "markdown",
+    "md",
+    "documentation",
+    "syntax highlighting",
+    "html",
+    "frontmatter",
+    "github",
+    "npm"
   ],
   "author": "Zeke Sikelianos <zeke@sikelianos.com> (http://zeke.sikelianos.com/)",
   "license": "ISC",
