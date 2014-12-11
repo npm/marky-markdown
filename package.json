@@ -1,0 +1,26 @@
+{
+  "name": "marky-markdown",
+  "version": "1.0.0",
+  "description": "The thing npmjs.com uses to process READMEs and other markdown files",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zeke/marky-markdown"
+  },
+  "keywords": [
+    "markdown",
+    "html",
+    "readme",
+    "npm",
+    "documentation"
+  ],
+  "author": "Zeke Sikelianos <zeke@sikelianos.com> (http://zeke.sikelianos.com/)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zeke/marky-markdown/issues"
+  },
+  "homepage": "https://github.com/zeke/marky-markdown"
+}
