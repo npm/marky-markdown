@@ -34,6 +34,7 @@
     "is-url": "^1.2.0",
     "lodash": "^2.4.1",
     "marked": "^0.3.2",
+    "sanitize-html": "^1.4.3",
     "sanitizer": "^0.1.2",
     "similarity": "^1.0.1"
   },

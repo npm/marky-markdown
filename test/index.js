@@ -43,9 +43,35 @@ describe("syntax highlighting", function() {
 })
 
 describe("sanitize", function(){
-  it("removes script tags")
-  it("removes other scary things like what")
-  it("maps relative URLs to their github equivalent, if package.repository is githubby")
+  var $
+
+  before(function() {
+    $ = marky(fixtures.dirty)
+  })
+
+  it("removes script tags", function(){
+    assert(~fixtures.dirty.indexOf("<script"))
+    assert(!$("script").length)
+  })
+
+  it("allows img tags", function() {
+    assert($("img").length)
+  })
+
+  it("allows h1-6 to preserve their dom id", function() {
+    assert($("h1").attr("id"))
+    assert($("h2").attr("id"))
+    assert($("h3").attr("id"))
+    assert($("h4").attr("id"))
+    assert($("h5").attr("id"))
+    assert($("h6").attr("id"))
+  })
+
+  it("removes classnames from elements", function() {
+    assert(~fixtures.dirty.indexOf("class=\"xxx\""))
+    assert(!$(".xxx").length)
+  })
+
 })
 
 describe("badges", function(){

@@ -2,6 +2,7 @@ var marked      = require("marked")
 var cheerio     = require("cheerio")
 var sanitizer   = require("sanitizer")
 var defaults    = require("lodash").defaults
+var sanitize    = require("./lib/sanitize")
 var badges      = require("./lib/badges")
 var github      = require("./lib/github")
 var gravatar    = require("./lib/gravatar")
@@ -32,7 +33,7 @@ var marky = module.exports = function(markdown, options) {
   html = marked.parse(markdown, {renderer: options.renderer})
 
   // Sanitize malicious or malformed HTML
-  // html = sanitizer.sanitize(html)
+  html = sanitize(html)
 
   // Turn HTML into DOM object
   $ = cheerio.load(html)
