@@ -1,7 +1,7 @@
 {
   "name": "marky-markdown",
   "version": "1.0.0",
-  "description": "The thing npmjs.com uses to process READMEs and other markdown files",
+  "description": "The thing npmjs.com uses to clean up READMEs and other markdown files",
   "main": "index.js",
   "scripts": {
     "test": "mocha"
