@@ -58,7 +58,7 @@ describe("sanitize", function(){
     assert($("img").length)
   })
 
-  it("allows h1-6 to preserve their dom id", function() {
+  it("allows h1/h2/h3/h4/h5/h6 tags to preserve their dom id", function() {
     assert($("h1").attr("id"))
     assert($("h2").attr("id"))
     assert($("h3").attr("id"))
@@ -101,7 +101,7 @@ describe("gravatar", function(){
     images = $("img")
   })
 
-  it("replaces insecure gravatar img src URLs with secure HTTPs URLs", function() {
+  it("replaces insecure gravatar img src URLs with secure HTTPS URLs", function() {
     assert(~fixtures.gravatar.indexOf("http://gravatar.com/avatar/123?s=50&d=retro"))
     assert.equal(images.length, 3)
     assert.equal($(images[0]).attr('src'), "https://secure.gravatar.com/avatar/123?s=50&d=retro")
@@ -123,7 +123,77 @@ describe("gravatar", function(){
 
 describe("github", function(){
 
-  it("rewrites relative links URLs to their absolute form")
+  describe("when package repo is on github", function() {
+    var $
+    var package = {
+      name: "wahlberg",
+      repository: {
+        type: "git",
+        url: "https://github.com/mark/wahlberg"
+      }
+    }
+
+    before(function() {
+      $ = marky(fixtures.github, {package: package})
+    })
+
+    it("rewrites relative links hrefs to absolute", function() {
+      assert(~fixtures.github.indexOf("(relative/file.js)"))
+      assert($("a[href='https://github.com/mark/wahlberg/blob/master/relative/file.js']").length)
+    })
+
+    it("rewrites slashy relative links hrefs to absolute", function() {
+      assert(~fixtures.github.indexOf("(/slashy/poo)"))
+      assert($("a[href='https://github.com/mark/wahlberg/blob/master/slashy/poo']").length)
+    })
+
+    it("leaves protocol-relative URLs alone", function() {
+      assert(~fixtures.github.indexOf("(//protocollie.com)"))
+      assert($("a[href='//protocollie.com']").length)
+    })
+
+    it("leaves hashy URLs alone", function() {
+      assert(~fixtures.github.indexOf("(#header)"))
+      assert($("a[href='#header']").length)
+    })
+
+  })
+
+  describe("when package repo is NOT on github", function() {
+    var $
+    var package = {
+      name: "bitbucketberg",
+      repository: {
+        type: "git",
+        url: "https://bitbucket.com/mark/bitbucketberg"
+      }
+    }
+
+    before(function() {
+      $ = marky(fixtures.github, {package: package})
+    })
+
+    it("leaves relative URLs alone", function() {
+      assert(~fixtures.github.indexOf("(relative/file.js)"))
+      assert($("a[href='relative/file.js']").length)
+    })
+
+    it("leaves slashy relative URLs alone", function() {
+      assert(~fixtures.github.indexOf("(/slashy/poo)"))
+      assert($("a[href='/slashy/poo']").length)
+    })
+
+    it("leaves protocol-relative URLs alone", function() {
+      assert(~fixtures.github.indexOf("(//protocollie.com)"))
+      assert($("a[href='//protocollie.com']").length)
+    })
+
+    it("leaves hashy URLs alone", function() {
+      assert(~fixtures.github.indexOf("(#header)"))
+      assert($("a[href='#header']").length)
+    })
+
+  })
 
 })
 
