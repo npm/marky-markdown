@@ -14,10 +14,7 @@ describe("marky-markdown", function() {
     assert($.html)
     assert($._root)
     assert($._options)
-    assert.equal(
-      $.html(),
-      "<h1 id=\"hello-world\">hello world</h1>\n<p>paragraph</p>\n"
-    )
+    assert(~$.html().indexOf("<h1 id=\"hello-world\">hello world</h1>\n<p>paragraph</p>\n"))
   })
 
   it("throws an error if first argument is not a string", function(){
@@ -36,10 +33,27 @@ describe("marky-markdown", function() {
 })
 
 describe("syntax highlighting", function() {
-  it("converts github flavored markdown GFM to <code> blocks")
-  it("adds 'lang-js' class to javascript blocks")
-  it("adds 'lang-sh' class to shell blocks")
-  it("adds 'hljs' class to all blocks")
+  var $ = marky(fixtures.basic)
+
+  it("converts github flavored markdown to <code> blocks", function() {
+    assert(fixtures.basic.indexOf("```js"))
+    assert($("code").length)
+  })
+
+  it("adds js class to javascript blocks", function(){
+    assert(fixtures.basic.indexOf("```js"))
+    assert($("code.js").length)
+  })
+
+  it("adds sh class to shell blocks", function(){
+    assert(fixtures.basic.indexOf("```sh"))
+    assert($("code.sh").length)
+  })
+
+  it("adds hljs class to all blocks", function() {
+    assert.equal($("code").length, $("code.hljs").length)
+  })
+
 })
 
 describe("sanitize", function(){
@@ -70,6 +84,10 @@ describe("sanitize", function(){
   it("removes classnames from elements", function() {
     assert(~fixtures.dirty.indexOf("class=\"xxx\""))
     assert(!$(".xxx").length)
+  })
+
+  it("allows classnames on code tags", function() {
+    assert($("code.hljs").length)
   })
 
 })
@@ -248,7 +266,6 @@ describe("packagize", function() {
 
     it("leaves first p alone if it differs from package.description", function() {
       var $ = marky(fixtures.wibble, {package: packages.dangledor})
-      // console.log($.html())
       assert.equal($("p.package-description-redundant").length, 0)
       assert.equal($("p:not(.package-description)").first().text(), "A package called wibble!")
     })

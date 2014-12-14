@@ -15,3 +15,7 @@
 <img src="local.png"></img>
 
 <a class="xxx" href="http://yyy.com">zzz</a>
+
+```js
+console.log("hello world")
+```
