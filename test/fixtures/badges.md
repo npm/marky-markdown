@@ -16,8 +16,8 @@
 
 ![](https://nodei.co/foo-package)
 
+neighboring ![](https://travis-ci.org/foo-package) content
+
 ![](https://saucelabs.com/foo-package)
 
 ![](https://secure.travis-ci.org/foo-package)
-
-![](https://travis-ci.org/foo-package)

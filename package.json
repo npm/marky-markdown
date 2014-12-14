@@ -26,5 +26,16 @@
   "bugs": {
     "url": "https://github.com/zeke/marky-markdown/issues"
   },
-  "homepage": "https://github.com/zeke/marky-markdown"
+  "homepage": "https://github.com/zeke/marky-markdown",
+  "dependencies": {
+    "cheerio": "^0.18.0",
+    "github-url-to-object": "^1.4.2",
+    "highlight.js": "^8.4.0",
+    "is-url": "^1.2.0",
+    "lodash": "^2.4.1",
+    "marked": "^0.3.2",
+    "mocha": "^2.0.1",
+    "sanitizer": "^0.1.2",
+    "similarity": "^1.0.1"
+  }
 }

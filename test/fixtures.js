@@ -1,4 +1,5 @@
 var fs = require("fs")
+var path = require("path")
 var fixtures = module.exports = {}
 
 fs.readdirSync(__dirname + "/fixtures").forEach(function(file) {

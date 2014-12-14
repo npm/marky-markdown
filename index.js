@@ -1,18 +1,18 @@
-// npm i mocha -d && npm i marked sanitizer highlight.js github-url-to-object cheerio similarity lodash
-
 var marked      = require("marked")
 var cheerio     = require("cheerio")
-var merge       = require("lodash").merge
-
-var badge       = require("../lib/badge")
-var packagize   = require("../lib/packagize")
-var renderer    = require("../lib/renderer")
-var stanitize   = require("../lib/sanitize")
+var sanitizer   = require("sanitizer")
+var defaults    = require("lodash").defaults
+var badges      = require("./lib/badges")
+var github      = require("./lib/github")
+var gravatar    = require("./lib/gravatar")
+var packagize   = require("./lib/packagize")
+var renderer    = require("./lib/renderer")
 
 var marky = module.exports = function(markdown, options) {
   var html
   var $
 
+  // Validate input
   if (!markdown || typeof markdown !== "string") {
     throw new Error("first argument must be a string")
   }
@@ -21,19 +21,34 @@ var marky = module.exports = function(markdown, options) {
     throw new Error("options must but an object")
   }
 
-  if (!options) {
-    options = {}
-  }
-
-  merge(options, {
+  // Set default options
+  options = options || {}
+  defaults(options, {
     package: null,
     renderer: renderer,
   })
 
+  // Parse markdown into HTML and add syntax highlighting
   html = marked.parse(markdown, {renderer: options.renderer})
-  html = sanitize(html, options.package)
+
+  // Sanitize malicious or malformed HTML
+  // html = sanitizer.sanitize(html)
+
+  // Turn HTML into DOM object
   $ = cheerio.load(html)
-  $ = badge($)
+
+  // Make gravatar img URLs secure
+  $ = gravatar($)
+
+  // Make relative GitHub link URLs absolute
+  $ = github($, options.package)
+
+  // Add CSS classes to paragraphs containing badges
+  $ = badges($)
+
+  // Inject package name and description into README
   $ = packagize($, options.package)
+
+  // Call .html() on the return value to get an HTML string
   return $
 }
