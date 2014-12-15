@@ -21,3 +21,5 @@ neighboring ![](https://travis-ci.org/foo-package) content
 ![](https://saucelabs.com/foo-package)
 
 ![](https://secure.travis-ci.org/foo-package)
+
+I'm just a paragraph without images.

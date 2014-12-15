@@ -99,18 +99,16 @@ describe("sanitize", function(){
 
 describe("badges", function(){
 
-  it("adds a badges class to p tags containing badge images", function() {
+  it("adds a badge class to img tags containing badge images", function() {
     var $ = marky(fixtures.badges)
-    assert($("p:has(img)").length)
-    assert($("p:has(img[src*='nodei.co'])").length)
-    assert($("p:has(img[src*='nodei.co'])").hasClass("badge"))
-    assert.equal($("p").length, $("p.badge").length)
+    assert($("img").length)
+    assert.equal($("img").length, $("img.badge").length)
   })
 
-  it("adds a badge-with-siblings class to p tags containing more than just a badge", function() {
+  it("adds a badge-only class to p tags containing nothing more than a badge", function() {
     var $ = marky(fixtures.badges)
-    assert.equal($("p.badge-with-siblings").length, 1)
-    assert.equal($("p.badge-with-siblings").text(), "neighboring  content")
+    assert.equal($("p:not(.badge-only)").length, 2)
+    assert.equal($("p.badge-only").length, $("p").length-2)
   })
 
 })
