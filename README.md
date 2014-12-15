@@ -16,7 +16,7 @@ npm install marky-markdown --save
 var marky = require("marky-markdown")
 
 // Clean up a regular old markdown string
-var html = marky("# hello, I'm markdown")
+var html = marky("# hello, I'm markdown").html()
 
 // Or pass in an npm `package` object to do stuff like:
 // - rewrite relative URLs to their absolute equivalent on github;
@@ -30,7 +30,7 @@ var html = marky("# hello, I am the foo readme", {
       url: "https://github.com/kung/foo"
     }
   }
-})
+}).html()
 
 ```
 
@@ -48,10 +48,11 @@ npm test
     ✓ is a function 
     ✓ accepts a markdown string and returns a cheerio DOM object 
     ✓ throws an error if first argument is not a string 
-    ✓ throws an error if second argument is present but isn't an object 
+    ✓ throws an error if second argument is present but not an object 
   syntax highlighting
-    ✓ converts github flavored markdown to <code> blocks 
+    ✓ converts github flavored fencing to code blocks 
     ✓ adds js class to javascript blocks 
+    ✓ adds sh class to shell blocks 
     ✓ adds sh class to shell blocks 
     ✓ adds hljs class to all blocks 
   sanitize
@@ -61,8 +62,8 @@ npm test
     ✓ removes classnames from elements 
     ✓ allows classnames on code tags 
   badges
-    ✓ adds a badges class to p tags containing badge images 
-    ✓ adds a badge-with-siblings class to p tags containing more than just a badge 
+    ✓ adds a badge class to img tags containing badge images 
+    ✓ adds a badge-only class to p tags containing nothing more than a badge 
   gravatar
     ✓ replaces insecure gravatar img src URLs with secure HTTPS URLs 
     ✓ leaves secure gravatar URLs untouched 
@@ -90,12 +91,24 @@ npm test
   fixtures
     ✓ is a key-value object 
     ✓ contains stringified markdown files as values 
-  niceties
-    - supports deep linking by injecting <a> tags into headings that have DOM ids
-    - replaces relative image URLs with npm CDN URLs
-    - rewrites HTML frontmatter as <meta> tags
-  34 passing (76ms)
-  3 pending
+  headings
+    ✓ injects hashy anchor tags into headings that have DOM ids 
+    ✓ adds deep-link class to modified headings 
+    ✓ doesn't inject anchor tags into headings that already contain anchors 
+  frontmatter
+    ✓ rewrites HTML frontmatter as <meta> tags 
+  cdn
+    when serveImagesWithCDN is true
+      ✓ replaces relative img URLs with npm CDN URLs 
+      ✓ replaces slashy relative img URLs with npm CDN URLs 
+      ✓ leaves protocol relative URLs alone 
+      ✓ leaves HTTPS URLs alone 
+    when serveImagesWithCDN is false (default)
+      ✓ leaves relative img along 
+      ✓ leaves slashy relative img URLs alone 
+      ✓ leaves protocol relative URLs alone 
+      ✓ leaves HTTPS URLs alone 
+  47 passing (69ms)
 
 ```
 
@@ -108,6 +121,7 @@ npm test
 - [marked](https://github.com/chjj/marked): A markdown parser built for speed
 - [sanitize-html](https://github.com/punkave/sanitize-html): Clean up user-submitted HTML, preserving whitelisted elements and whitelisted attributes on a per-element basis
 - [similarity](https://github.com/zeke/similarity): How similar are these two strings?
+- [html-frontmatter](https://github.com/zeke/html-frontmatter): Extract key-value metadata from HTML comments
 
 ## Dev Dependencies
 

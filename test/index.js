@@ -24,7 +24,7 @@ describe("marky-markdown", function() {
     assert.throws(function() { marky({a:1,b:2}) }, errorPattern)
   })
 
-  it("throws an error if second argument is present but isn't an object", function(){
+  it("throws an error if second argument is present but not an object", function(){
     var errorPattern = new RegExp("options must but an object", "i")
     assert.throws(function() { marky("this is a test", "wtf") }, errorPattern)
   })
