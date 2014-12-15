@@ -4,8 +4,10 @@ var sanitizer   = require("sanitizer")
 var defaults    = require("lodash").defaults
 var sanitize    = require("./lib/sanitize")
 var badges      = require("./lib/badges")
+var frontmatter = require("./lib/frontmatter")
 var github      = require("./lib/github")
 var gravatar    = require("./lib/gravatar")
+var headings    = require("./lib/headings")
 var packagize   = require("./lib/packagize")
 var renderer    = require("./lib/renderer")
 
@@ -27,10 +29,14 @@ var marky = module.exports = function(markdown, options) {
   defaults(options, {
     package: null,
     renderer: renderer,
+    serveImagesWithCDN: false,
   })
 
   // Parse markdown into HTML and add syntax highlighting
   html = marked.parse(markdown, {renderer: options.renderer})
+
+  // Convert HTML fontmatter into meta tags
+  html = frontmatter(html)
 
   // Sanitize malicious or malformed HTML
   html = sanitize(html)
@@ -46,6 +52,9 @@ var marky = module.exports = function(markdown, options) {
 
   // Add CSS classes to paragraphs containing badges
   $ = badges($)
+
+  // Add #hashy links to h1,h2,h3,h4,h5,h6
+  $ = headings($)
 
   // Inject package name and description into README
   $ = packagize($, options.package)

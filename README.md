@@ -1,4 +1,4 @@
-# marky-markdown
+# marky-markdown 
 
 The thing npmjs.com uses to clean up READMEs and other markdown files
 
@@ -10,55 +10,93 @@ Download node at [nodejs.org](http://nodejs.org) and install it, if you haven't 
 npm install marky-markdown --save
 ```
 
+## Usage
+
+```js
+var marky = require("marky-markdown")
+
+// Clean up a regular old markdown string
+var html = marky("# hello, I'm markdown")
+
+// Or pass in an npm `package` object to do stuff like:
+// - rewrite relative URLs to their absolute equivalent on github;
+// - normalize package metadata with redundant readme content;
+var html = marky("# hello, I am the foo readme", {
+  package: {
+    name: "foo"
+    name: "foo is a thing"
+    repository: {
+      type: "git",
+      url: "https://github.com/kung/foo"
+    }
+  }
+})
+
+```
+
 ## Tests
 
 ```sh
 npm install
 npm test
 ```
-
 ```
-marky-markdown
-  ✓ is a function
-  ✓ accepts a markdown string and returns a cheerio DOM object
-  ✓ throws an error if first argument is not a string
-  ✓ throws an error if second argument is present but isn't an object
-syntax highlighting
-  - converts github flavored markdown GFM to <code> blocks
-  - adds 'lang-js' class to javascript blocks
-  - adds 'lang-sh' class to shell blocks
-  - adds 'hljs' class to all blocks
-sanitize
-  - removes script tags
-  - removes other scary things like what
-  - maps relative URLs to their github equivalent, if package.repository is githubby
-badges
-  ✓ adds a badges class to p tags containing badge images
-  ✓ adds a badge-with-siblings class to p tags containing more than just a badge
-gravatar
-  ✓ replaces insecure gravatar img src URLs with secure HTTPs URLs
-  ✓ leaves secure gravatar URLs untouched
-  ✓ leaves non-gravtar URLs untouched
-github
-  - rewrites relative links URLs to their absolute form
-packagize
-  name
-    ✓ prepends an h1.package-name element into readme with value of package.name
-    ✓ adds .package-name-redundant class to first h1 if it's similar to package.name
-    ✓ leaves first h1 alone if it differs from package.name
-  description
-    ✓ prepends package.description in a p.package-description element
-    ✓ adds .package-description-redundant class to first p if it's similar to package.description
-    ✓ leaves first p alone if it differs from package.description
-fixtures
-  ✓ is a key-value object
-  ✓ contains stringified markdown files as values
-niceties
-  - supports deep linking by injecting <a> tags into headings that have DOM ids
-  - replaces relative image URLs with npm CDN URLs
-  - rewrites HTML frontmatter as <meta> tags
-17 passing (54ms)
-11 pending
+
+> marky-markdown@1.0.0 test /Users/z/code/personal/marky-markdown
+> mocha
+  marky-markdown
+    ✓ is a function 
+    ✓ accepts a markdown string and returns a cheerio DOM object 
+    ✓ throws an error if first argument is not a string 
+    ✓ throws an error if second argument is present but isn't an object 
+  syntax highlighting
+    ✓ converts github flavored markdown to <code> blocks 
+    ✓ adds js class to javascript blocks 
+    ✓ adds sh class to shell blocks 
+    ✓ adds hljs class to all blocks 
+  sanitize
+    ✓ removes script tags 
+    ✓ allows img tags 
+    ✓ allows h1/h2/h3/h4/h5/h6 tags to preserve their dom id 
+    ✓ removes classnames from elements 
+    ✓ allows classnames on code tags 
+  badges
+    ✓ adds a badges class to p tags containing badge images 
+    ✓ adds a badge-with-siblings class to p tags containing more than just a badge 
+  gravatar
+    ✓ replaces insecure gravatar img src URLs with secure HTTPS URLs 
+    ✓ leaves secure gravatar URLs untouched 
+    ✓ leaves non-gravtar URLs untouched 
+  github
+    when package repo is on github
+      ✓ rewrites relative links hrefs to absolute 
+      ✓ rewrites slashy relative links hrefs to absolute 
+      ✓ leaves protocol-relative URLs alone 
+      ✓ leaves hashy URLs alone 
+    when package repo is NOT on github
+      ✓ leaves relative URLs alone 
+      ✓ leaves slashy relative URLs alone 
+      ✓ leaves protocol-relative URLs alone 
+      ✓ leaves hashy URLs alone 
+  packagize
+    name
+      ✓ prepends an h1.package-name element into readme with value of package.name 
+      ✓ adds .package-name-redundant class to first h1 if it's similar to package.name 
+      ✓ leaves first h1 alone if it differs from package.name 
+    description
+      ✓ prepends package.description in a p.package-description element 
+      ✓ adds .package-description-redundant class to first p if it's similar to package.description 
+      ✓ leaves first p alone if it differs from package.description 
+  fixtures
+    ✓ is a key-value object 
+    ✓ contains stringified markdown files as values 
+  niceties
+    - supports deep linking by injecting <a> tags into headings that have DOM ids
+    - replaces relative image URLs with npm CDN URLs
+    - rewrites HTML frontmatter as <meta> tags
+  34 passing (76ms)
+  3 pending
+
 ```
 
 ## Dependencies
@@ -66,10 +104,9 @@ niceties
 - [cheerio](https://github.com/cheeriojs/cheerio): Tiny, fast, and elegant implementation of core jQuery designed specifically for the server
 - [github-url-to-object](https://github.com/zeke/github-url-to-object): Extract user, repo, and other interesting properties from GitHub URLs
 - [highlight.js](https://github.com/isagalaev/highlight.js): Syntax highlighting with language autodetection.
-- [is-url](https://github.com/segmentio/is-url): Check whether a string is a URL.
 - [lodash](https://github.com/lodash/lodash): A utility library delivering consistency, customization, performance, &amp; extras.
 - [marked](https://github.com/chjj/marked): A markdown parser built for speed
-- [sanitizer](https://github.com/theSmaw/Caja-HTML-Sanitizer): Caja&#39;s HTML Sanitizer as a Node.js module
+- [sanitize-html](https://github.com/punkave/sanitize-html): Clean up user-submitted HTML, preserving whitelisted elements and whitelisted attributes on a per-element basis
 - [similarity](https://github.com/zeke/similarity): How similar are these two strings?
 
 ## Dev Dependencies

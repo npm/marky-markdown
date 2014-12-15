@@ -10,11 +10,11 @@ describe("marky-markdown", function() {
   })
 
   it("accepts a markdown string and returns a cheerio DOM object", function(){
-    var $ = marky(fixtures.basic)
+    var $ = marky("hello, world")
     assert($.html)
     assert($._root)
     assert($._options)
-    assert(~$.html().indexOf("<h1 id=\"hello-world\">hello world</h1>\n<p>paragraph</p>\n"))
+    assert(~$.html().indexOf("<p>hello, world</p>\n"))
   })
 
   it("throws an error if first argument is not a string", function(){
@@ -35,7 +35,7 @@ describe("marky-markdown", function() {
 describe("syntax highlighting", function() {
   var $ = marky(fixtures.basic)
 
-  it("converts github flavored markdown to <code> blocks", function() {
+  it("converts github flavored fencing to code blocks", function() {
     assert(fixtures.basic.indexOf("```js"))
     assert($("code").length)
   })
@@ -48,6 +48,11 @@ describe("syntax highlighting", function() {
   it("adds sh class to shell blocks", function(){
     assert(fixtures.basic.indexOf("```sh"))
     assert($("code.sh").length)
+  })
+
+  it("adds sh class to shell blocks", function(){
+    assert(fixtures.basic.indexOf("```coffee"))
+    assert($("code.coffeescript").length)
   })
 
   it("adds hljs class to all blocks", function() {
@@ -292,8 +297,100 @@ describe("fixtures", function() {
 
 })
 
-describe("niceties", function(){
-  it("supports deep linking by injecting <a> tags into headings that have DOM ids")
-  it("replaces relative image URLs with npm CDN URLs")
-  it("rewrites HTML frontmatter as <meta> tags")
+describe("headings", function(){
+
+  it("injects hashy anchor tags into headings that have DOM ids", function(){
+    assert(~fixtures.dirty.indexOf("# h1"))
+    var $ = marky(fixtures.dirty)
+    assert($("h1 a[href='#h1']").length)
+  })
+
+  it("adds deep-link class to modified headings", function(){
+    assert(~fixtures.dirty.indexOf("# h1"))
+    var $ = marky(fixtures.dirty)
+    assert($("h1.deep-link a[href='#h1']").length)
+  })
+
+  it("doesn't inject anchor tags into headings that already contain anchors", function(){
+    assert(~fixtures.dirty.indexOf("### [h3](/already/linky)"))
+    var $ = marky(fixtures.dirty)
+    assert($("h3 a[href='/already/linky']").length)
+  })
+
+})
+
+describe("frontmatter", function() {
+  it("rewrites HTML frontmatter as <meta> tags", function() {
+    var $ = marky(fixtures.frontmatter)
+    // console.log($("meta[name='hello']"))
+    assert($("meta[name='hello']").length)
+    assert.equal($("meta[name='hello']").attr("content"), "world")
+  })
+})
+
+describe("cdn", function() {
+
+  describe("when serveImagesWithCDN is true", function() {
+    var $ = marky(fixtures.basic, {
+      package: {
+        name: "foo",
+        version: "1.0.0"
+      },
+      serveImagesWithCDN: true
+    })
+
+    it("replaces relative img URLs with npm CDN URLs", function() {
+      assert(~fixtures.basic.indexOf("![](relative.png)"))
+      assert($("img[src='https://cdn.npm.im/foo@1.0.0/relative.png']"))
+    })
+
+    it("replaces slashy relative img URLs with npm CDN URLs", function() {
+      assert(~fixtures.basic.indexOf("![](/slashy/deep.png)"))
+      assert($("img[src='https://cdn.npm.im/foo@1.0.0/slashy/deep.png']"))
+    })
+
+    it("leaves protocol relative URLs alone", function() {
+      assert(~fixtures.basic.indexOf("![](//protocollie.com/woof.png)"))
+      assert($("img[src='//protocollie.com/woof.png']"))
+    })
+
+    it("leaves HTTPS URLs alone", function() {
+      assert(~fixtures.basic.indexOf("![](https://secure.com/good.png)"))
+      assert($("img[src='![](https://secure.com/good.png)']"))
+    })
+
+  })
+
+
+  describe("when serveImagesWithCDN is false (default)", function() {
+    var $ = marky(fixtures.basic, {
+      package: {
+        name: "foo",
+        version: "1.0.0"
+      }
+    })
+
+    it("leaves relative img along", function() {
+      assert(~fixtures.basic.indexOf("![](relative.png)"))
+      assert($("img[src='relative.png']"))
+    })
+
+    it("leaves slashy relative img URLs alone", function() {
+      assert(~fixtures.basic.indexOf("![](/slashy/deep.png)"))
+      assert($("img[src='/slashy/deep.png']"))
+    })
+
+    it("leaves protocol relative URLs alone", function() {
+      assert(~fixtures.basic.indexOf("![](//protocollie.com/woof.png)"))
+      assert($("img[src='//protocollie.com/woof.png']"))
+    })
+
+    it("leaves HTTPS URLs alone", function() {
+      assert(~fixtures.basic.indexOf("![](https://secure.com/good.png)"))
+      assert($("img[src='![](https://secure.com/good.png)']"))
+    })
+
+  })
+
+
 })

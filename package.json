@@ -34,7 +34,8 @@
     "lodash": "^2.4.1",
     "marked": "^0.3.2",
     "sanitize-html": "^1.4.3",
-    "similarity": "^1.0.1"
+    "similarity": "^1.0.1",
+    "html-frontmatter": "^1.2.1"
   },
   "devDependencies": {
     "mocha": "^2.0.1"
