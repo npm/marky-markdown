@@ -414,7 +414,12 @@ describe("real readmes in the wild", function() {
     var $
 
     beforeEach(function() {
-      $ = marky(fixtures.express)
+      $ = marky(fixtures.express, {
+        package: {
+          name: "express",
+          description: "Fast, unopinionated, minimalist web framework"
+        }
+      })
     })
 
     it("successfully parses readme.md", function(){
@@ -424,6 +429,14 @@ describe("real readmes in the wild", function() {
     it("syntax highlights javascript", function(){
       assert($("pre code .hljs-string").length)
       assert($("pre code .hljs-keyword").length)
+    })
+
+    it("adds package name h1", function(){
+      assert.equal($("h1.package-name a[href='#readme']").text(), "express")
+    })
+
+    it("identifies and marks redundant package description, even when it is not the the first paragraph", function(){
+      assert($("p.package-description-redundant").length)
     })
 
   })
