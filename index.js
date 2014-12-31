@@ -1,7 +1,6 @@
-var marked      = require("marked")
 var cheerio     = require("cheerio")
-var sanitizer   = require("sanitizer")
 var defaults    = require("lodash").defaults
+var render      = require("./lib/render")
 var sanitize    = require("./lib/sanitize")
 var badges      = require("./lib/badges")
 var frontmatter = require("./lib/frontmatter")
@@ -9,11 +8,9 @@ var github      = require("./lib/github")
 var gravatar    = require("./lib/gravatar")
 var headings    = require("./lib/headings")
 var packagize   = require("./lib/packagize")
-var renderer    = require("./lib/renderer")
 
 var marky = module.exports = function(markdown, options) {
-  var html
-  var $
+  var html, $
 
   // Validate input
   if (!markdown || typeof markdown !== "string") {
@@ -28,12 +25,11 @@ var marky = module.exports = function(markdown, options) {
   options = options || {}
   defaults(options, {
     package: null,
-    renderer: renderer,
     serveImagesWithCDN: false,
   })
 
   // Parse markdown into HTML and add syntax highlighting
-  html = marked.parse(markdown, {renderer: options.renderer})
+  html = render(markdown)
 
   // Convert HTML fontmatter into meta tags
   html = frontmatter(html)

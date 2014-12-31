@@ -32,11 +32,11 @@
     "cheerio": "^0.18.0",
     "github-url-to-object": "^1.4.2",
     "highlight.js": "^8.4.0",
+    "html-frontmatter": "^1.2.1",
     "lodash": "^2.4.1",
     "marked": "^0.3.2",
     "sanitize-html": "^1.4.3",
-    "similarity": "^1.0.1",
-    "html-frontmatter": "^1.2.1"
+    "similarity": "^1.0.1"
   },
   "devDependencies": {
     "mocha": "^2.0.1"

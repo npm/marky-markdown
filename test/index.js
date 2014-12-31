@@ -59,6 +59,21 @@ describe("syntax highlighting", function() {
     assert.equal($("code").length, $("code.hljs").length)
   })
 
+  it("applies inline syntax highlighting classes to javascript", function(){
+    assert($("code.js .hljs-keyword").length)
+    assert($("code.js .hljs-function").length)
+    assert($("code.js .hljs-string").length)
+    assert($("code.js .hljs-params").length)
+  })
+
+  it("applies inline syntax highlighting classes to shell", function(){
+    assert($("code.sh .hljs-keyword").length)
+  })
+
+  it("applies inline syntax highlighting classes to coffeesript", function(){
+    assert($("code.coffeescript .hljs-title").length)
+  })
+
 })
 
 describe("sanitize", function(){
