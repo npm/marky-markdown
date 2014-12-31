@@ -225,6 +225,10 @@ describe("packagize", function() {
       name: "wibble",
       description: "A package called wibble"
     },
+    wobble: {
+      name: "wobble",
+      description: "wibble"
+    },
     dangledor: {
       name: "dangledor",
       description: "dangledor need not roar"
@@ -260,6 +264,17 @@ describe("packagize", function() {
         $("p.package-description").text(),
         packages.wibble.description
       )
+    })
+
+    it("adds .package-description-redundant class to first h1 if it's similar to package.description", function() {
+      var $ = marky(fixtures.wibble, {package: packages.wobble})
+      assert.equal($("h1.package-description-redundant").length, 1)
+    })
+
+    it("leaves first h1 alone if it differs from package.description", function() {
+      var $ = marky(fixtures.wibble, {package: packages.dangledor})
+      assert.equal($("h1.package-description-redundant").length, 0)
+      assert.equal($("h1:not(.package-name)").text(), "wibble.js")
     })
 
     it("adds .package-description-redundant class to first p if it's similar to package.description", function() {
