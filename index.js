@@ -1,6 +1,5 @@
 var marked      = require("marked")
 var cheerio     = require("cheerio")
-var sanitizer   = require("sanitizer")
 var defaults    = require("lodash").defaults
 var sanitize    = require("./lib/sanitize")
 var badges      = require("./lib/badges")
