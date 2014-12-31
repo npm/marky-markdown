@@ -407,3 +407,43 @@ describe("cdn", function() {
 
 
 })
+
+describe("real readmes in the wild", function() {
+
+  describe("express", function() {
+    var $
+
+    beforeEach(function() {
+      $ = marky(fixtures.express)
+    })
+
+    it("successfully parses readme.md", function(){
+      assert($.html().length)
+    })
+
+    it("syntax highlights javascript", function(){
+      assert($("pre code .hljs-string").length)
+      assert($("pre code .hljs-keyword").length)
+    })
+
+  })
+
+  describe("benchmark", function() {
+    var $
+
+    beforeEach(function() {
+      $ = marky(fixtures.benchmark)
+    })
+
+    it("successfully parses", function(){
+      assert($.html().length)
+    })
+
+    it("linkifies headings", function(){
+      var link = $("h2#-benchmark-support-.deep-link a")
+      assert.equal(link.attr('href'), "#-benchmark-support-")
+      assert.equal(link.text(), "Benchmark.support")
+    })
+
+  })
+})
