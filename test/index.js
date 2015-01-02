@@ -29,11 +29,16 @@ describe("marky-markdown", function() {
     assert.throws(function() { marky("this is a test", "wtf") }, errorPattern)
   })
 
-
 })
 
-describe("syntax highlighting", function() {
+describe("markdown processing and syntax highlighting", function() {
   var $ = marky(fixtures.basic)
+
+  it('preserves query parameters in URLs when making them into links', function (done) {
+    assert(~fixtures.basic.indexOf("watch?v=dQw4w9WgXcQ"))
+    assert.equal($("a[href*='youtube.com']").attr('href'), 'https://www.youtube.com/watch?v=dQw4w9WgXcQ')
+    done()
+  });
 
   it("converts github flavored fencing to code blocks", function() {
     assert(fixtures.basic.indexOf("```js"))
