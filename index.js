@@ -5,6 +5,7 @@ var sanitize    = require("./lib/sanitize")
 var badges      = require("./lib/badges")
 var frontmatter = require("./lib/frontmatter")
 var github      = require("./lib/github")
+var youtube     = require("./lib/youtube")
 var gravatar    = require("./lib/gravatar")
 var headings    = require("./lib/headings")
 var packagize   = require("./lib/packagize")
@@ -45,6 +46,9 @@ var marky = module.exports = function(markdown, options) {
 
   // Make relative GitHub link URLs absolute
   $ = github($, options.package)
+
+  // Dress up Youtube iframes
+  $ = youtube($)
 
   // Add CSS classes to paragraphs containing badges
   $ = badges($)

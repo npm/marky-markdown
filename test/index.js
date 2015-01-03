@@ -115,6 +115,14 @@ describe("sanitize", function(){
     assert($("code.hljs").length)
   })
 
+  it("disallows iframes from sources other than youtube", function() {
+    var $ = marky(fixtures.basic)
+    assert(~fixtures.basic.indexOf("<iframe src=\"//www.youtube.com/embed/3I78ELjTzlQ"))
+    assert(~fixtures.basic.indexOf("<iframe src=\"//malware.com"))
+    assert.equal($("iframe").length, 1)
+    assert.equal($("iframe").attr("src"), "//www.youtube.com/embed/3I78ELjTzlQ")
+  })
+
 })
 
 describe("badges", function(){
@@ -234,6 +242,28 @@ describe("github", function(){
       assert($("a[href='#header']").length)
     })
 
+  })
+
+})
+
+describe("youtube", function() {
+  var $ = marky(fixtures.basic)
+  var iframe = $(".youtube-video > iframe")
+
+  it("wraps iframes in a div for stylability", function() {
+    assert(!~fixtures.basic.indexOf("youtube-video"))
+    assert.equal(iframe.length, 1)
+  })
+
+  it("removes iframe width and height properties", function() {
+    assert.equal(iframe.attr("width"), null)
+    assert.equal(iframe.attr("height"), null)
+  })
+
+  it("preserves src, frameborder, and allowfullscreen properties", function() {
+    assert.equal(iframe.attr("src"), "//www.youtube.com/embed/3I78ELjTzlQ")
+    assert.equal(iframe.attr("frameborder"), "0")
+    assert.equal(iframe.attr("allowfullscreen"), "")
   })
 
 })

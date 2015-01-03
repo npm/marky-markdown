@@ -1,6 +1,6 @@
 # marky-markdown 
 
-The thing npmjs.com uses to clean up READMEs and other markdown files
+The thing npm uses to clean up READMEs and other markdown files
 
 ## Installation
 
@@ -42,25 +42,30 @@ npm test
 ```
 ```
 
-> marky-markdown@1.0.0 test /Users/z/code/personal/marky-markdown
+> marky-markdown@1.0.4 test /Users/z/personal/marky-markdown
 > mocha
   marky-markdown
     ✓ is a function 
     ✓ accepts a markdown string and returns a cheerio DOM object 
     ✓ throws an error if first argument is not a string 
     ✓ throws an error if second argument is present but not an object 
-  syntax highlighting
+  markdown processing and syntax highlighting
+    ✓ preserves query parameters in URLs when making them into links 
     ✓ converts github flavored fencing to code blocks 
     ✓ adds js class to javascript blocks 
     ✓ adds sh class to shell blocks 
     ✓ adds sh class to shell blocks 
     ✓ adds hljs class to all blocks 
+    ✓ applies inline syntax highlighting classes to javascript 
+    ✓ applies inline syntax highlighting classes to shell 
+    ✓ applies inline syntax highlighting classes to coffeesript 
   sanitize
     ✓ removes script tags 
     ✓ allows img tags 
     ✓ allows h1/h2/h3/h4/h5/h6 tags to preserve their dom id 
     ✓ removes classnames from elements 
     ✓ allows classnames on code tags 
+    ✓ disallows iframes from sources other than youtube 
   badges
     ✓ adds a badge class to img tags containing badge images 
     ✓ adds a badge-only class to p tags containing nothing more than a badge 
@@ -79,6 +84,10 @@ npm test
       ✓ leaves slashy relative URLs alone 
       ✓ leaves protocol-relative URLs alone 
       ✓ leaves hashy URLs alone 
+  youtube
+    ✓ wraps iframes in a div for stylability 
+    ✓ removes iframe width and height properties 
+    ✓ preserves src, frameborder, and allowfullscreen properties 
   packagize
     name
       ✓ prepends an h1.package-name element into readme with value of package.name 
@@ -86,6 +95,8 @@ npm test
       ✓ leaves first h1 alone if it differs from package.name 
     description
       ✓ prepends package.description in a p.package-description element 
+      ✓ adds .package-description-redundant class to first h1 if it's similar to package.description 
+      ✓ leaves first h1 alone if it differs from package.description 
       ✓ adds .package-description-redundant class to first p if it's similar to package.description 
       ✓ leaves first p alone if it differs from package.description 
   fixtures
@@ -108,7 +119,16 @@ npm test
       ✓ leaves slashy relative img URLs alone 
       ✓ leaves protocol relative URLs alone 
       ✓ leaves HTTPS URLs alone 
-  47 passing (69ms)
+  real readmes in the wild
+    express
+      ✓ successfully parses readme.md 
+      ✓ syntax highlights javascript 
+      ✓ adds package name h1 
+      ✓ identifies and marks redundant package description, even when it is not the the first paragraph 
+    benchmark
+      ✓ successfully parses 
+      ✓ linkifies headings 
+  63 passing (2s)
 
 ```
 
@@ -117,11 +137,11 @@ npm test
 - [cheerio](https://github.com/cheeriojs/cheerio): Tiny, fast, and elegant implementation of core jQuery designed specifically for the server
 - [github-url-to-object](https://github.com/zeke/github-url-to-object): Extract user, repo, and other interesting properties from GitHub URLs
 - [highlight.js](https://github.com/isagalaev/highlight.js): Syntax highlighting with language autodetection.
+- [html-frontmatter](https://github.com/zeke/html-frontmatter): Extract key-value metadata from HTML comments
 - [lodash](https://github.com/lodash/lodash): A utility library delivering consistency, customization, performance, &amp; extras.
 - [marked](https://github.com/chjj/marked): A markdown parser built for speed
 - [sanitize-html](https://github.com/punkave/sanitize-html): Clean up user-submitted HTML, preserving whitelisted elements and whitelisted attributes on a per-element basis
 - [similarity](https://github.com/zeke/similarity): How similar are these two strings?
-- [html-frontmatter](https://github.com/zeke/html-frontmatter): Extract key-value metadata from HTML comments
 
 ## Dev Dependencies
 
