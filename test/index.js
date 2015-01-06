@@ -510,3 +510,26 @@ describe("real readmes in the wild", function() {
 
   })
 })
+
+describe("performance", function() {
+
+  it("successfully parses big markdown", function() {
+    var $ = marky(fixtures.performance)
+    assert.equal($("h1").html(), "<a href=\"#ion-range-slider-2-0-3\">Ion.Range Slider 2.0.3</a>")
+  })
+
+})
+
+describe("special characters", function() {
+
+  it("successfully parses h1 contains \"\\udeff\"", function() {
+    var $ = marky("# foo\udeffbar")
+    assert.equal($.html(), "<h1 id=\"foo-bar\" class=\"deep-link\"><a href=\"#foo-bar\">foo&#xDEFF;bar</a></h1>\n")
+  })
+
+  it("successfully parses h1 contains ^\\w", function() {
+    var $ = marky("# 中文a\'b\"c`d|e,f.g?h&i/j\\k")
+    assert.equal($.html(),
+      "<h1 id=\"%E4%B8%AD%E6%96%87a-b-c-d-e-f-g-h-i-j-k\" class=\"deep-link\"><a href=\"#%E4%B8%AD%E6%96%87a-b-c-d-e-f-g-h-i-j-k\">&#x4E2D;&#x6587;a&apos;b&quot;c`d|e,f.g?h&amp;i/j\\k</a></h1>\n")
+  })
+})
