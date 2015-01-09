@@ -359,6 +359,12 @@ describe("fixtures", function() {
     })
   })
 
+  it("includes some real package readmes right from node_modules", function(){
+    assert(fixtures.async.length)
+    assert(fixtures.express.length)
+    assert(fixtures["johnny-five"].length)
+  })
+
 })
 
 describe("headings", function(){
@@ -463,14 +469,13 @@ describe("real readmes in the wild", function() {
 
   describe("express", function() {
     var $
+    var package
+    var readme
 
     beforeEach(function() {
-      $ = marky(fixtures.express, {
-        package: {
-          name: "express",
-          description: "Fast, unopinionated, minimalist web framework"
-        }
-      })
+      package = require("../node_modules/express/package.json")
+      readme = fs.readFileSync(__dirname + "/../node_modules/express/README.md", "utf-8")
+      $ = marky(readme, {package: package})
     })
 
     it("successfully parses readme.md", function(){
@@ -514,12 +519,12 @@ describe("real readmes in the wild", function() {
   describe("async", function() {
     var $
     var package
+    var readme
 
     beforeEach(function() {
       package = require("../node_modules/async/package.json")
-      $ = marky(fixtures.async, {
-        package: package
-      })
+      readme = fs.readFileSync(__dirname + "/../node_modules/async/README.md", "utf-8")
+      $ = marky(readme, {package: package})
     })
 
     it("successfully parses", function(){
