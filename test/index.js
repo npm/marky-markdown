@@ -474,8 +474,7 @@ describe("real readmes in the wild", function() {
 
     beforeEach(function() {
       package = require("../node_modules/express/package.json")
-      readme = fs.readFileSync(__dirname + "/../node_modules/express/README.md", "utf-8")
-      $ = marky(readme, {package: package})
+      $ = marky(fixtures.express, {package: package})
     })
 
     it("successfully parses readme.md", function(){
@@ -499,9 +498,12 @@ describe("real readmes in the wild", function() {
 
   describe("benchmark", function() {
     var $
+    var package
+    var readme
 
     beforeEach(function() {
-      $ = marky(fixtures.benchmark)
+      package = require("../node_modules/benchmark/package.json")
+      $ = marky(fixtures.benchmark, {package: package})
     })
 
     it("successfully parses", function(){
@@ -523,8 +525,7 @@ describe("real readmes in the wild", function() {
 
     beforeEach(function() {
       package = require("../node_modules/async/package.json")
-      readme = fs.readFileSync(__dirname + "/../node_modules/async/README.md", "utf-8")
-      $ = marky(readme, {package: package})
+      $ = marky(fixtures.async, {package: package})
     })
 
     it("successfully parses", function(){
@@ -540,8 +541,7 @@ describe("real readmes in the wild", function() {
 
     beforeEach(function() {
       package = require("../node_modules/johnny-five/package.json")
-      readme = fs.readFileSync(__dirname + "/../node_modules/johnny-five/README.md", "utf-8")
-      $ = marky(readme, {
+      $ = marky(fixtures["johnny-five"], {
         package: package
       })
     })
@@ -551,11 +551,33 @@ describe("real readmes in the wild", function() {
     })
 
     it("throws out HTML comments", function(){
-      assert(readme.match("<!--"))
+      assert(fixtures["johnny-five"].match("<!--"))
       assert(!$.html().match("<!--"))
       assert(!$.html().match("&lt;!--"))
     })
 
   })
+
+  describe("wzrd", function() {
+    var $
+    var package
+    var readme
+
+    beforeEach(function() {
+      package = require("../node_modules/wzrd/package.json")
+      $ = marky(fixtures.wzrd, {package: package})
+    })
+
+    it("successfully parses", function(){
+      assert($.html().length)
+    })
+
+    it("process package description as markdown", function(){
+      assert(package.description.match(/Inspired by \[beefy\]/))
+      assert($("p.package-description a[href='http://npmjs.org/beefy']").length)
+    })
+
+  })
+
 
 })
