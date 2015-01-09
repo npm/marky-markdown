@@ -1,4 +1,5 @@
 var assert = require("assert")
+var fs = require("fs")
 var fixtures = require("./fixtures.js")
 var marky = require("..")
 
@@ -525,11 +526,30 @@ describe("real readmes in the wild", function() {
       assert($.html().length)
     })
 
-    // it("linkifies headings", function(){
-    //   var link = $("h2#-benchmark-support-.deep-link a")
-    //   assert.equal(link.attr('href'), "#-benchmark-support-")
-    //   assert.equal(link.text(), "Benchmark.support")
-    // })
+  })
+
+  describe("johnny-five", function() {
+    var $
+    var package
+    var readme
+
+    beforeEach(function() {
+      package = require("../node_modules/johnny-five/package.json")
+      readme = fs.readFileSync(__dirname + "/../node_modules/johnny-five/README.md", "utf-8")
+      $ = marky(readme, {
+        package: package
+      })
+    })
+
+    it("successfully parses", function(){
+      assert($.html().length)
+    })
+
+    it("throws out HTML comments", function(){
+      assert(readme.match("<!--"))
+      assert(!$.html().match("<!--"))
+      assert(!$.html().match("&lt;!--"))
+    })
 
   })
 

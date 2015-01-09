@@ -1,5 +1,6 @@
 var cheerio     = require("cheerio")
 var defaults    = require("lodash").defaults
+var comments    = require("./lib/comments")
 var render      = require("./lib/render")
 var sanitize    = require("./lib/sanitize")
 var badges      = require("./lib/badges")
@@ -29,11 +30,14 @@ var marky = module.exports = function(markdown, options) {
     serveImagesWithCDN: false,
   })
 
-  // Parse markdown into HTML and add syntax highlighting
-  html = render(markdown)
-
   // Convert HTML fontmatter into meta tags
-  html = frontmatter(html)
+  html = frontmatter(markdown)
+
+  // Remove HTML comments
+  html = comments(html)
+
+  // Parse markdown into HTML and add syntax highlighting
+  html = render(html)
 
   // Sanitize malicious or malformed HTML
   html = sanitize(html)
