@@ -509,4 +509,28 @@ describe("real readmes in the wild", function() {
     })
 
   })
+
+  describe("async", function() {
+    var $
+    var package
+
+    beforeEach(function() {
+      package = require("../node_modules/async/package.json")
+      $ = marky(fixtures.async, {
+        package: package
+      })
+    })
+
+    it("successfully parses", function(){
+      assert($.html().length)
+    })
+
+    // it("linkifies headings", function(){
+    //   var link = $("h2#-benchmark-support-.deep-link a")
+    //   assert.equal(link.attr('href'), "#-benchmark-support-")
+    //   assert.equal(link.text(), "Benchmark.support")
+    // })
+
+  })
+
 })
