@@ -4,6 +4,7 @@ var comments    = require("./lib/comments")
 var render      = require("./lib/render")
 var sanitize    = require("./lib/sanitize")
 var badges      = require("./lib/badges")
+var cdn         = require("./lib/cdn")
 var frontmatter = require("./lib/frontmatter")
 var github      = require("./lib/github")
 var youtube     = require("./lib/youtube")
@@ -62,6 +63,11 @@ var marky = module.exports = function(markdown, options) {
 
   // Inject package name and description into README
   $ = packagize($, options.package)
+
+  // Rewrite relative image source to use CDN
+  if (options.serveImagesWithCDN) {
+    $ = cdn($, options.package)
+  }
 
   // Call .html() on the return value to get an HTML string
   return $

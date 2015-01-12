@@ -187,7 +187,7 @@ describe("github", function(){
       $ = marky(fixtures.github, {package: package})
     })
 
-    it("rewrites relative links hrefs to absolute", function() {
+    it("rewrites relative link hrefs to absolute", function() {
       assert(~fixtures.github.indexOf("(relative/file.js)"))
       assert($("a[href='https://github.com/mark/wahlberg/blob/master/relative/file.js']").length)
     })
@@ -205,6 +205,26 @@ describe("github", function(){
     it("leaves hashy URLs alone", function() {
       assert(~fixtures.github.indexOf("(#header)"))
       assert($("a[href='#header']").length)
+    })
+
+    it("replaces relative img URLs with npm CDN URLs", function() {
+      assert(~fixtures.github.indexOf("![](relative.png)"))
+      assert($("img[src='https://github.com/mark/wahlberg/blob/master/relative.png']").length)
+    })
+
+    it("replaces slashy relative img URLs with npm CDN URLs", function() {
+      assert(~fixtures.github.indexOf("![](/slashy/deep.png)"))
+      assert($("img[src='https://github.com/mark/wahlberg/blob/master/slashy/deep.png']").length)
+    })
+
+    it("leaves protocol relative URLs alone", function() {
+      assert(~fixtures.github.indexOf("![](//protocollie.com/woof.png)"))
+      assert($("img[src='//protocollie.com/woof.png']").length)
+    })
+
+    it("leaves HTTPS URLs alone", function() {
+      assert(~fixtures.github_base.indexOf("![](https://secure.com/good.png)"))
+      assert($("img[src='![](https://secure.com/good.png)']").length)
     })
 
   })
@@ -398,7 +418,7 @@ describe("frontmatter", function() {
   })
 })
 
-describe("cdn", function() {
+describe.only("cdn", function() {
 
   describe("when serveImagesWithCDN is true", function() {
     var $ = marky(fixtures.basic, {
@@ -411,22 +431,22 @@ describe("cdn", function() {
 
     it("replaces relative img URLs with npm CDN URLs", function() {
       assert(~fixtures.basic.indexOf("![](relative.png)"))
-      assert($("img[src='https://cdn.npm.im/foo@1.0.0/relative.png']"))
+      assert($("img[src='https://cdn.npm.im/foo@1.0.0/relative.png']").length)
     })
 
     it("replaces slashy relative img URLs with npm CDN URLs", function() {
       assert(~fixtures.basic.indexOf("![](/slashy/deep.png)"))
-      assert($("img[src='https://cdn.npm.im/foo@1.0.0/slashy/deep.png']"))
+      assert($("img[src='https://cdn.npm.im/foo@1.0.0/slashy/deep.png']").length)
     })
 
     it("leaves protocol relative URLs alone", function() {
       assert(~fixtures.basic.indexOf("![](//protocollie.com/woof.png)"))
-      assert($("img[src='//protocollie.com/woof.png']"))
+      assert($("img[src='//protocollie.com/woof.png']").length)
     })
 
     it("leaves HTTPS URLs alone", function() {
       assert(~fixtures.basic.indexOf("![](https://secure.com/good.png)"))
-      assert($("img[src='![](https://secure.com/good.png)']"))
+      assert($("img[src='https://secure.com/good.png']").length)
     })
 
   })
@@ -442,22 +462,22 @@ describe("cdn", function() {
 
     it("leaves relative img along", function() {
       assert(~fixtures.basic.indexOf("![](relative.png)"))
-      assert($("img[src='relative.png']"))
+      assert($("img[src='relative.png']").length)
     })
 
     it("leaves slashy relative img URLs alone", function() {
       assert(~fixtures.basic.indexOf("![](/slashy/deep.png)"))
-      assert($("img[src='/slashy/deep.png']"))
+      assert($("img[src='/slashy/deep.png']").length)
     })
 
     it("leaves protocol relative URLs alone", function() {
       assert(~fixtures.basic.indexOf("![](//protocollie.com/woof.png)"))
-      assert($("img[src='//protocollie.com/woof.png']"))
+      assert($("img[src='//protocollie.com/woof.png']").length)
     })
 
     it("leaves HTTPS URLs alone", function() {
       assert(~fixtures.basic.indexOf("![](https://secure.com/good.png)"))
-      assert($("img[src='![](https://secure.com/good.png)']"))
+      assert($("img[src='https://secure.com/good.png']").length)
     })
 
   })
