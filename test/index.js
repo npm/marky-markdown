@@ -223,8 +223,8 @@ describe("github", function(){
     })
 
     it("leaves HTTPS URLs alone", function() {
-      assert(~fixtures.github_base.indexOf("![](https://secure.com/good.png)"))
-      assert($("img[src='![](https://secure.com/good.png)']").length)
+      assert(~fixtures.github.indexOf("![](https://secure.com/good.png)"))
+      assert($("img[src='https://secure.com/good.png']").length)
     })
 
   })
@@ -262,6 +262,27 @@ describe("github", function(){
       assert(~fixtures.github.indexOf("(#header)"))
       assert($("a[href='#header']").length)
     })
+
+    it("leaves relative img alone", function() {
+      assert(~fixtures.github.indexOf("![](relative.png)"))
+      assert($("img[src='relative.png']").length)
+    })
+
+    it("leaves slashy relative img URLs alone", function() {
+      assert(~fixtures.github.indexOf("![](/slashy/deep.png)"))
+      assert($("img[src='/slashy/deep.png']").length)
+    })
+
+    it("leaves protocol relative URLs alone", function() {
+      assert(~fixtures.github.indexOf("![](//protocollie.com/woof.png)"))
+      assert($("img[src='//protocollie.com/woof.png']").length)
+    })
+
+    it("leaves HTTPS URLs alone", function() {
+      assert(~fixtures.github.indexOf("![](https://secure.com/good.png)"))
+      assert($("img[src='https://secure.com/good.png']").length)
+    })
+
 
   })
 
@@ -418,7 +439,7 @@ describe("frontmatter", function() {
   })
 })
 
-describe.only("cdn", function() {
+describe("cdn", function() {
 
   describe("when serveImagesWithCDN is true", function() {
     var $ = marky(fixtures.basic, {
@@ -460,7 +481,7 @@ describe.only("cdn", function() {
       }
     })
 
-    it("leaves relative img along", function() {
+    it("leaves relative img alone", function() {
       assert(~fixtures.basic.indexOf("![](relative.png)"))
       assert($("img[src='relative.png']").length)
     })
