@@ -209,12 +209,12 @@ describe("github", function(){
 
     it("replaces relative img URLs with npm CDN URLs", function() {
       assert(~fixtures.github.indexOf("![](relative.png)"))
-      assert($("img[src='https://github.com/mark/wahlberg/blob/master/relative.png']").length)
+      assert($("img[src='https://raw.githubusercontent.com/mark/wahlberg/master/relative.png']").length)
     })
 
     it("replaces slashy relative img URLs with npm CDN URLs", function() {
       assert(~fixtures.github.indexOf("![](/slashy/deep.png)"))
-      assert($("img[src='https://github.com/mark/wahlberg/blob/master/slashy/deep.png']").length)
+      assert($("img[src='https://raw.githubusercontent.com/mark/wahlberg/master/slashy/deep.png']").length)
     })
 
     it("leaves protocol relative URLs alone", function() {
