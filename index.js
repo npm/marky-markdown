@@ -38,7 +38,7 @@ var marky = module.exports = function(markdown, options) {
 
   log("\n\n" + markdown + "\n\n")
 
-  log("Convert HTML fontmatter into meta tags")
+  log("Convert HTML frontmatter into meta tags")
   html = frontmatter(markdown)
 
   log("Remove HTML comments")
