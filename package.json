@@ -5,7 +5,8 @@
   "tagline": "It's like ordinary markdown except it drops its pants for attention.",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "doc": "readme package.json --test > README.md"
   },
   "repository": {
     "type": "git",
@@ -48,6 +49,7 @@
     "memoize": "~0.1.1",
     "mkhere": "~1.0.9",
     "mocha": "^2.0.1",
+    "package-json-to-readme": "^1.3.0",
     "wzrd": "^1.1.1"
   }
 }
