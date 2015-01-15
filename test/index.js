@@ -613,9 +613,25 @@ describe("real readmes in the wild", function() {
       assert($.html().length)
     })
 
-    it("process package description as markdown", function(){
+    it("processes package description as markdown", function(){
       assert(package.description.match(/Inspired by \[beefy\]/))
       assert($("p.package-description a[href='http://npmjs.org/beefy']").length)
+    })
+
+  })
+
+  describe("flake", function() {
+    var $
+    var package
+    var readme
+
+    beforeEach(function() {
+      package = require("../node_modules/flake/package.json")
+      $ = marky(fixtures.flake, {package: package})
+    })
+
+    it("successfully parses", function(){
+      assert($.html().length)
     })
 
   })

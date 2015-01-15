@@ -42,6 +42,7 @@
     "async": "^0.9.0",
     "benchmark": "^1.0.0",
     "express": "^4.10.7",
+    "flake": "^1.0.0",
     "johnny-five": "^0.8.37",
     "mocha": "^2.0.1",
     "wzrd": "^1.1.1"

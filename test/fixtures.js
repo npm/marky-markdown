@@ -13,6 +13,6 @@ fs.readdirSync(__dirname + "/fixtures").forEach(function(file) {
 })
 
 // Packages with a readme.md
-"wzrd".split(" ").forEach(function(pkg) {
+"flake wzrd".split(" ").forEach(function(pkg) {
   fixtures[pkg] = fs.readFileSync(__dirname + "/../node_modules/" + pkg + "/readme.md", "utf-8")
 })
