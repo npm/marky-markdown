@@ -507,7 +507,6 @@ describe("cdn", function() {
 })
 
 describe("real readmes in the wild", function() {
-
   describe("express", function() {
     var $
     var package
@@ -620,6 +619,54 @@ describe("real readmes in the wild", function() {
 
   })
 
+  describe("memoize", function() {
+    var $
+    var package
+    var readme
+
+    beforeEach(function() {
+      package = require("../node_modules/memoize/package.json")
+      $ = marky(fixtures.memoize, {package: package})
+    })
+
+    it("successfully parses", function(){
+      assert($.html().length)
+    })
+
+  })
+
+  describe("mkhere", function() {
+    var $
+    var package
+    var readme
+
+    beforeEach(function() {
+      package = require("../node_modules/mkhere/package.json")
+      $ = marky(fixtures.mkhere, {package: package})
+    })
+
+    it("successfully parses", function(){
+      assert($.html().length)
+    })
+
+  })
+
+  describe("cicada", function() {
+    var $
+    var package
+    var readme
+
+    beforeEach(function() {
+      package = require("../node_modules/cicada/package.json")
+      $ = marky(fixtures.cicada, {package: package})
+    })
+
+    it("successfully parses", function(){
+      assert($.html().length)
+    })
+
+  })
+
   describe("flake", function() {
     var $
     var package
@@ -635,6 +682,5 @@ describe("real readmes in the wild", function() {
     })
 
   })
-
 
 })
