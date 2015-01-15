@@ -8,11 +8,16 @@ fs.readdirSync(__dirname + "/fixtures").forEach(function(file) {
 });
 
 // Packages with a README.md
-"async express johnny-five".split(" ").forEach(function(pkg) {
+"async express johnny-five memoize mkhere".split(" ").forEach(function(pkg) {
   fixtures[pkg] = fs.readFileSync(__dirname + "/../node_modules/" + pkg + "/README.md", "utf-8")
 })
 
 // Packages with a readme.md
-"wzrd".split(" ").forEach(function(pkg) {
+"flake wzrd".split(" ").forEach(function(pkg) {
   fixtures[pkg] = fs.readFileSync(__dirname + "/../node_modules/" + pkg + "/readme.md", "utf-8")
+})
+
+// Packages with a readme.markdown
+"cicada".split(" ").forEach(function(pkg) {
+  fixtures[pkg] = fs.readFileSync(__dirname + "/../node_modules/" + pkg + "/readme.markdown", "utf-8")
 })

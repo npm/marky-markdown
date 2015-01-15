@@ -507,7 +507,6 @@ describe("cdn", function() {
 })
 
 describe("real readmes in the wild", function() {
-
   describe("express", function() {
     var $
     var package
@@ -613,12 +612,75 @@ describe("real readmes in the wild", function() {
       assert($.html().length)
     })
 
-    it("process package description as markdown", function(){
+    it("processes package description as markdown", function(){
       assert(package.description.match(/Inspired by \[beefy\]/))
       assert($("p.package-description a[href='http://npmjs.org/beefy']").length)
     })
 
   })
 
+  describe("memoize", function() {
+    var $
+    var package
+    var readme
+
+    beforeEach(function() {
+      package = require("../node_modules/memoize/package.json")
+      $ = marky(fixtures.memoize, {package: package})
+    })
+
+    it("successfully parses", function(){
+      assert($.html().length)
+    })
+
+  })
+
+  describe("mkhere", function() {
+    var $
+    var package
+    var readme
+
+    beforeEach(function() {
+      package = require("../node_modules/mkhere/package.json")
+      $ = marky(fixtures.mkhere, {package: package})
+    })
+
+    it("successfully parses", function(){
+      assert($.html().length)
+    })
+
+  })
+
+  describe("cicada", function() {
+    var $
+    var package
+    var readme
+
+    beforeEach(function() {
+      package = require("../node_modules/cicada/package.json")
+      $ = marky(fixtures.cicada, {package: package})
+    })
+
+    it("successfully parses", function(){
+      assert($.html().length)
+    })
+
+  })
+
+  describe("flake", function() {
+    var $
+    var package
+    var readme
+
+    beforeEach(function() {
+      package = require("../node_modules/flake/package.json")
+      $ = marky(fixtures.flake, {package: package})
+    })
+
+    it("successfully parses", function(){
+      assert($.html().length)
+    })
+
+  })
 
 })
