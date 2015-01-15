@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/zeke/marky-markdown"
+    "url": "https://github.com/npm/marky-markdown"
   },
   "keywords": [
     "readme",
@@ -25,9 +25,9 @@
   "author": "Zeke Sikelianos <zeke@sikelianos.com> (http://zeke.sikelianos.com/)",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/zeke/marky-markdown/issues"
+    "url": "https://github.com/npm/marky-markdown/issues"
   },
-  "homepage": "https://github.com/zeke/marky-markdown",
+  "homepage": "https://github.com/npm/marky-markdown",
   "dependencies": {
     "cheerio": "^0.18.0",
     "github-url-to-object": "^1.4.2",
