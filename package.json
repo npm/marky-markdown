@@ -47,6 +47,7 @@
     "cicada": "~1.1.1",
     "express": "^4.10.7",
     "flake": "^1.0.0",
+    "grunt-angular-templates": "^0.5.7",
     "johnny-five": "^0.8.37",
     "memoize": "~0.1.1",
     "mkhere": "~1.0.9",

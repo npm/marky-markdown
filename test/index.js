@@ -763,4 +763,22 @@ describe("real readmes in the wild", function() {
     })
 
   })
+
+  describe("grunt-angular-templates", function() {
+    var $
+    var package = require("../node_modules/grunt-angular-templates/package.json")
+
+    beforeEach(function(done) {
+      marky(fixtures["grunt-angular-templates"], {package: package}, function(err, result){
+        $ = result
+        done()
+      })
+    })
+
+    it("successfully parses", function(){
+      assert($.html().length)
+    })
+
+  })
+
 })
