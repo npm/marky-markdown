@@ -638,7 +638,7 @@ describe("real readmes in the wild", function() {
     var package = require("../node_modules/async/package.json")
 
     beforeEach(function(done) {
-      marky(fixtures.async, {package: package, debug: true}, function(err, output){
+      marky(fixtures.async, {package: package, debug: false}, function(err, output){
         $ = output
         done()
       })
