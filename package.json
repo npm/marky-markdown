@@ -36,6 +36,7 @@
     "lodash": "^2.4.1",
     "marked": "^0.3.2",
     "pygmentize-bundled": "^2.3.0",
+    "pygmentize-bundled-cached": "^1.0.1",
     "pygments-tokens": "^1.0.1",
     "sanitize-html": "^1.4.3",
     "similarity": "^1.0.1"
