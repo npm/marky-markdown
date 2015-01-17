@@ -12,15 +12,16 @@ var gravatar    = require("./lib/gravatar")
 var headings    = require("./lib/headings")
 var packagize   = require("./lib/packagize")
 
-var marky = module.exports = function(markdown, options) {
+var marky = module.exports = function(markdown, options, callback) {
   var html, $
 
-  if (!markdown || typeof markdown !== "string") {
-    throw new Error("first argument must be a string")
+  if (!callback) {
+    callback = options
+    options = {}
   }
 
-  if (options && typeof options !== "object") {
-    throw new Error("options must but an object")
+  if (!markdown || typeof markdown !== "string") {
+    return callback(Error("first argument must be a string"))
   }
 
   options = options || {}
@@ -45,37 +46,40 @@ var marky = module.exports = function(markdown, options) {
   html = comments(html)
 
   log("Parse markdown into HTML and add syntax highlighting")
-  html = render(html)
+  render(html, function(err, output) {
+    html = output
 
-  log("Sanitize malicious or malformed HTML")
-  html = sanitize(html)
+    log("Sanitize malicious or malformed HTML")
+    html = sanitize(html)
 
-  log("Turn HTML into DOM object")
-  $ = cheerio.load(html)
+    log("Turn HTML into DOM object")
+    $ = cheerio.load(html)
 
-  log("Make gravatar img URLs secure")
-  $ = gravatar($)
+    log("Make gravatar img URLs secure")
+    $ = gravatar($)
 
-  log("Make relative GitHub link URLs absolute")
-  $ = github($, options.package)
+    log("Make relative GitHub link URLs absolute")
+    $ = github($, options.package)
 
-  log("Dress up Youtube iframes")
-  $ = youtube($)
+    log("Dress up Youtube iframes")
+    $ = youtube($)
 
-  log("Add CSS classes to paragraphs containing badges")
-  $ = badges($)
+    log("Add CSS classes to paragraphs containing badges")
+    $ = badges($)
 
-  log("Add #hashy links to h1,h2,h3,h4,h5,h6")
-  $ = headings($)
+    log("Add #hashy links to h1,h2,h3,h4,h5,h6")
+    $ = headings($)
 
-  log("Inject package name and description into README")
-  $ = packagize($, options.package)
+    log("Inject package name and description into README")
+    $ = packagize($, options.package)
 
-  if (options.serveImagesWithCDN) {
-    log("Rewrite relative image source to use CDN")
-    $ = cdn($, options.package)
-  }
+    if (options.serveImagesWithCDN) {
+      log("Rewrite relative image source to use CDN")
+      $ = cdn($, options.package)
+    }
 
-  // Call .html() on the return value to get an HTML string
-  return $
+    // Call .html() on the return value to get an HTML string
+    return callback(null, $)
+  })
+
 }
