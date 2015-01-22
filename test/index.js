@@ -1,7 +1,23 @@
 var assert = require("assert")
 var fs = require("fs")
+var path = require("path")
+var rimraf = require("rimraf")
+var userhome = require("userhome")
 var fixtures = require("./fixtures.js")
 var marky = require("..")
+
+
+describe("before everything", function(done){
+
+  it("removes the pygments cache directory", function(done){
+    var p = path.resolve(userhome(), ".pygmentize-bundled-cache")
+    rimraf(path.resolve(userhome(), ".pygmentize-bundled-cache"), function() {
+      assert(!fs.existsSync(p))
+      return done()
+    })
+  })
+
+})
 
 describe("marky-markdown", function() {
 
@@ -38,11 +54,10 @@ describe("marky-markdown", function() {
 
 })
 
-
 describe("markdown processing and syntax highlighting", function() {
   var $
   before(function(done) {
-    marky(fixtures.basic, function(err, output) {
+    marky(fixtures.basic, {highlightSyntax: true}, function(err, output) {
       $ = output
       done()
     })
@@ -779,6 +794,19 @@ describe("real readmes in the wild", function() {
       assert($.html().length)
     })
 
+  })
+
+})
+
+describe("after everything", function(done){
+
+  it("removes the pygments cache directory", function(done){
+    var p = path.resolve(userhome(), ".pygmentize-bundled-cache")
+    assert(fs.existsSync(p))
+    rimraf(path.resolve(userhome(), ".pygmentize-bundled-cache"), function() {
+      assert(!fs.existsSync(p))
+      return done()
+    })
   })
 
 })

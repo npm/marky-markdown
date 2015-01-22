@@ -27,6 +27,7 @@ var marky = module.exports = function(markdown, options, callback) {
   options = options || {}
   defaults(options, {
     package: null,
+    highlightSyntax: false,
     serveImagesWithCDN: false,
     debug: false
   })
@@ -46,7 +47,7 @@ var marky = module.exports = function(markdown, options, callback) {
   html = comments(html)
 
   log("Parse markdown into HTML and add syntax highlighting")
-  render(html, function(err, output) {
+  render(html, options, function(err, output) {
     html = output
 
     log("Sanitize malicious or malformed HTML")
