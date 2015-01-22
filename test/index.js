@@ -73,8 +73,8 @@ describe("markdown processing and syntax highlighting", function() {
     assert($("code.coffeescript").length)
   })
 
-  it("adds hljs class to all blocks", function() {
-    assert.equal($("code").length, $("code.hljs").length)
+  it("adds hightlight class to all blocks", function() {
+    assert.equal($("code").length, $("code.highlight").length)
   })
 
   it("applies inline syntax highlighting classes to javascript", function(){
@@ -128,7 +128,7 @@ describe("sanitize", function(){
   })
 
   it("allows classnames on code tags", function() {
-    assert($("code.hljs").length)
+    assert($("code.highlight").length)
   })
 
   it("disallows iframes from sources other than youtube", function(done) {
