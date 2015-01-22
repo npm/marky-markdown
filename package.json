@@ -32,10 +32,14 @@
   "dependencies": {
     "cheerio": "^0.18.0",
     "github-url-to-object": "^1.4.2",
-    "highlight.js": "^8.4.0",
     "html-frontmatter": "^1.2.1",
+    "js-beautify": "^1.5.4",
     "lodash": "^2.4.1",
     "marked": "^0.3.2",
+    "pretty": "^1.0.0",
+    "pygmentize-bundled": "^2.3.0",
+    "pygmentize-bundled-cached": "^1.0.1",
+    "pygments-tokens": "^1.0.1",
     "sanitize-html": "^1.4.3",
     "similarity": "^1.0.1"
   },
@@ -45,11 +49,15 @@
     "cicada": "~1.1.1",
     "express": "^4.10.7",
     "flake": "^1.0.0",
+    "grunt-angular-templates": "^0.5.7",
     "johnny-five": "^0.8.37",
     "memoize": "~0.1.1",
     "mkhere": "~1.0.9",
     "mocha": "^2.0.1",
     "package-json-to-readme": "^1.3.0",
+    "rimraf": "^2.2.8",
+    "userhome": "^1.0.0",
     "wzrd": "^1.1.1"
-  }
+  },
+  "bin": "./bin/marky-markdown.js"
 }
