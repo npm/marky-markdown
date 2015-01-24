@@ -109,9 +109,9 @@ describe("sanitize", function(){
     assert(!$("script").length)
   })
 
-  it("optionally allows script tags", function(done){
+  it("can be disabled to allow input from trusted sources", function(done){
     assert(~fixtures.dirty.indexOf("<script"))
-    marky(fixtures.dirty, {allowScriptTags: true}, function(err, $){
+    marky(fixtures.dirty, {sanitize: false}, function(err, $){
       console.log($("script"))
       assert.equal($("script").length, 1)
       assert.equal($("script[src='http://malware.com']").length, 1)

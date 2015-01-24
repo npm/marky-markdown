@@ -26,8 +26,8 @@ var marky = module.exports = function(markdown, options, callback) {
 
   options = options || {}
   defaults(options, {
+    sanitize: true,
     package: null,
-    allowScriptTags: false,
     highlightSyntax: false,
     serveImagesWithCDN: false,
     debug: false
