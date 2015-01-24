@@ -109,6 +109,14 @@ describe("sanitize", function(){
     assert(!$("script").length)
   })
 
+  it("optionally allows script tags", function(done){
+    assert(~fixtures.dirty.indexOf("<script"))
+    marky(fixtures.dirty, {allowScriptTags: true}, function(err, $){
+      assert.equal($("script").length, 1)
+      done()
+    })
+  })
+
   it("allows img tags", function() {
     assert($("img").length)
   })
