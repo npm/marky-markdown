@@ -10,7 +10,7 @@
 
 ###### h6
 
-<script>alert("haxorz")</script>
+<script src="http://malware.com" type="text/javascript">alert("haxorz")</script>
 
 <img src="local.png"></img>
 
