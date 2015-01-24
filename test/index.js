@@ -112,9 +112,11 @@ describe("sanitize", function(){
   it("optionally allows script tags", function(done){
     assert(~fixtures.dirty.indexOf("<script"))
     marky(fixtures.dirty, {allowScriptTags: true}, function(err, $){
+      console.log($("script"))
       assert.equal($("script").length, 1)
       assert.equal($("script[src='http://malware.com']").length, 1)
       assert.equal($("script[type='text/javascript']").length, 1)
+      assert.equal($("script[charset='utf-8']").length, 1)
       done()
     })
   })
