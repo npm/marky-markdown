@@ -27,6 +27,7 @@ var marky = module.exports = function(markdown, options, callback) {
   options = options || {}
   defaults(options, {
     package: null,
+    allowScriptTags: false,
     highlightSyntax: false,
     serveImagesWithCDN: false,
     debug: false
@@ -51,7 +52,7 @@ var marky = module.exports = function(markdown, options, callback) {
     html = output
 
     log("Sanitize malicious or malformed HTML")
-    html = sanitize(html)
+    html = sanitize(html, options)
 
     log("Turn HTML into DOM object")
     $ = cheerio.load(html)
