@@ -51,16 +51,18 @@ var marky = module.exports = function(markdown, options, callback) {
   render(html, options, function(err, output) {
     html = output
 
-    log("Sanitize malicious or malformed HTML")
-    html = sanitize(html, options)
+    if (options.sanitize) {
+      log("Sanitize malicious or malformed HTML")
+      html = sanitize(html)
+    }
 
-    log("Turn HTML into DOM object")
+    log("Parse HTML into a cheerio DOM object")
     $ = cheerio.load(html)
 
-    log("Make gravatar img URLs secure")
+    log("Make gravatar image URLs secure")
     $ = gravatar($)
 
-    log("Make relative GitHub link URLs absolute")
+    log("Resolve relative GitHub link hrefs")
     $ = github($, options.package)
 
     log("Dress up Youtube iframes")
@@ -69,7 +71,7 @@ var marky = module.exports = function(markdown, options, callback) {
     log("Add CSS classes to paragraphs containing badges")
     $ = badges($)
 
-    log("Add #hashy links to h1,h2,h3,h4,h5,h6")
+    log("Add fragment hyperlinks links to h1,h2,h3,h4,h5,h6")
     $ = headings($)
 
     log("Inject package name and description into README")
@@ -80,7 +82,6 @@ var marky = module.exports = function(markdown, options, callback) {
       $ = cdn($, options.package)
     }
 
-    // Call .html() on the return value to get an HTML string
     return callback(null, $)
   })
 
