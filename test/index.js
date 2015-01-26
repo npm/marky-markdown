@@ -801,4 +801,38 @@ describe("real readmes in the wild", function() {
 
   })
 
+  describe("cordova", function() {
+    var $
+    var package = require("../node_modules/cordova/package.json")
+
+    beforeEach(function(done) {
+      marky(fixtures["cordova"], {package: package}, function(err, result){
+        $ = result
+        done()
+      })
+    })
+
+    it("successfully parses", function(){
+      assert($.html().length)
+    })
+
+  })
+
+  describe("catjs", function() {
+    var $
+    var package = require("../node_modules/catjs/package.json")
+
+    beforeEach(function(done) {
+      marky(fixtures["catjs"], {package: package}, function(err, result){
+        $ = result
+        done()
+      })
+    })
+
+    it("successfully parses", function(){
+      assert($.html().length)
+    })
+
+  })
+
 })

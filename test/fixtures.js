@@ -8,7 +8,7 @@ fs.readdirSync(__dirname + "/fixtures").forEach(function(file) {
 });
 
 // Packages with a README.md
-"async express grunt-angular-templates johnny-five memoize mkhere".split(" ").forEach(function(pkg) {
+"async catjs cordova express grunt-angular-templates johnny-five memoize mkhere".split(" ").forEach(function(pkg) {
   fixtures[pkg] = fs.readFileSync(__dirname + "/../node_modules/" + pkg + "/README.md", "utf-8")
 })
 
