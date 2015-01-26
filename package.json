@@ -39,7 +39,7 @@
     "pretty": "^1.0.0",
     "pygmentize-bundled": "^2.3.0",
     "pygments-tokens": "^1.0.1",
-    "sanitize-html": "^1.4.3",
+    "sanitize-html": "^1.5.1",
     "similarity": "^1.0.1"
   },
   "devDependencies": {
