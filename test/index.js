@@ -447,6 +447,14 @@ describe("packagize", function() {
         done()
       })
     })
+
+    it("parses description as markdown and removes script tags", function(done){
+      marky("this is a test", {package: {name: "malice", description: "bad <script>/xss</script> [hax](http://hax.com)"}}, function(err, $){
+        assert.equal($("p.package-description").html(), "bad  <a href=\"http://hax.com\">hax</a>")
+        done()
+      })
+    })
+
   })
 
 })
