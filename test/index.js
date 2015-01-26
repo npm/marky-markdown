@@ -54,22 +54,22 @@ describe("markdown processing and syntax highlighting", function() {
   });
 
   it("converts github flavored fencing to code blocks", function() {
-    assert(fixtures.basic.indexOf("```js"))
+    assert(~fixtures.basic.indexOf("```js"))
     assert($("code").length)
   })
 
   it("adds js class to javascript blocks", function(){
-    assert(fixtures.basic.indexOf("```js"))
+    assert(~fixtures.basic.indexOf("```js"))
     assert($("code.js").length)
   })
 
   it("adds sh class to shell blocks", function(){
-    assert(fixtures.basic.indexOf("```sh"))
+    assert(~fixtures.basic.indexOf("```sh"))
     assert($("code.sh").length)
   })
 
   it("adds sh class to shell blocks", function(){
-    assert(fixtures.basic.indexOf("```coffee"))
+    assert(~fixtures.basic.indexOf("```coffee"))
     assert($("code.coffeescript").length)
   })
 
