@@ -681,12 +681,6 @@ describe("real readmes in the wild", function() {
       assert($.html().length)
     })
 
-    it("throws out HTML comments", function(){
-      assert(fixtures["johnny-five"].match("<!--"))
-      assert(!$.html().match("<!--"))
-      assert(!$.html().match("&lt;!--"))
-    })
-
   })
 
   describe("wzrd", function() {
