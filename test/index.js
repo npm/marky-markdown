@@ -78,20 +78,17 @@ describe("markdown processing and syntax highlighting", function() {
   })
 
   it("applies inline syntax highlighting classes to javascript", function(){
-    assert($("code.js span.kd").length)
-    assert($("code.js span.nx").length)
-    assert($("code.js span.p").length)
+    assert($(".js.modifier").length)
+    assert($(".js.function").length)
   })
 
-  it("applies inline syntax highlighting classes to shell", function(){
-    assert($("code.sh span.nb").length)
+  it("applies inline syntax highlighting classes to shell", function() {
+    assert($(".shell.builtin").length)
   })
 
-  it("applies inline syntax highlighting classes to coffeesript", function(){
-    assert($("code.coffeescript span.nx").length)
-    assert($("code.coffeescript span.s").length)
+  it("applies inline syntax highlighting classes to coffeesript", function() {
+    assert($(".coffee.begin").length)
   })
-
 })
 
 describe("sanitize", function(){
@@ -112,7 +109,6 @@ describe("sanitize", function(){
   it("can be disabled to allow input from trusted sources", function(done){
     assert(~fixtures.dirty.indexOf("<script"))
     marky(fixtures.dirty, {sanitize: false}, function(err, $){
-      console.log($("script"))
       assert.equal($("script").length, 1)
       assert.equal($("script[src='http://malware.com']").length, 1)
       assert.equal($("script[type='text/javascript']").length, 1)
@@ -496,12 +492,12 @@ describe("headings", function(){
 
   it("injects hashy anchor tags into headings that have DOM ids", function(){
     assert(~fixtures.dirty.indexOf("# h1"))
-    assert($("h1 a[href='#h1']").length)
+    assert($("h1 a[href='#user-content-h1']").length)
   })
 
   it("adds deep-link class to modified headings", function(){
     assert(~fixtures.dirty.indexOf("# h1"))
-    assert($("h1.deep-link a[href='#h1']").length)
+    assert($("h1.deep-link a[href='#user-content-h1']").length)
   })
 
   it("doesn't inject anchor tags into headings that already contain anchors", function(){
@@ -645,8 +641,8 @@ describe("real readmes in the wild", function() {
     })
 
     it("linkifies headings", function(){
-      var link = $("h2#-benchmark-support-.deep-link a")
-      assert.equal(link.attr('href'), "#-benchmark-support-")
+      var link = $("h2#user-content-benchmarksupport.deep-link a")
+      assert.equal(link.attr('href'), "#user-content-benchmarksupport")
       assert.equal(link.text(), "Benchmark.support")
     })
 
@@ -683,12 +679,6 @@ describe("real readmes in the wild", function() {
 
     it("successfully parses", function(){
       assert($.html().length)
-    })
-
-    it("throws out HTML comments", function(){
-      assert(fixtures["johnny-five"].match("<!--"))
-      assert(!$.html().match("<!--"))
-      assert(!$.html().match("&lt;!--"))
     })
 
   })
