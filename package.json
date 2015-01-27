@@ -31,6 +31,7 @@
   "homepage": "https://github.com/npm/marky-markdown",
   "dependencies": {
     "cheerio": "^0.18.0",
+    "escape-html": "^1.0.1",
     "github-url-to-object": "^1.4.2",
     "highlights": "^0.16.0",
     "highlights-tokens": "^1.0.1",
@@ -41,7 +42,8 @@
     "marked": "^0.3.2",
     "pretty": "^1.0.0",
     "sanitize-html": "^1.5.1",
-    "similarity": "^1.0.1"
+    "similarity": "^1.0.1",
+    "string": "^3.0.0"
   },
   "devDependencies": {
     "async": "^0.9.0",
