@@ -77,19 +77,11 @@ describe("markdown processing and syntax highlighting", function() {
     assert.equal($("code").length, $("code.highlight").length)
   })
 
-  it("applies inline syntax highlighting classes to javascript", function(){
-    assert($("code.js span.kd").length)
-    assert($("code.js span.nx").length)
-    assert($("code.js span.p").length)
-  })
-
-  it("applies inline syntax highlighting classes to shell", function(){
-    assert($("code.sh span.nb").length)
-  })
-
-  it("applies inline syntax highlighting classes to coffeesript", function(){
-    assert($("code.coffeescript span.nx").length)
-    assert($("code.coffeescript span.s").length)
+  it.only("applies inline syntax highlighting classes to javascript", function(){
+    console.log($("code.js").html())
+    // assert($("code.js pre.editor.editor-colors").length)
+    // assert($("code.js div.line").length)
+    assert($("code.js span.text.plain.null-grammar").length)
   })
 
 })
@@ -112,7 +104,6 @@ describe("sanitize", function(){
   it("can be disabled to allow input from trusted sources", function(done){
     assert(~fixtures.dirty.indexOf("<script"))
     marky(fixtures.dirty, {sanitize: false}, function(err, $){
-      console.log($("script"))
       assert.equal($("script").length, 1)
       assert.equal($("script[src='http://malware.com']").length, 1)
       assert.equal($("script[type='text/javascript']").length, 1)
