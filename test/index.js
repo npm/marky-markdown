@@ -77,11 +77,9 @@ describe("markdown processing and syntax highlighting", function() {
     assert.equal($("code").length, $("code.highlight").length)
   })
 
-  it.only("applies inline syntax highlighting classes to javascript", function(){
-    console.log($("code.js").html())
-    // assert($("code.js pre.editor.editor-colors").length)
-    // assert($("code.js div.line").length)
-    assert($("code.js span.text.plain.null-grammar").length)
+  it("applies inline syntax highlighting classes to javascript", function(){
+    assert($(".js.modifier").length)
+    assert($(".js.function").length)
   })
 
 })
