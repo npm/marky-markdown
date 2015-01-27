@@ -492,12 +492,12 @@ describe("headings", function(){
 
   it("injects hashy anchor tags into headings that have DOM ids", function(){
     assert(~fixtures.dirty.indexOf("# h1"))
-    assert($("h1 a[href='#user-content-h1']").length)
+    assert($("h1 a[href='#h1']").length)
   })
 
   it("adds deep-link class to modified headings", function(){
     assert(~fixtures.dirty.indexOf("# h1"))
-    assert($("h1.deep-link a[href='#user-content-h1']").length)
+    assert($("h1.deep-link a[href='#h1']").length)
   })
 
   it("doesn't inject anchor tags into headings that already contain anchors", function(){
@@ -642,7 +642,7 @@ describe("real readmes in the wild", function() {
 
     it("linkifies headings", function(){
       var link = $("h2#user-content-benchmarksupport.deep-link a")
-      assert.equal(link.attr('href'), "#user-content-benchmarksupport")
+      assert.equal(link.attr('href'), "#benchmarksupport")
       assert.equal(link.text(), "Benchmark.support")
     })
 
