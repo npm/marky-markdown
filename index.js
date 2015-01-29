@@ -12,25 +12,20 @@ var gravatar    = require("./lib/gravatar")
 var headings    = require("./lib/headings")
 var packagize   = require("./lib/packagize")
 
-var marky = module.exports = function(markdown, options, callback) {
+var marky = module.exports = function(markdown, options) {
   var html, $
 
-  if (!callback) {
-    callback = options
-    options = {}
-  }
-
   if (!markdown || typeof markdown !== "string") {
-    return callback(Error("first argument must be a string"))
+    return Error("first argument must be a string")
   }
 
   options = options || {}
   defaults(options, {
     sanitize: true,
-    package: null,
-    highlightSyntax: false,
+    highlightSyntax: true,
     serveImagesWithCDN: false,
-    debug: false
+    debug: false,
+    package: null,
   })
 
   var log = function(msg) {
@@ -45,41 +40,39 @@ var marky = module.exports = function(markdown, options, callback) {
   html = frontmatter(markdown)
 
   log("Parse markdown into HTML and add syntax highlighting")
-  render(html, options, function(err, output) {
-    html = output
+  html = render(html, options)
 
-    if (options.sanitize) {
-      log("Sanitize malicious or malformed HTML")
-      html = sanitize(html)
-    }
+  if (options.sanitize) {
+    log("Sanitize malicious or malformed HTML")
+    html = sanitize(html)
+  }
 
-    log("Parse HTML into a cheerio DOM object")
-    $ = cheerio.load(html)
+  log("Parse HTML into a cheerio DOM object")
+  $ = cheerio.load(html)
 
-    log("Make gravatar image URLs secure")
-    $ = gravatar($)
+  log("Make gravatar image URLs secure")
+  $ = gravatar($)
 
-    log("Resolve relative GitHub link hrefs")
-    $ = github($, options.package)
+  log("Resolve relative GitHub link hrefs")
+  $ = github($, options.package)
 
-    log("Dress up Youtube iframes")
-    $ = youtube($)
+  log("Dress up Youtube iframes")
+  $ = youtube($)
 
-    log("Add CSS classes to paragraphs containing badges")
-    $ = badges($)
+  log("Add CSS classes to paragraphs containing badges")
+  $ = badges($)
 
-    log("Add fragment hyperlinks links to h1,h2,h3,h4,h5,h6")
-    $ = headings($)
+  log("Add fragment hyperlinks links to h1,h2,h3,h4,h5,h6")
+  $ = headings($)
 
-    log("Inject package name and description into README")
-    $ = packagize($, options.package)
+  log("Inject package name and description into README")
+  $ = packagize($, options.package)
 
-    if (options.serveImagesWithCDN) {
-      log("Rewrite relative image source to use CDN")
-      $ = cdn($, options.package)
-    }
+  if (options.serveImagesWithCDN) {
+    log("Rewrite relative image source to use CDN")
+    $ = cdn($, options.package)
+  }
 
-    return callback(null, $)
-  })
+  return $
 
 }

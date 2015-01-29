@@ -5,8 +5,7 @@
   "tagline": "It's like ordinary markdown except it drops its pants for attention.",
   "main": "index.js",
   "scripts": {
-    "test": "mocha",
-    "doc": "readme package.json --test > README.md"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -53,6 +52,7 @@
     "cordova": "^4.2.0",
     "express": "^4.10.7",
     "flake": "^1.0.0",
+    "glob": "^4.3.5",
     "grunt-angular-templates": "^0.5.7",
     "johnny-five": "^0.8.37",
     "memoize": "~0.1.1",

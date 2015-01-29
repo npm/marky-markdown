@@ -1,12 +1,10 @@
 var marky = require("./")
 
 // Here's my basic API
-marky(inputString, [optionsObject], nodeStyleCallback)
+marky(inputString, [optionsObject])
 
 // Clean up a regular old markdown string
-marky("# hello, I'm markdown", function(err, $){
-  console.log($.html())
-})
+marky("# hello, I'm markdown").html()
 
 // Pass in an npm `package` object to do stuff like
 // rewriting relative URLs to their absolute equivalent on github,
@@ -23,28 +21,17 @@ var package = {
 
 marky(
   "# hello, I am the foo readme",
-  {package: package},
-  function(err, $) {
-    console.log($.html())
-  }
-)
+  {package: package}
+).html()
 
-// Syntax highlighting is disabled by default.
-// To turn it on:
-
+// Disable syntax highlighting
 marky(
   "# I'm a file with github flavored markdown",
-  {highlightSyntax: false},
-  function(err, $) {
-    console.log($.html())
-  }
-)
+  {highlightSyntax: false}
+).html()
 
 // Pass in a `debug` for verbose output
 marky(
   "# hello, I'm an evil document",
   {debug: true},
-  function(err, $) {
-    console.log($.html())
-  }
-)
+).html()
