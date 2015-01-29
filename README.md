@@ -6,11 +6,11 @@ The thing [npmjs.com](https://www.npmjs.com) uses to clean up READMEs and other 
 
 - Parses markdown with [markdown-it](https://github.com/markdown-it/markdown-it), a fast and [commonmark-compliant](http://commonmark.org/) parser.
 - Removes broken and malicious user input with [sanitize-html](https://www.npmjs.com/package/sanitize-html)
-- Highlights code syntax using the [highlights](https://www.npmjs.com/package/highlights) library from [Atom](https://atom.io/).
-- Converts headings (h1, h2, etc) into deep hyperlinks.
+- Applies syntax highlighting to [GitHub-flavored code blocks](https://help.github.com/articles/github-flavored-markdown/#fenced-code-blocks) using the [highlights](https://www.npmjs.com/package/highlights) library from [Atom](https://atom.io/).
+- Converts headings (h1, h2, etc) into anchored hyperlinks.
 - Converts relative GitHub links to their absolute equivalents.
 - Converts relative GitHub images sources to their GitHub raw equivalents.
-- Converts insecure Gravatar URLs to use HTTPS.
+- Converts insecure Gravatar URLs to HTTPS.
 - Wraps embedded YouTube videos so they can be styled.
 - Parses and sanitizes `package.description` as markdown.
 - Applies CSS classes to redundant content that closely matches npm package name and description.
