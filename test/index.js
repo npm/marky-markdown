@@ -1,6 +1,7 @@
 var assert = require("assert")
 var fs = require("fs")
 var path = require("path")
+var glob = require("glob")
 var fixtures = require("./fixtures.js")
 var marky = require("..")
 
@@ -11,17 +12,15 @@ describe("marky-markdown", function() {
     assert(typeof marky === "function")
   })
 
-  it("accepts a markdown string and returns a cheerio DOM object", function(done){
-     marky("hello, world", function(err, $) {
-      assert($.html)
-      assert($._root)
-      assert($._options)
-      assert(~$.html().indexOf("<p>hello, world</p>\n"))
-      done()
-    })
+  it("accepts a markdown string and returns a cheerio DOM object", function(){
+    var $ = marky("hello, world")
+    assert($.html)
+    assert($._root)
+    assert($._options)
+    assert(~$.html().indexOf("<p>hello, world</p>\n"))
   })
 
-  it("calls back with an error if first argument is not a string", function(done){
+  it("returns an error if first argument is not a string", function(){
     marky(null, function(err, $) {
       assert(err)
       assert.equal(err.message, "first argument must be a string")
@@ -41,11 +40,8 @@ describe("marky-markdown", function() {
 
 describe("markdown processing and syntax highlighting", function() {
   var $
-  before(function(done) {
-    marky(fixtures.basic, {highlightSyntax: true}, function(err, output) {
-      $ = output
-      done()
-    })
+  before(function() {
+    $ = marky(fixtures.basic, {highlightSyntax: true})
   })
 
   it('preserves query parameters in URLs when making them into links', function () {
@@ -94,11 +90,8 @@ describe("markdown processing and syntax highlighting", function() {
 describe("sanitize", function(){
   var $
 
-  before(function(done) {
-    marky(fixtures.dirty, function(err, output) {
-      $ = output
-      done()
-    })
+  before(function() {
+    $ = marky(fixtures.dirty)
   })
 
   it("removes script tags", function(){
@@ -106,15 +99,13 @@ describe("sanitize", function(){
     assert(!$("script").length)
   })
 
-  it("can be disabled to allow input from trusted sources", function(done){
+  it("can be disabled to allow input from trusted sources", function(){
     assert(~fixtures.dirty.indexOf("<script"))
-    marky(fixtures.dirty, {sanitize: false}, function(err, $){
-      assert.equal($("script").length, 1)
-      assert.equal($("script[src='http://malware.com']").length, 1)
-      assert.equal($("script[type='text/javascript']").length, 1)
-      assert.equal($("script[charset='utf-8']").length, 1)
-      done()
-    })
+    var $ = marky(fixtures.dirty, {sanitize: false})
+    assert.equal($("script").length, 1)
+    assert.equal($("script[src='http://malware.com']").length, 1)
+    assert.equal($("script[type='text/javascript']").length, 1)
+    assert.equal($("script[charset='utf-8']").length, 1)
   })
 
   it("allows img tags", function() {
@@ -139,14 +130,12 @@ describe("sanitize", function(){
     assert($("code.highlight").length)
   })
 
-  it("disallows iframes from sources other than youtube", function(done) {
-    marky(fixtures.basic, function(err, $){
-      assert(~fixtures.basic.indexOf("<iframe src=\"//www.youtube.com/embed/3I78ELjTzlQ"))
-      assert(~fixtures.basic.indexOf("<iframe src=\"//malware.com"))
-      assert.equal($("iframe").length, 1)
-      assert.equal($("iframe").attr("src"), "//www.youtube.com/embed/3I78ELjTzlQ")
-      done()
-    })
+  it("disallows iframes from sources other than youtube", function() {
+    var $ = marky(fixtures.basic)
+    assert(~fixtures.basic.indexOf("<iframe src=\"//www.youtube.com/embed/3I78ELjTzlQ"))
+    assert(~fixtures.basic.indexOf("<iframe src=\"//malware.com"))
+    assert.equal($("iframe").length, 1)
+    assert.equal($("iframe").attr("src"), "//www.youtube.com/embed/3I78ELjTzlQ")
   })
 
 })
@@ -154,11 +143,8 @@ describe("sanitize", function(){
 describe("badges", function(){
   var $
 
-  before(function(done) {
-    marky(fixtures.badges, function(err, output) {
-      $ = output
-      done()
-    })
+  before(function() {
+    $ = marky(fixtures.badges)
   })
 
   it("adds a badge class to img tags containing badge images", function() {
@@ -175,30 +161,25 @@ describe("badges", function(){
 
 describe("gravatar", function(){
   var $
-  var images
 
-  before(function(done) {
-    marky(fixtures.gravatar, function(err, output){
-      $ = output
-      images = $("img")
-      done()
-    })
+  before(function() {
+    $ = marky(fixtures.gravatar)
   })
 
   it("replaces insecure gravatar img src URLs with secure HTTPS URLs", function() {
     assert(~fixtures.gravatar.indexOf("http://gravatar.com/avatar/123?s=50&d=retro"))
-    assert.equal(images.length, 3)
-    assert.equal($(images[0]).attr('src'), "https://secure.gravatar.com/avatar/123?s=50&d=retro")
+    assert.equal($("img").length, 3)
+    assert.equal($("img").eq(0).attr('src'), "https://secure.gravatar.com/avatar/123?s=50&d=retro")
   })
 
   it("leaves secure gravatar URLs untouched", function() {
     assert(~fixtures.gravatar.indexOf("https://secure.gravatar.com/avatar/456?s=50&d=retro"))
-    assert.equal($(images[1]).attr('src'), "https://secure.gravatar.com/avatar/456?s=50&d=retro")
+    assert.equal($("img").eq(1).attr('src'), "https://secure.gravatar.com/avatar/456?s=50&d=retro")
   })
 
   it("leaves non-gravtar URLs untouched", function() {
     assert(~fixtures.gravatar.indexOf("http://not-gravatar.com/foo"))
-    assert.equal($(images[2]).attr('src'), "http://not-gravatar.com/foo")
+    assert.equal($("img").eq(2).attr('src'), "http://not-gravatar.com/foo")
   })
 
 })
@@ -216,11 +197,8 @@ describe("github", function(){
       }
     }
 
-    before(function(done) {
-      marky(fixtures.github, {package: package}, function(err, output){
-        $ = output
-        done()
-      })
+    before(function() {
+      $ = marky(fixtures.github, {package: package})
     })
 
     it("rewrites relative link hrefs to absolute", function() {
@@ -275,11 +253,8 @@ describe("github", function(){
       }
     }
 
-    before(function(done) {
-      marky(fixtures.github, {package: package}, function(err, output){
-        $ = output
-        done()
-      })
+    before(function() {
+      $ = marky(fixtures.github, {package: package})
     })
 
     it("leaves relative URLs alone", function() {
@@ -331,12 +306,9 @@ describe("youtube", function() {
   var $
   var iframe
 
-  before(function(done){
-    marky(fixtures.basic, function(err, output){
-      $ = output
-      iframe = $(".youtube-video > iframe")
-      done()
-    })
+  before(function(){
+    $ = marky(fixtures.basic)
+    iframe = $(".youtube-video > iframe")
   })
 
   it("wraps iframes in a div for stylability", function() {
@@ -376,79 +348,60 @@ describe("packagize", function() {
 
   describe("name", function() {
 
-    it("prepends an h1.package-name element into readme with value of package.name", function(done){
-      marky(fixtures.wibble, {package: packages.wibble}, function(err, $){
-        assert.equal(
-          $("h1.package-name").text(),
-          packages.wibble.name
-        )
-        done()
-      })
+    it("prepends an h1.package-name element into readme with value of package.name", function(){
+      var $ = marky(fixtures.wibble, {package: packages.wibble})
+      assert.equal(
+        $("h1.package-name").text(),
+        packages.wibble.name
+      )
     })
 
-    it("adds .package-name-redundant class to first h1 if it's similar to package.name", function(done) {
-      marky(fixtures.wibble, {package: packages.wibble}, function(err, $){
-        assert.equal($("h1.package-name-redundant").length, 1)
-        done()
-      })
-
+    it("adds .package-name-redundant class to first h1 if it's similar to package.name", function() {
+      var $ = marky(fixtures.wibble, {package: packages.wibble})
+      assert.equal($("h1.package-name-redundant").length, 1)
     })
 
-    it("leaves first h1 alone if it differs from package.name", function(done) {
-      marky(fixtures.wibble, {package: packages.dangledor}, function(err, $){
-        assert.equal($("h1.package-name-redundant").length, 0)
-        assert.equal($("h1:not(.package-name)").text(), "wibble.js")
-        done()
-      })
+    it("leaves first h1 alone if it differs from package.name", function() {
+      var $ = marky(fixtures.wibble, {package: packages.dangledor})
+      assert.equal($("h1.package-name-redundant").length, 0)
+      assert.equal($("h1:not(.package-name)").text(), "wibble.js")
     })
   })
 
   describe("description", function() {
-    it("prepends package.description in a p.package-description element", function(done) {
-      marky(fixtures.wibble, {package: packages.wibble}, function(err, $){
-        assert.equal(
-          $("p.package-description").text(),
-          packages.wibble.description
-        )
-        done()
-      })
+    it("prepends package.description in a p.package-description element", function() {
+      var $ = marky(fixtures.wibble, {package: packages.wibble})
+      assert.equal(
+        $("p.package-description").text(),
+        packages.wibble.description
+      )
     })
 
-    it("adds .package-description-redundant class to first h1 if it's similar to package.description", function(done) {
-      marky(fixtures.wibble, {package: packages.wobble}, function(err, $){
-        assert.equal($("h1.package-description-redundant").length, 1)
-        done()
-      })
+    it("adds .package-description-redundant class to first h1 if it's similar to package.description", function() {
+      var $ = marky(fixtures.wibble, {package: packages.wobble})
+      assert.equal($("h1.package-description-redundant").length, 1)
     })
 
-    it("leaves first h1 alone if it differs from package.description", function(done) {
-      marky(fixtures.wibble, {package: packages.dangledor}, function(err, $){
-        assert.equal($("h1.package-description-redundant").length, 0)
-        assert.equal($("h1:not(.package-name)").text(), "wibble.js")
-        done()
-      })
+    it("leaves first h1 alone if it differs from package.description", function() {
+      var $ = marky(fixtures.wibble, {package: packages.dangledor})
+      assert.equal($("h1.package-description-redundant").length, 0)
+      assert.equal($("h1:not(.package-name)").text(), "wibble.js")
     })
 
-    it("adds .package-description-redundant class to first p if it's similar to package.description", function(done) {
-      marky(fixtures.wibble, {package: packages.wibble}, function(err, $){
-        assert.equal($("p.package-description-redundant").length, 1)
-        done()
-      })
+    it("adds .package-description-redundant class to first p if it's similar to package.description", function() {
+      var $ = marky(fixtures.wibble, {package: packages.wibble})
+      assert.equal($("p.package-description-redundant").length, 1)
     })
 
-    it("leaves first p alone if it differs from package.description", function(done) {
-      marky(fixtures.wibble, {package: packages.dangledor}, function(err, $){
-        assert.equal($("p.package-description-redundant").length, 0)
-        assert.equal($("p:not(.package-description)").first().text(), "A package called wibble!")
-        done()
-      })
+    it("leaves first p alone if it differs from package.description", function() {
+      var $ = marky(fixtures.wibble, {package: packages.dangledor})
+      assert.equal($("p.package-description-redundant").length, 0)
+      assert.equal($("p:not(.package-description)").first().text(), "A package called wibble!")
     })
 
-    it("parses description as markdown and removes script tags", function(done){
-      marky("this is a test", {package: {name: "malice", description: "bad <script>/xss</script> [hax](http://hax.com)"}}, function(err, $){
-        assert.equal($("p.package-description").html(), "bad  <a href=\"http://hax.com\">hax</a>")
-        done()
-      })
+    it("parses description as markdown and removes script tags", function(){
+      var $ = marky("this is a test", {package: {name: "malice", description: "bad <script>/xss</script> [hax](http://hax.com)"}})
+      assert.equal($("p.package-description").html(), "bad  <a href=\"http://hax.com\">hax</a>")
     })
 
   })
@@ -483,11 +436,8 @@ describe("fixtures", function() {
 describe("headings", function(){
   var $
 
-  before(function(done){
-    marky(fixtures.dirty, function(err, output){
-      $ = output
-      done()
-    })
+  before(function(){
+    $ = marky(fixtures.dirty)
   })
 
   it("injects hashy anchor tags into headings that have DOM ids", function(){
@@ -508,15 +458,12 @@ describe("headings", function(){
 })
 
 describe("frontmatter", function() {
-  it("rewrites HTML frontmatter as <meta> tags", function(done) {
-    marky(fixtures.frontmatter, function(err, $){
-      assert($("meta[name='hello']").length)
-      assert.equal($("meta[name='hello']").attr("content"), "world")
-      done()
-    })
+  it("rewrites HTML frontmatter as <meta> tags", function() {
+    var $ = marky(fixtures.frontmatter)
+    assert($("meta[name='hello']").length)
+    assert.equal($("meta[name='hello']").attr("content"), "world")
   })
 })
-
 
 describe("cdn", function() {
 
@@ -527,11 +474,8 @@ describe("cdn", function() {
       serveImagesWithCDN: true
     }
 
-    before(function(done){
-      marky(fixtures.basic, options, function(err, output){
-        $ = output
-        done()
-      })
+    before(function(){
+      $ = marky(fixtures.basic, options)
     })
 
     it("replaces relative img URLs with npm CDN URLs", function() {
@@ -556,7 +500,6 @@ describe("cdn", function() {
 
   })
 
-
   describe("when serveImagesWithCDN is false (default)", function() {
     var $
     var options = {
@@ -566,11 +509,8 @@ describe("cdn", function() {
       }
     }
 
-    before(function(done){
-      marky(fixtures.basic, options, function(err, output){
-        $ = output
-        done()
-      })
+    before(function(){
+      $ = marky(fixtures.basic, options)
     })
 
     it("leaves relative img alone", function() {
@@ -597,232 +537,25 @@ describe("cdn", function() {
 
 })
 
-
 describe("real readmes in the wild", function() {
-  describe("express", function() {
-    var $
-    var package = require("../node_modules/express/package.json")
 
-    beforeEach(function(done) {
-      marky(fixtures.express, {package: package}, function(err, output){
-        $ = output
-        done()
-      })
+  it("parses readmes of all dependencies and devDependencies", function(done){
+    var packages = Object.keys(require("../package.json").devDependencies).concat(
+      Object.keys(require("../package.json").dependencies))
+
+    assert(Array.isArray(packages))
+    assert(packages.length)
+    packages.forEach(function(name) {
+      console.log("\t" + name)
+      assert(typeof fixtures[name] === "string")
+      var json = require(path.resolve("node_modules", name, "package.json"))
+      var $ = marky(fixtures[name], {package: json})
+      assert($.html().length > 100)
+
+      if (name === packages[packages.length-1]) {
+        return done()
+      }
     })
-
-    it("successfully parses readme.md", function(){
-      assert($.html().length)
-    })
-
-    it("adds package name h1", function(){
-      assert.equal($("h1.package-name a[href='#readme']").text(), "express")
-    })
-
-    it("identifies and marks redundant package description, even when it is not the the first paragraph", function(){
-      assert($("p.package-description-redundant").length)
-    })
-
-  })
-
-
-  describe("benchmark", function() {
-    var $
-    var package = require("../node_modules/benchmark/package.json")
-
-    beforeEach(function(done) {
-      marky(fixtures.benchmark, {package: package}, function(err, output){
-        $ = output
-        done()
-      })
-    })
-
-    it("successfully parses", function(){
-      assert($.html().length)
-    })
-
-    it("linkifies headings", function(){
-      var link = $("h2#user-content-benchmarksupport.deep-link a")
-      assert.equal(link.attr('href'), "#benchmarksupport")
-      assert.equal(link.text(), "Benchmark.support")
-    })
-
-  })
-
-  describe("async", function() {
-    this.timeout(10000)
-    var $
-    var package = require("../node_modules/async/package.json")
-
-    beforeEach(function(done) {
-      marky(fixtures.async, {package: package, debug: false}, function(err, output){
-        $ = output
-        done()
-      })
-    })
-
-    it("successfully parses", function(){
-      assert($.html().length)
-    })
-
-  })
-
-  describe("johnny-five", function() {
-    var $
-    var package = require("../node_modules/johnny-five/package.json")
-
-    beforeEach(function(done) {
-      marky(fixtures["johnny-five"], {package: package}, function(err, result){
-        $ = result
-        done()
-      })
-    })
-
-    it("successfully parses", function(){
-      assert($.html().length)
-    })
-
-  })
-
-  describe("wzrd", function() {
-    var $
-    var package = require("../node_modules/wzrd/package.json")
-
-    beforeEach(function(done) {
-      marky(fixtures.wzrd, {package: package}, function(err, result){
-        $ = result
-        done()
-      })
-    })
-
-    it("successfully parses", function(){
-      assert($.html().length)
-    })
-
-    it("processes package description as markdown", function(){
-      assert(package.description.match(/Inspired by \[beefy\]/))
-      assert($("p.package-description a[href='http://npmjs.org/beefy']").length)
-    })
-
-  })
-
-
-  describe("memoize", function() {
-    var $
-    var package = require("../node_modules/memoize/package.json")
-
-    beforeEach(function(done) {
-      marky(fixtures.memoize, {package: package}, function(err, result){
-        $ = result
-        done()
-      })
-    })
-
-    it("successfully parses", function(){
-      assert($.html().length)
-    })
-
-  })
-
-  describe("mkhere", function() {
-    var $
-    var package = require("../node_modules/mkhere/package.json")
-
-    beforeEach(function(done) {
-      marky(fixtures.mkhere, {package: package}, function(err, result){
-        $ = result
-        done()
-      })
-    })
-
-    it("successfully parses", function(){
-      assert($.html().length)
-    })
-
-  })
-
-  describe("cicada", function() {
-    var $
-    var package = require("../node_modules/cicada/package.json")
-
-    beforeEach(function(done) {
-      marky(fixtures.cicada, {package: package}, function(err, result){
-        $ = result
-        done()
-      })
-    })
-
-    it("successfully parses", function(){
-      assert($.html().length)
-    })
-
-  })
-
-  describe("flake", function() {
-    var $
-    var package = require("../node_modules/flake/package.json")
-
-    beforeEach(function(done) {
-      marky(fixtures.flake, {package: package}, function(err, result){
-        $ = result
-        done()
-      })
-    })
-
-    it("successfully parses", function(){
-      assert($.html().length)
-    })
-
-  })
-
-  describe("grunt-angular-templates", function() {
-    var $
-    var package = require("../node_modules/grunt-angular-templates/package.json")
-
-    beforeEach(function(done) {
-      marky(fixtures["grunt-angular-templates"], {package: package}, function(err, result){
-        $ = result
-        done()
-      })
-    })
-
-    it("successfully parses", function(){
-      assert($.html().length)
-    })
-
-  })
-
-  describe("cordova", function() {
-    var $
-    var package = require("../node_modules/cordova/package.json")
-
-    beforeEach(function(done) {
-      marky(fixtures["cordova"], {package: package}, function(err, result){
-        $ = result
-        done()
-      })
-    })
-
-    it("successfully parses", function(){
-      assert($.html().length)
-    })
-
-  })
-
-  describe("catjs", function() {
-    var $
-    var package = require("../node_modules/catjs/package.json")
-
-    beforeEach(function(done) {
-      marky(fixtures["catjs"], {package: package}, function(err, result){
-        $ = result
-        done()
-      })
-    })
-
-    it("successfully parses", function(){
-      assert($.html().length)
-    })
-
   })
 
 })
