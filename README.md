@@ -7,6 +7,7 @@ The thing [npmjs.com](https://www.npmjs.com) uses to clean up READMEs and other 
 - Parses markdown with [markdown-it](https://github.com/markdown-it/markdown-it), a fast and [commonmark-compliant](http://commonmark.org/) parser.
 - Removes broken and malicious user input with [sanitize-html](https://www.npmjs.com/package/sanitize-html)
 - Applies syntax highlighting to [GitHub-flavored code blocks](https://help.github.com/articles/github-flavored-markdown/#fenced-code-blocks) using the [highlights](https://www.npmjs.com/package/highlights) library from [Atom](https://atom.io/).
+- Uses [cheerio](https://www.npmjs.com/package/cheerio) to perform various feats of DOM manipulation.
 - Converts headings (h1, h2, etc) into anchored hyperlinks.
 - Converts relative GitHub links to their absolute equivalents.
 - Converts relative GitHub images sources to their GitHub raw equivalents.
@@ -24,20 +25,54 @@ npm install marky-markdown --save
 
 ## Programmatic Usage
 
+marky-markdown exports a single function. For basic use, that function
+takes a single argument: a string to convert.
+
 ```js
 var marky = require("marky-markdown")
-var marky = require("./")
-
-// Here's my basic API
-marky(inputString, [optionsObject])
-
-// Clean up a regular old markdown string
 marky("# hello, I'm markdown").html()
+```
 
-// Pass in an npm `package` object to do stuff like
-// rewriting relative URLs to their absolute equivalent on github,
-// normalizing package metadata with redundant readme content,
-// etcs
+### Options
+
+The exported function takes an optional options object
+as its second argument:
+
+```js
+marky("some trusted string", {sanitize: false}).html()
+```
+
+The default options are as follows:
+
+```js
+{
+  sanitize: true,             // remove script tags and stuff
+  highlightSyntax: true,      // run highlights on fenced code blocks
+  serveImagesWithCDN: false,  // use npm's CDN to proxy images over HTTPS
+  debug: false,               // console.log() all the things
+  package: null,              // npm package metadata
+}
+```
+
+### cheerio "middleware"
+
+marky-markdown always returns the generated HTML document as a [cheerio](https://www.npmjs.com/package/cheerio) DOM object that can be queried using a familiar jQuery syntax:
+
+```js
+var $ = marky("![cat](cat.png)")
+$("img").length
+// => 1
+$("img").attr("src")
+// => "cat.png"
+```
+
+### npm packages
+
+Pass in an npm `package` object to do stuff like rewriting relative URLs
+to their absolute equivalent on GitHub, normalizing package metadata
+with redundant readme content, etc
+
+```js
 var package = {
   name: "foo"
   name: "foo is a thing"
@@ -50,18 +85,6 @@ var package = {
 marky(
   "# hello, I am the foo readme",
   {package: package}
-).html()
-
-// Syntax highlighting is disabled by default.
-marky(
-  "# I'm a file with github flavored markdown",
-  {highlightSyntax: true}
-).html()
-
-// Pass in a `debug` for verbose output
-marky(
-  "# hello, I'm an evil document",
-  {debug: true},
 ).html()
 ```
 

@@ -22,10 +22,10 @@ var marky = module.exports = function(markdown, options) {
   options = options || {}
   defaults(options, {
     sanitize: true,
-    package: null,
-    highlightSyntax: false,
+    highlightSyntax: true,
     serveImagesWithCDN: false,
-    debug: false
+    debug: false,
+    package: null,
   })
 
   var log = function(msg) {

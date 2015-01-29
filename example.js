@@ -24,9 +24,7 @@ marky(
   {package: package}
 ).html()
 
-// Syntax highlighting is disabled by default.
-// To turn it on:
-
+// Disable syntax highlighting
 marky(
   "# I'm a file with github flavored markdown",
   {highlightSyntax: false}
