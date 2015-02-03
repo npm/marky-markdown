@@ -472,6 +472,13 @@ describe("headings", function(){
     assert.equal($("h4#this-is-a-test").length, 1)
   })
 
+  it("encodes innerHTML and removes angle brackets before generating ids", function(){
+    assert(~fixtures.payform.indexOf("## Browser `<input>` Helpers"))
+    $ = marky(fixtures.payform, {prefixHeadingIds: false})
+    assert.equal($("h2#browser-input-helpers a").length, 1)
+    assert.equal($("h2#browser-input-helpers a").html(), "Browser <code>&lt;input&gt;</code> Helpers")
+  })
+
 })
 
 describe("frontmatter", function() {
