@@ -461,9 +461,9 @@ describe("headings", function(){
   })
 
   it("allows id prefixes to be disabled with prefixHeadingIds", function(){
-    assert(~fixtures.dirty.indexOf("## h2"))
+    assert(~fixtures.dirty.indexOf("#### This is a TEST"))
     $ = marky(fixtures.dirty, {prefixHeadingIds: false})
-    assert.equal($("h2#h2").length, 1)
+    assert.equal($("h4#this-is-a-test").length, 1)
   })
 
 })
