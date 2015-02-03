@@ -23,6 +23,7 @@ var marky = module.exports = function(markdown, options) {
   defaults(options, {
     sanitize: true,
     highlightSyntax: true,
+    prefixHeadingIds: true,
     serveImagesWithCDN: false,
     debug: false,
     package: null,
@@ -63,7 +64,7 @@ var marky = module.exports = function(markdown, options) {
   $ = badges($)
 
   log("Add fragment hyperlinks links to h1,h2,h3,h4,h5,h6")
-  $ = headings($)
+  $ = headings($, options)
 
   log("Inject package name and description into README")
   $ = packagize($, options.package)

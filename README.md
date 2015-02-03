@@ -48,6 +48,7 @@ The default options are as follows:
 {
   sanitize: true,             // remove script tags and stuff
   highlightSyntax: true,      // run highlights on fenced code blocks
+  prefixHeadingIds: true,     // prevent DOM id collisions
   serveImagesWithCDN: false,  // use npm's CDN to proxy images over HTTPS
   debug: false,               // console.log() all the things
   package: null,              // npm package metadata

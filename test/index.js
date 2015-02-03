@@ -455,6 +455,17 @@ describe("headings", function(){
     assert($("h3 a[href='/already/linky']").length)
   })
 
+  it("applies a prefix to generated DOM ids by default", function(){
+    assert(~fixtures.dirty.indexOf("## h2"))
+    assert.equal($("h2#user-content-h2").length, 1)
+  })
+
+  it("allows id prefixes to be disabled with prefixHeadingIds", function(){
+    assert(~fixtures.dirty.indexOf("## h2"))
+    $ = marky(fixtures.dirty, {prefixHeadingIds: false})
+    assert.equal($("h2#h2").length, 1)
+  })
+
 })
 
 describe("frontmatter", function() {
