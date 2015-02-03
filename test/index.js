@@ -115,7 +115,7 @@ describe("sanitize", function(){
   it("allows h1/h2/h3/h4/h5/h6 tags to preserve their dom id", function() {
     assert($("h1").attr("id"))
     assert($("h2").attr("id"))
-    assert($("h3").attr("id"))
+    assert(!$("h3").attr("id"))
     assert($("h4").attr("id"))
     assert($("h5").attr("id"))
     assert($("h6").attr("id"))
