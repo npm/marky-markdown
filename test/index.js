@@ -421,8 +421,14 @@ describe("fixtures", function() {
     assert(keys.length)
     keys.forEach(function(key) {
       assert(fixtures[key])
+      if (key === "packageNames") return
       assert(typeof fixtures[key] === "string")
     })
+  })
+
+  it("has a property that is an alphabetical list of dependencies", function(){
+    assert(Array.isArray(fixtures.packageNames))
+    assert(fixtures.packageNames.length)
   })
 
   it("includes some real package readmes right from node_modules", function(){
@@ -551,8 +557,7 @@ describe("cdn", function() {
 describe("real readmes in the wild", function() {
 
   it("parses readmes of all dependencies and devDependencies", function(done){
-    var packages = Object.keys(require("../package.json").devDependencies).concat(
-      Object.keys(require("../package.json").dependencies))
+    var packages = fixtures.packageNames
 
     assert(Array.isArray(packages))
     assert(packages.length)

@@ -10,10 +10,12 @@ fs.readdirSync(__dirname + "/fixtures").forEach(function(file) {
 });
 
 // Read in all the devDependencies readmes
-var packages = Object.keys(require("../package.json").devDependencies).concat(
-  Object.keys(require("../package.json").dependencies))
+fixtures.packageNames = Object.keys(require("../package.json").devDependencies)
+  .concat(Object.keys(require("../package.json").dependencies))
+  .sort()
 
-packages.forEach(function(name) {
+
+fixtures.packageNames.forEach(function(name) {
   var json = require("../node_modules/" + name + "/package.json")
   var modulePath = path.resolve("node_modules", name)
 
