@@ -37,11 +37,11 @@ var marky = module.exports = function(markdown, options) {
 
   log("\n\n" + markdown + "\n\n")
 
-  log("Convert HTML frontmatter into meta tags")
-  html = frontmatter(markdown)
-
   log("Parse markdown into HTML and add syntax highlighting")
-  html = render(html, options)
+  html = render(markdown, options)
+
+  log("Convert HTML frontmatter into meta tags")
+  html = frontmatter(html)
 
   if (options.sanitize) {
     log("Sanitize malicious or malformed HTML")
