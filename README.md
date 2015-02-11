@@ -52,6 +52,7 @@ The default options are as follows:
   serveImagesWithCDN: false,  // use npm's CDN to proxy images over HTTPS
   debug: false,               // console.log() all the things
   package: null,              // npm package metadata
+  renderer: null,             // Uses markdown-it.render with default options
 }
 ```
 
