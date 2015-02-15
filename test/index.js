@@ -89,7 +89,6 @@ describe("markdown processing and syntax highlighting", function() {
   it("does not encode entities within code blocks", function(){
     assert(~fixtures.enterprise.indexOf("\"name\": \"@myco/anypackage\""))
     var $ = marky(fixtures.enterprise)
-    console.log($("code.js").eq(1).html())
     assert(!~$.html().indexOf("<span>quot</span>"))
     assert(~$.html().indexOf("<span>&quot;</span>"))
     // assert($("code.js").eq(0).html)
