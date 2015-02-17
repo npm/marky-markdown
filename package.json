@@ -29,6 +29,7 @@
   },
   "homepage": "https://github.com/npm/marky-markdown",
   "dependencies": {
+    "atom-language-nginx": "^0.4.0",
     "cheerio": "^0.18.0",
     "github-url-to-object": "^1.4.2",
     "highlights": "^1.2.0",
@@ -38,6 +39,7 @@
     "language-dart": "^0.1.1",
     "language-erlang": "^2.0.0",
     "language-glsl": "^1.0.0",
+    "language-haxe": "^0.2.1",
     "language-ini": "^1.7.0",
     "language-stylus": "^0.5.2",
     "lodash": "^2.4.1",
