@@ -19,8 +19,8 @@ if (process.argv.length < 3) {
 var filePath = path.resolve(process.cwd(), process.argv[2])
 
 fs.readFile(filePath, function (err, data) {
-  marky(data.toString(), function(err, $){
-    if (err) throw err;
-    process.stdout.write(pretty($.html()))
-  })
+  if (err) throw err;
+  var $ = marky(data.toString())
+  if ($ instanceof Error) throw $;
+  process.stdout.write(pretty($.html()))
 });
