@@ -46,7 +46,7 @@
     "markdown-it": "^3.0.4",
     "marked": "^0.3.2",
     "pretty": "^1.0.0",
-    "sanitize-html": "^1.5.1",
+    "sanitize-html": "^1.6.1",
     "similarity": "^1.0.1",
     "slug": "^0.8.0"
   },
