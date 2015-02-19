@@ -1,3 +1,4 @@
+var assert      = require("assert")
 var cheerio     = require("cheerio")
 var defaults    = require("lodash").defaults
 var comments    = require("./lib/comments")
@@ -15,9 +16,7 @@ var packagize   = require("./lib/packagize")
 var marky = module.exports = function(markdown, options) {
   var html, $
 
-  if (!markdown || typeof markdown !== "string") {
-    return Error("first argument must be a string")
-  }
+  assert(typeof markdown === "string", "first argument must be a string")
 
   options = options || {}
   defaults(options, {
