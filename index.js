@@ -66,7 +66,7 @@ var marky = module.exports = function(markdown, options) {
   log("Add fragment hyperlinks links to h1,h2,h3,h4,h5,h6")
   $ = headings($, options)
 
-  log("Inject package name and description into README")
+  log("Apply CSS classes to readme content already expressed by package metadata")
   $ = packagize($, options.package)
 
   if (options.serveImagesWithCDN) {
@@ -77,3 +77,5 @@ var marky = module.exports = function(markdown, options) {
   return $
 
 }
+
+marky.parsePackageDescription = packagize.parsePackageDescription
