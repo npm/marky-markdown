@@ -21,6 +21,5 @@ var filePath = path.resolve(process.cwd(), process.argv[2])
 fs.readFile(filePath, function (err, data) {
   if (err) throw err;
   var $ = marky(data.toString())
-  if ($ instanceof Error) throw $;
   process.stdout.write(pretty($.html()))
 });
