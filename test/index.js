@@ -20,20 +20,11 @@ describe("marky-markdown", function() {
     assert(~$.html().indexOf("<p>hello, world</p>\n"))
   })
 
-  it("returns an error if first argument is not a string", function(){
-    marky(null, function(err, $) {
-      assert(err)
-      assert.equal(err.message, "first argument must be a string")
-      marky([1,2,3], function(err, $) {
-        assert(err)
-        assert.equal(err.message, "first argument must be a string")
-        marky({a:1}, function(err, $) {
-          assert(err)
-          assert.equal(err.message, "first argument must be a string")
-          done()
-        })
-      })
-    })
+  it("throws an error if first argument is not a string", function(){
+    assert.throws(
+      function() { marky(null) },
+      /first argument must be a string/
+    )
   })
 
 })
