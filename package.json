@@ -35,6 +35,7 @@
     "highlights": "^1.2.0",
     "highlights-tokens": "^1.0.1",
     "html-frontmatter": "^1.3.2",
+    "insane": "^1.0.0",
     "js-beautify": "^1.5.4",
     "language-dart": "^0.1.1",
     "language-erlang": "^2.0.0",
