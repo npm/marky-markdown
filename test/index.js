@@ -382,15 +382,26 @@ describe("packagize", function() {
     })
   })
 
-  describe("parsePackageDescription()", function() {
+  describe.only("parsePackageDescription()", function() {
     it("is a method for parsing package descriptions", function() {
       assert.equal(typeof marky.parsePackageDescription, "function")
     })
 
     it("parses description as markdown and removes script tags", function(){
-      var d = marky.parsePackageDescription("bad <script>/xss</script> [hax](http://hax.com)")
-      assert.equal(d, "bad  <a href=\"http://hax.com\">hax</a>")
+      var description = marky.parsePackageDescription("bad <script>/xss</script> [hax](http://hax.com)")
+      assert.equal(description, "bad  <a href=\"http://hax.com\">hax</a>")
     })
+
+    it("safely handles inline code blocks", function() {
+      var description = marky.parsePackageDescription("Browser `<input type=\"text\">` Helpers")
+      assert.equal(description, "Browser <code>&lt;input type=&quot;text&quot;&gt;</code> Helpers")
+    })
+
+    it("safely handles script tags in inline code blocks", function() {
+      var description = marky.parsePackageDescription("Here comes a `<script>` tag")
+      assert.equal(description, "Here comes a <code>&lt;script&gt;</code> tag")
+    })
+
   })
 
 })
