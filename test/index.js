@@ -380,7 +380,17 @@ describe("packagize", function() {
       assert.equal($("p.package-description-redundant").length, 0)
       assert.equal($("p:not(.package-description)").first().text(), "A package called wibble!")
     })
+  })
 
+  describe("parsePackageDescription()", function() {
+    it("is a method for parsing package descriptions", function() {
+      assert.equal(typeof marky.parsePackageDescription, "function")
+    })
+
+    it("parses description as markdown and removes script tags", function(){
+      var d = marky.parsePackageDescription("bad <script>/xss</script> [hax](http://hax.com)")
+      assert.equal(d, "bad  <a href=\"http://hax.com\">hax</a>")
+    })
   })
 
 })
@@ -534,19 +544,6 @@ describe("cdn", function() {
       assert($("img[src='https://secure.com/good.png']").length)
     })
 
-  })
-
-})
-
-describe("package.description parsing", function() {
-
-  it("exposes a description() method for parsing package descriptions", function() {
-    assert.equal(typeof marky.parsePackageDescription, "function")
-  })
-
-  it("parses description as markdown and removes script tags", function(){
-    var $ = marky.parsePackageDescription("bad <script>/xss</script> [hax](http://hax.com)")
-    assert.equal($("p.package-description").html(), "bad  <a href=\"http://hax.com\">hax</a>")
   })
 
 })
