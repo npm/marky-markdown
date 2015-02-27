@@ -118,8 +118,6 @@ npm test
 - [js-beautify](https://github.com/beautify-web/js-beautify): jsbeautifier.org for node
 - [lodash](https://github.com/lodash/lodash): A utility library delivering consistency, customization, performance, &amp; extras.
 - [markdown-it](https://github.com/markdown-it/markdown-it): Markdown-it - modern pluggable markdown parser.
-- [marked](https://github.com/chjj/marked): A markdown parser built for speed
-- [pretty](https://github.com/jonschlinkert/pretty): Some tweaks for beautifying HTML with js-beautify according to my preferences.
 - [sanitize-html](https://github.com/punkave/sanitize-html): Clean up user-submitted HTML, preserving whitelisted elements and whitelisted attributes on a per-element basis
 - [similarity](https://github.com/zeke/similarity): How similar are these two strings?
 - [string](https://github.com/jprichardson/string.js): string contains methods that aren&#39;t included in the vanilla JavaScript string such as escaping html, decoding html entities, stripping tags, etc.

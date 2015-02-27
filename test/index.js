@@ -20,20 +20,11 @@ describe("marky-markdown", function() {
     assert(~$.html().indexOf("<p>hello, world</p>\n"))
   })
 
-  it("returns an error if first argument is not a string", function(){
-    marky(null, function(err, $) {
-      assert(err)
-      assert.equal(err.message, "first argument must be a string")
-      marky([1,2,3], function(err, $) {
-        assert(err)
-        assert.equal(err.message, "first argument must be a string")
-        marky({a:1}, function(err, $) {
-          assert(err)
-          assert.equal(err.message, "first argument must be a string")
-          done()
-        })
-      })
-    })
+  it("throws an error if first argument is not a string", function(){
+    assert.throws(
+      function() { marky(null) },
+      /first argument must be a string/
+    )
   })
 
 })
@@ -89,7 +80,6 @@ describe("markdown processing and syntax highlighting", function() {
   it("does not encode entities within code blocks", function(){
     assert(~fixtures.enterprise.indexOf("\"name\": \"@myco/anypackage\""))
     var $ = marky(fixtures.enterprise)
-    console.log($("code.js").eq(1).html())
     assert(!~$.html().indexOf("<span>quot</span>"))
     assert(~$.html().indexOf("<span>&quot;</span>"))
     // assert($("code.js").eq(0).html)
@@ -356,15 +346,6 @@ describe("packagize", function() {
   }
 
   describe("name", function() {
-
-    it("prepends an h1.package-name element into readme with value of package.name", function(){
-      var $ = marky(fixtures.wibble, {package: packages.wibble})
-      assert.equal(
-        $("h1.package-name").text(),
-        packages.wibble.name
-      )
-    })
-
     it("adds .package-name-redundant class to first h1 if it's similar to package.name", function() {
       var $ = marky(fixtures.wibble, {package: packages.wibble})
       assert.equal($("h1.package-name-redundant").length, 1)
@@ -378,14 +359,6 @@ describe("packagize", function() {
   })
 
   describe("description", function() {
-    it("prepends package.description in a p.package-description element", function() {
-      var $ = marky(fixtures.wibble, {package: packages.wibble})
-      assert.equal(
-        $("p.package-description").text(),
-        packages.wibble.description
-      )
-    })
-
     it("adds .package-description-redundant class to first h1 if it's similar to package.description", function() {
       var $ = marky(fixtures.wibble, {package: packages.wobble})
       assert.equal($("h1.package-description-redundant").length, 1)
@@ -407,10 +380,26 @@ describe("packagize", function() {
       assert.equal($("p.package-description-redundant").length, 0)
       assert.equal($("p:not(.package-description)").first().text(), "A package called wibble!")
     })
+  })
+
+  describe.only("parsePackageDescription()", function() {
+    it("is a method for parsing package descriptions", function() {
+      assert.equal(typeof marky.parsePackageDescription, "function")
+    })
 
     it("parses description as markdown and removes script tags", function(){
-      var $ = marky("this is a test", {package: {name: "malice", description: "bad <script>/xss</script> [hax](http://hax.com)"}})
-      assert.equal($("p.package-description").html(), "bad  <a href=\"http://hax.com\">hax</a>")
+      var description = marky.parsePackageDescription("bad <script>/xss</script> [hax](http://hax.com)")
+      assert.equal(description, "bad  <a href=\"http://hax.com\">hax</a>")
+    })
+
+    it("safely handles inline code blocks", function() {
+      var description = marky.parsePackageDescription("Browser `<input type=\"text\">` Helpers")
+      assert.equal(description, "Browser <code>&lt;input type=&quot;text&quot;&gt;</code> Helpers")
+    })
+
+    it("safely handles script tags in inline code blocks", function() {
+      var description = marky.parsePackageDescription("Here comes a `<script>` tag")
+      assert.equal(description, "Here comes a <code>&lt;script&gt;</code> tag")
     })
 
   })

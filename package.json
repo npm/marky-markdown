@@ -1,11 +1,11 @@
 {
   "name": "marky-markdown",
-  "version": "4.1.4",
+  "version": "5.0.2",
   "description": "The thing npm uses to clean up READMEs and other markdown files",
   "tagline": "It's like ordinary markdown except it drops its pants for attention.",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha --timeout 5000"
   },
   "repository": {
     "type": "git",
@@ -29,17 +29,21 @@
   },
   "homepage": "https://github.com/npm/marky-markdown",
   "dependencies": {
+    "atom-language-nginx": "^0.4.0",
     "cheerio": "^0.18.0",
     "github-url-to-object": "^1.4.2",
     "highlights": "^1.2.0",
     "highlights-tokens": "^1.0.1",
     "html-frontmatter": "^1.3.2",
-    "js-beautify": "^1.5.4",
+    "language-dart": "^0.1.1",
+    "language-erlang": "^2.0.0",
+    "language-glsl": "^1.0.0",
+    "language-haxe": "^0.2.1",
+    "language-ini": "^1.7.0",
+    "language-stylus": "^0.5.2",
     "lodash": "^2.4.1",
     "markdown-it": "^3.0.4",
-    "marked": "^0.3.2",
-    "pretty": "^1.0.0",
-    "sanitize-html": "^1.5.1",
+    "sanitize-html": "^1.6.1",
     "similarity": "^1.0.1",
     "slug": "^0.8.0"
   },
@@ -50,16 +54,79 @@
     "cicada": "~1.1.1",
     "cordova": "^4.2.0",
     "express": "^4.10.7",
-    "flake": "^1.0.0",
     "glob": "^4.3.5",
     "grunt-angular-templates": "^0.5.7",
     "johnny-five": "^0.8.37",
     "memoize": "~0.1.1",
     "mkhere": "~1.0.9",
     "mocha": "^2.0.1",
-    "package-json-to-readme": "^1.3.0",
-    "payform": "^1.0.1",
+    "payform": "1.0.1",
     "wzrd": "^1.1.1"
   },
-  "bin": "./bin/marky-markdown.js"
+  "bin": "./bin/marky-markdown.js",
+  "contributors": [
+    {
+      "name": "Grant Bakker",
+      "email": "grant@bakker.pw",
+      "url": "https://github.com/bakkerthehacker",
+      "contributions": 1,
+      "additions": 0,
+      "deletions": 1,
+      "hireable": false
+    },
+    {
+      "name": "Alexander Early",
+      "email": null,
+      "url": "https://github.com/aearly",
+      "contributions": 1,
+      "additions": 1,
+      "deletions": 1,
+      "hireable": false
+    },
+    {
+      "name": "Laurie Voss",
+      "email": "github@seldo.com",
+      "url": "https://github.com/seldo",
+      "contributions": 1,
+      "additions": 64,
+      "deletions": 6,
+      "hireable": false
+    },
+    {
+      "name": "Eugene Sharygin",
+      "email": "",
+      "url": "https://github.com/eush77",
+      "contributions": 1,
+      "additions": 4,
+      "deletions": 4,
+      "hireable": false
+    },
+    {
+      "name": "Paul Salaets",
+      "email": "",
+      "url": "https://github.com/psalaets",
+      "contributions": 1,
+      "additions": 4,
+      "deletions": 4,
+      "hireable": true
+    },
+    {
+      "name": "Benjamin E. Coe",
+      "email": "ben@npmjs.com",
+      "url": "https://github.com/bcoe",
+      "contributions": 11,
+      "additions": 102,
+      "deletions": 42,
+      "hireable": false
+    },
+    {
+      "name": "Zeke Sikelianos",
+      "email": "zeke@sikelianos.com",
+      "url": "https://github.com/zeke",
+      "contributions": 97,
+      "additions": 7187,
+      "deletions": 3861,
+      "hireable": false
+    }
+  ]
 }
