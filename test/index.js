@@ -382,7 +382,7 @@ describe("packagize", function() {
     })
   })
 
-  describe.only("parsePackageDescription()", function() {
+  describe("parsePackageDescription()", function() {
     it("is a method for parsing package descriptions", function() {
       assert.equal(typeof marky.parsePackageDescription, "function")
     })
