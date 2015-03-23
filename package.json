@@ -45,7 +45,7 @@
     "markdown-it": "^3.0.4",
     "sanitize-html": "^1.6.1",
     "similarity": "^1.0.1",
-    "slug": "^0.8.0"
+    "slugg": "^0.1.2"
   },
   "devDependencies": {
     "async": "^0.9.0",
