@@ -82,7 +82,12 @@ describe("markdown processing and syntax highlighting", function() {
     var $ = marky(fixtures.enterprise)
     assert(!~$.html().indexOf("<span>quot</span>"))
     assert(~$.html().indexOf("<span>&quot;</span>"))
-    // assert($("code.js").eq(0).html)
+  })
+
+  it("linkifies fully-qualified URLs", function() {
+    assert(~fixtures['maintenance-modules'].indexOf("- https://github.com/feross/standard"))
+    var $ = marky(fixtures['maintenance-modules'])
+    assert($("a[href='https://github.com/feross/standard']").length)
   })
 })
 

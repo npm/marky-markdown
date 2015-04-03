@@ -57,6 +57,7 @@
     "glob": "^4.3.5",
     "grunt-angular-templates": "^0.5.7",
     "johnny-five": "^0.8.37",
+    "maintenance-modules": "^1.0.2",
     "memoize": "~0.1.1",
     "mkhere": "~1.0.9",
     "mocha": "^2.0.1",
