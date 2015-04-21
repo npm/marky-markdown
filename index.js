@@ -1,22 +1,22 @@
-var cheerio     = require("cheerio")
-var defaults    = require("lodash").defaults
-var comments    = require("./lib/comments")
-var render      = require("./lib/render")
-var sanitize    = require("./lib/sanitize")
-var badges      = require("./lib/badges")
-var cdn         = require("./lib/cdn")
-var frontmatter = require("./lib/frontmatter")
-var github      = require("./lib/github")
-var youtube     = require("./lib/youtube")
-var gravatar    = require("./lib/gravatar")
-var headings    = require("./lib/headings")
-var packagize   = require("./lib/packagize")
+var cheerio = require('cheerio')
+var defaults = require('lodash').defaults
+// var comments = require('./lib/comments')
+var render = require('./lib/render')
+var sanitize = require('./lib/sanitize')
+var badges = require('./lib/badges')
+var cdn = require('./lib/cdn')
+var frontmatter = require('./lib/frontmatter')
+var github = require('./lib/github')
+var youtube = require('./lib/youtube')
+var gravatar = require('./lib/gravatar')
+var headings = require('./lib/headings')
+var packagize = require('./lib/packagize')
 
-var marky = module.exports = function(markdown, options) {
+var marky = module.exports = function (markdown, options) {
   var html, $
 
-  if (typeof markdown !== "string") {
-    throw Error("first argument must be a string")
+  if (typeof markdown !== 'string') {
+    throw Error('first argument must be a string')
   }
 
   options = options || {}
@@ -26,51 +26,51 @@ var marky = module.exports = function(markdown, options) {
     prefixHeadingIds: true,
     serveImagesWithCDN: false,
     debug: false,
-    package: null,
+    package: null
   })
 
-  var log = function(msg) {
+  var log = function (msg) {
     if (options.debug) {
-      console.log("marky-markdown: " + msg)
+      console.log('marky-markdown: ' + msg)
     }
   }
 
-  log("\n\n" + markdown + "\n\n")
+  log('\n\n' + markdown + '\n\n')
 
-  log("Parse markdown into HTML and add syntax highlighting")
+  log('Parse markdown into HTML and add syntax highlighting')
   html = render(markdown, options)
 
-  log("Convert HTML frontmatter into meta tags")
+  log('Convert HTML frontmatter into meta tags')
   html = frontmatter(html)
 
   if (options.sanitize) {
-    log("Sanitize malicious or malformed HTML")
+    log('Sanitize malicious or malformed HTML')
     html = sanitize(html)
   }
 
-  log("Parse HTML into a cheerio DOM object")
+  log('Parse HTML into a cheerio DOM object')
   $ = cheerio.load(html)
 
-  log("Make gravatar image URLs secure")
+  log('Make gravatar image URLs secure')
   $ = gravatar($)
 
-  log("Resolve relative GitHub link hrefs")
+  log('Resolve relative GitHub link hrefs')
   $ = github($, options.package)
 
-  log("Dress up Youtube iframes")
+  log('Dress up Youtube iframes')
   $ = youtube($)
 
-  log("Add CSS classes to paragraphs containing badges")
+  log('Add CSS classes to paragraphs containing badges')
   $ = badges($)
 
-  log("Add fragment hyperlinks links to h1,h2,h3,h4,h5,h6")
+  log('Add fragment hyperlinks links to h1,h2,h3,h4,h5,h6')
   $ = headings($, options)
 
-  log("Apply CSS classes to readme content already expressed by package metadata")
+  log('Apply CSS classes to readme content already expressed by package metadata')
   $ = packagize($, options.package)
 
   if (options.serveImagesWithCDN) {
-    log("Rewrite relative image source to use CDN")
+    log('Rewrite relative image source to use CDN')
     $ = cdn($, options.package)
   }
 

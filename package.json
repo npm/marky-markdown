@@ -5,7 +5,7 @@
   "tagline": "It's like ordinary markdown except it drops its pants for attention.",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --timeout 5000"
+    "test": "standard --format && mocha --timeout 5000"
   },
   "repository": {
     "type": "git",
@@ -61,6 +61,7 @@
     "mkhere": "~1.0.9",
     "mocha": "^2.0.1",
     "payform": "1.0.1",
+    "standard": "^3.7.0",
     "wzrd": "^1.1.1"
   },
   "bin": "./bin/marky-markdown.js",
