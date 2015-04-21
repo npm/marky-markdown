@@ -1,7 +1,4 @@
-var marky = require("./")
-
-// Here's my basic API
-marky(inputString, [optionsObject])
+var marky = require('./')
 
 // Clean up a regular old markdown string
 marky("# hello, I'm markdown").html()
@@ -10,18 +7,17 @@ marky("# hello, I'm markdown").html()
 // rewriting relative URLs to their absolute equivalent on github,
 // normalizing package metadata with redundant readme content,
 // etcs
-var package = {
-  name: "foo"
-  name: "foo is a thing"
+var pkg = {
+  name: 'foo is a thing',
   repository: {
-    type: "git",
-    url: "https://github.com/kung/foo"
+    type: 'git',
+    url: 'https://github.com/kung/foo'
   }
 }
 
 marky(
-  "# hello, I am the foo readme",
-  {package: package}
+  '# hello, I am the foo readme',
+  {package: pkg}
 ).html()
 
 // Disable syntax highlighting
@@ -33,5 +29,5 @@ marky(
 // Pass in a `debug` for verbose output
 marky(
   "# hello, I'm an evil document",
-  {debug: true},
+  {debug: true}
 ).html()
