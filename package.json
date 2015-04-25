@@ -51,9 +51,7 @@
   "devDependencies": {
     "async": "^0.9.0",
     "benchmark": "^1.0.0",
-    "catjs": "^0.4.56",
     "cicada": "~1.1.1",
-    "cordova": "^4.2.0",
     "express": "^4.10.7",
     "glob": "^4.3.5",
     "grunt-angular-templates": "^0.5.7",

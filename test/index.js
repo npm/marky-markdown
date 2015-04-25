@@ -81,7 +81,6 @@ describe('markdown processing and syntax highlighting', function () {
     var $ = marky(fixtures.enterprise)
     assert(!~$.html().indexOf('<span>quot</span>'))
     assert(~$.html().indexOf('<span>&quot;</span>'))
-    // assert($("code.js").eq(0).html)
   })
 })
 
