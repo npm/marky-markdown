@@ -107,6 +107,10 @@ describe('sanitize', function () {
 
   it('allows img tags', function () {
     assert($('img').length)
+    assert.equal($('img').attr('width'), "600")
+    assert.equal($('img').attr('height'), "400")
+    assert.equal($('img').attr('valign'), "middle")
+    assert.equal($('img').attr('onclick'), undefined)
   })
 
   it('allows h1/h2/h3/h4/h5/h6 tags to preserve their dom id', function () {
