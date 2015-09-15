@@ -1,5 +1,19 @@
 /* globals before, describe, it */
 
+var fs = require('fs')
+
+var fsLog = false
+
+Object.keys(fs).forEach(function (k) {
+  if (typeof fs[k] === 'function') {
+    var orig = fs[k]
+    fs[k] = function () {
+      if (fsLog) console.log('fs.' + k)
+      return orig.apply(this, arguments)
+    }
+  }
+})
+
 var assert = require('assert')
 var path = require('path')
 var fixtures = require('./fixtures.js')
@@ -551,22 +565,76 @@ describe('cdn', function () {
 
 })
 
+var allTheReadmes = {}
+
 describe('real readmes in the wild', function () {
   it('parses readmes of all dependencies and devDependencies', function (done) {
     var packages = fixtures.packageNames
 
     assert(Array.isArray(packages))
     assert(packages.length)
+
+    var allStart = Date.now()
+
     packages.forEach(function (name) {
-      console.log('\t' + name)
       assert(typeof fixtures[name] === 'string')
       var json = require(path.resolve('node_modules', name, 'package.json'))
+
+      var start = Date.now()
       var $ = marky(fixtures[name], {package: json})
+
+      allTheReadmes[name] = $.html()
+
+      console.log('\t' + name + ' ' + (Date.now() - start))
+
       assert($.html().length > 100)
 
       if (name === packages[packages.length - 1]) {
+        console.log('allSync took ', Date.now() - allStart)
         return done()
       }
+    })
+  })
+
+})
+
+describe('real readmes in the wild async', function () {
+  it('parses readmes of all dependencies and devDependencies', function (done) {
+    fsLog = true
+    var packages = fixtures.packageNames
+
+    assert(Array.isArray(packages))
+    assert(packages.length)
+
+    var todo = packages.length
+
+    var allStart = Date.now()
+
+    var errors = {}
+
+    packages.forEach(function (name) {
+      assert(typeof fixtures[name] === 'string')
+      var json = require(path.resolve('node_modules', name, 'package.json'))
+
+      var start = Date.now()
+      marky(fixtures[name], {package: json}, function (_err, $) {
+        console.log('\t' + name + ' ' + (Date.now() - start), $.html() === allTheReadmes[name], ' remaining ', todo - 1)
+
+        var resultStr = $.html()
+        if (resultStr !== allTheReadmes[name]) {
+          errors[name] = require('diff').diffChars(allTheReadmes[name], resultStr)
+        }
+
+        if (!--todo) {
+          console.log('all took ', Date.now() - allStart)
+          console.log(errors)
+
+          assert(Object.keys(errors).length === 0, 'should have no improperly rendered readmes')
+
+          return done()
+        }
+      })
+
     })
   })
 
