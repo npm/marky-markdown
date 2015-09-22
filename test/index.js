@@ -439,7 +439,7 @@ describe('fixtures', function () {
   it('includes some real package readmes right from node_modules', function () {
     assert(fixtures.async.length)
     assert(fixtures.express.length)
-    assert(fixtures['johnny-five'].length)
+    assert(fixtures['once'].length)
   })
 
 })
