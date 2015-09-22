@@ -1,5 +1,6 @@
 var marky = require('./')
 
+var fs = require('fs')
 // Clean up a regular old markdown string
 marky("# hello, I'm markdown").html()
 
@@ -15,11 +16,14 @@ var pkg = {
   }
 }
 
-marky(
-  '# hello, I am the foo readme',
-  {package: pkg}
-).html()
+var npm = fs.readFileSync(__dirname + '/npm-readme') + ''
 
+console.log(marky(
+  npm,
+  {package: pkg}
+).html())
+
+/*
 // Disable syntax highlighting
 marky(
   "# I'm a file with github flavored markdown",
@@ -31,3 +35,4 @@ marky(
   "# hello, I'm an evil document",
   {debug: true}
 ).html()
+*/

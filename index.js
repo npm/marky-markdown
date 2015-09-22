@@ -1,6 +1,5 @@
 var cheerio = require('cheerio')
 var defaults = require('lodash').defaults
-// var comments = require('./lib/comments')
 var render = require('./lib/render')
 var sanitize = require('./lib/sanitize')
 var badges = require('./lib/badges')

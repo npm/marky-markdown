@@ -33,6 +33,15 @@ var marky = require("marky-markdown")
 marky("# hello, I'm markdown").html()
 ```
 
+or async
+
+```js
+var marky = require("marky-markdown")
+marky("# hello, I'm markdown",function(err,$){
+  $.html()
+})
+```
+
 ### Options
 
 The exported function takes an optional options object
