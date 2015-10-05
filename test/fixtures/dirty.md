@@ -12,7 +12,7 @@
 
 <script charset="utf-8" src="http://malware.com" type="text/javascript">alert("haxorz")</script>
 
-<img src="local.png"></img>
+<img src="local.png" width="600" height="400" valign="middle" onclick="maliciousClickHandler()"></img>
 
 <a class="xxx" href="http://yyy.com">zzz</a>
 
