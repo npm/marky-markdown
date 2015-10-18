@@ -15,3 +15,5 @@
 ![](//protocollie.com/woof.png)
 ![](http://insecure.com/bad.png)
 ![](https://secure.com/good.png)
+
+:sparkles:
