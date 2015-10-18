@@ -11,7 +11,6 @@ var youtube = require('./lib/youtube')
 var gravatar = require('./lib/gravatar')
 var headings = require('./lib/headings')
 var packagize = require('./lib/packagize')
-var emoji = require('markdown-it-emoji')
 
 var marky = module.exports = function (markdown, options) {
   var html, $
@@ -78,7 +77,5 @@ var marky = module.exports = function (markdown, options) {
   return $
 
 }
-
-marky.use(emoji);
 
 marky.parsePackageDescription = packagize.parsePackageDescription
