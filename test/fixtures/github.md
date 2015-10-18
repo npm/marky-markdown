@@ -15,6 +15,7 @@
 ![](//protocollie.com/woof.png)
 ![](http://insecure.com/bad.png)
 ![](https://secure.com/good.png)
+
 ![Methods](#methods)
 
 ### heading with a - dash
@@ -32,3 +33,5 @@
 ### duplicate)
 
 ### exchange.bind_headers(exchange, routing [, bindCallback])
+
+:sparkles:
