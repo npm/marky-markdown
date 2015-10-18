@@ -240,9 +240,9 @@ describe('github', function () {
       assert($("img[src='https://secure.com/good.png']").length)
     })
 
-    it('', function() {
-      assert()
-      assert()
+    it('replaces github flavored markdown for emojis with unicode', function() {
+      assert(~fixtures.github.indexOf(':sparkles:'))
+      assert($("U+2728").length)
     })
 
   })
