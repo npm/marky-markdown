@@ -59,7 +59,7 @@ describe('markdown processing and syntax highlighting', function () {
     assert($('code.coffeescript').length)
   })
 
-  it('adds hightlight class to all blocks', function () {
+  it('adds highlight class to all blocks', function () {
     assert.equal($('code').length, $('code.highlight').length)
   })
 
@@ -238,6 +238,11 @@ describe('github', function () {
     it('leaves HTTPS URLs alone', function () {
       assert(~fixtures.github.indexOf('![](https://secure.com/good.png)'))
       assert($("img[src='https://secure.com/good.png']").length)
+    })
+
+    it('', function() {
+      assert()
+      assert()
     })
 
   })
