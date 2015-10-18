@@ -107,9 +107,9 @@ describe('sanitize', function () {
 
   it('allows img tags', function () {
     assert($('img').length)
-    assert.equal($('img').attr('width'), "600")
-    assert.equal($('img').attr('height'), "400")
-    assert.equal($('img').attr('valign'), "middle")
+    assert.equal($('img').attr('width'), '600')
+    assert.equal($('img').attr('height'), '400')
+    assert.equal($('img').attr('valign'), 'middle')
     assert.equal($('img').attr('onclick'), undefined)
   })
 
@@ -238,11 +238,6 @@ describe('github', function () {
     it('leaves HTTPS URLs alone', function () {
       assert(~fixtures.github.indexOf('![](https://secure.com/good.png)'))
       assert($("img[src='https://secure.com/good.png']").length)
-    })
-
-    it('replaces github flavored markdown for emojis with unicode', function() {
-      assert(~fixtures.github.indexOf(':sparkles:'))
-      assert($("U+2728").length)
     })
 
   })
