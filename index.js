@@ -78,4 +78,6 @@ var marky = module.exports = function (markdown, options) {
 
 }
 
+marky.use(emoji);
+
 marky.parsePackageDescription = packagize.parsePackageDescription
