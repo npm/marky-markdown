@@ -240,6 +240,8 @@ describe('github', function () {
       assert($("img[src='https://secure.com/good.png']").length)
     })
 
+    //write a test for markdown-it-emoji
+
   })
 
   describe('when package repo is NOT on github', function () {
