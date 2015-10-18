@@ -16,4 +16,4 @@
 ![](http://insecure.com/bad.png)
 ![](https://secure.com/good.png)
 
-:sparkles:
+:sparkles::sparkles::sparkles::sparkles::sparkles:
