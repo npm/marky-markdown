@@ -131,6 +131,11 @@ describe('sanitize', function () {
     assert($('code.highlight').length)
   })
 
+  it('allows the <s> strikethrough element', function () {
+    assert(~fixtures.dirty.indexOf('~~orange~~'))
+    assert.equal($('s').text(), 'orange')
+  })
+
   it('disallows iframes from sources other than youtube', function () {
     var $ = marky(fixtures.basic)
     assert(~fixtures.basic.indexOf('<iframe src="//www.youtube.com/embed/3I78ELjTzlQ'))
