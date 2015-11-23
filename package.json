@@ -1,6 +1,6 @@
 {
   "name": "marky-markdown",
-  "version": "5.4.0",
+  "version": "5.5.0",
   "description": "The thing npm uses to clean up READMEs and other markdown files",
   "main": "index.js",
   "scripts": {
@@ -28,10 +28,10 @@
   },
   "homepage": "https://github.com/npm/marky-markdown",
   "dependencies": {
+    "highlights": "^1.3.0",
     "atom-language-nginx": "^0.4.0",
     "cheerio": "^0.19.0",
     "github-url-to-object": "^1.4.2",
-    "highlights": "^1.2.0",
     "highlights-tokens": "^1.0.1",
     "html-frontmatter": "^1.3.2",
     "language-dart": "^0.1.1",
@@ -43,10 +43,12 @@
     "language-stylus": "^0.5.2",
     "lodash": "^2.4.1",
     "markdown-it": "^4.4.0",
+    "once": "^1.3.2",
     "property-ttl": "^1.0.0",
     "sanitize-html": "^1.6.1",
     "similarity": "^1.0.1",
-    "slugg": "^0.1.2"
+    "slugg": "^0.1.2",
+    "uuid": "^2.0.1"
   },
   "devDependencies": {
     "async": "^0.9.0",
@@ -55,7 +57,6 @@
     "express": "^4.10.7",
     "glob": "^4.3.5",
     "grunt-angular-templates": "^0.5.7",
-    "johnny-five": "^0.8.37",
     "memoize": "~0.1.1",
     "mkhere": "~1.0.9",
     "mocha": "^2.0.1",
