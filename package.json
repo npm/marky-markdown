@@ -29,7 +29,7 @@
   "homepage": "https://github.com/npm/marky-markdown",
   "dependencies": {
     "atom-language-nginx": "^0.4.0",
-    "cheerio": "^0.18.0",
+    "cheerio": "^0.19.0",
     "github-url-to-object": "^1.4.2",
     "highlights": "^1.2.0",
     "highlights-tokens": "^1.0.1",
