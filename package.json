@@ -41,7 +41,7 @@
     "language-ini": "^1.7.0",
     "language-rust": "^0.4.3",
     "language-stylus": "^0.5.2",
-    "lodash": "^2.4.1",
+    "lodash": "^3.10.1",
     "markdown-it": "^4.4.0",
     "property-ttl": "^1.0.0",
     "sanitize-html": "^1.6.1",
