@@ -82,6 +82,12 @@ describe('markdown processing and syntax highlighting', function () {
     assert(!~$.html().indexOf('<span>quot</span>'))
     assert(~$.html().indexOf('<span>&quot;</span>'))
   })
+
+  it('linkifies fully-qualified URLs', function () {
+    assert(~fixtures['maintenance-modules'].indexOf('- https://gist.github.com/sindresorhus/8435329'))
+    var $ = marky(fixtures['maintenance-modules'])
+    assert($("a[href='https://gist.github.com/sindresorhus/8435329']").length)
+  })
 })
 
 describe('sanitize', function () {
