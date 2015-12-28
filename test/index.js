@@ -479,6 +479,17 @@ describe('headings', function () {
     assert.equal($('h2#browser-input-helpers a').html(), 'Browser <code>&lt;input&gt;</code> Helpers')
   })
 
+  it('properly handles headings lacking a space between the leading #(s) and heading text', function () {
+    assert(~fixtures.lazyheading.indexOf('#lazy heading'))
+    $ = marky(fixtures.lazyheading, {prefixHeadingIds: false})
+    assert.equal($('h1#lazy-heading-1').length, 1)
+    assert.equal($('h2#lazy-heading-2').length, 1)
+    assert.equal($('h3#lazy-heading-3').length, 1)
+    assert.equal($('h4#lazy-heading-4').length, 1)
+    assert.equal($('h5#lazy-heading-5').length, 1)
+    assert.equal($('h6#lazy-heading-6').length, 1)
+  })
+
 })
 
 describe('frontmatter', function () {
