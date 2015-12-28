@@ -144,6 +144,26 @@ describe('sanitize', function () {
     assert.equal($('iframe').attr('src'), '//www.youtube.com/embed/3I78ELjTzlQ')
   })
 
+  it('allows the <ins> element', function () {
+    assert(~fixtures.dirty.indexOf('<ins>'))
+    assert.equal($('ins').text(), 'inserted')
+  })
+
+  it('allows the <del> element', function () {
+    assert(~fixtures.dirty.indexOf('<del>'))
+    assert.equal($('del').text(), 'deleted')
+  })
+
+  it('allows the <sub> element', function () {
+    assert(~fixtures.dirty.indexOf('<sub>'))
+    assert.equal($('sub').text(), 'subscript')
+  })
+
+  it('allows the <sup> element', function () {
+    assert(~fixtures.dirty.indexOf('<sup>'))
+    assert.equal($('sup').text(), 'superscript')
+  })
+
 })
 
 describe('badges', function () {
