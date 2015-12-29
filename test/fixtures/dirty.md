@@ -16,6 +16,16 @@
 
 <a class="xxx" href="http://yyy.com">zzz</a>
 
+My favorite color is ~~orange~~ red.
+
 ```js
 console.log("hello world")
 ```
+
+some<sub>subscript</sub>
+
+some<sup>superscript</sup>
+
+<del>deleted</del>
+
+<ins>inserted</ins>

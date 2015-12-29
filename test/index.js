@@ -83,11 +83,19 @@ describe('markdown processing and syntax highlighting', function () {
     assert(~$.html().indexOf('<span>&quot;</span>'))
   })
 
+<<<<<<< HEAD
   it('replaces markdown syntax for emoji with unicode for the emoji', function () {
     assert(~fixtures.github.indexOf(':sparkles:'))
     assert($('&#x2747;').length)
   })
 
+=======
+  it('linkifies fully-qualified URLs', function () {
+    assert(~fixtures['maintenance-modules'].indexOf('- https://gist.github.com/sindresorhus/8435329'))
+    var $ = marky(fixtures['maintenance-modules'])
+    assert($("a[href='https://gist.github.com/sindresorhus/8435329']").length)
+  })
+>>>>>>> 87789e02f7f02d28f9b87084da599e102b8e73c9
 })
 
 describe('sanitize', function () {
@@ -137,12 +145,37 @@ describe('sanitize', function () {
     assert($('code.highlight').length)
   })
 
+  it('allows the <s> strikethrough element', function () {
+    assert(~fixtures.dirty.indexOf('~~orange~~'))
+    assert.equal($('s').text(), 'orange')
+  })
+
   it('disallows iframes from sources other than youtube', function () {
     var $ = marky(fixtures.basic)
     assert(~fixtures.basic.indexOf('<iframe src="//www.youtube.com/embed/3I78ELjTzlQ'))
     assert(~fixtures.basic.indexOf('<iframe src="//malware.com'))
     assert.equal($('iframe').length, 1)
     assert.equal($('iframe').attr('src'), '//www.youtube.com/embed/3I78ELjTzlQ')
+  })
+
+  it('allows the <ins> element', function () {
+    assert(~fixtures.dirty.indexOf('<ins>'))
+    assert.equal($('ins').text(), 'inserted')
+  })
+
+  it('allows the <del> element', function () {
+    assert(~fixtures.dirty.indexOf('<del>'))
+    assert.equal($('del').text(), 'deleted')
+  })
+
+  it('allows the <sub> element', function () {
+    assert(~fixtures.dirty.indexOf('<sub>'))
+    assert.equal($('sub').text(), 'subscript')
+  })
+
+  it('allows the <sup> element', function () {
+    assert(~fixtures.dirty.indexOf('<sup>'))
+    assert.equal($('sup').text(), 'superscript')
   })
 
 })
@@ -478,6 +511,17 @@ describe('headings', function () {
     $ = marky(fixtures.payform, {prefixHeadingIds: false})
     assert.equal($('h2#browser-input-helpers a').length, 1)
     assert.equal($('h2#browser-input-helpers a').html(), 'Browser <code>&lt;input&gt;</code> Helpers')
+  })
+
+  it('properly handles headings lacking a space between the leading #(s) and heading text', function () {
+    assert(~fixtures.lazyheading.indexOf('#lazy heading'))
+    $ = marky(fixtures.lazyheading, {prefixHeadingIds: false})
+    assert.equal($('h1#lazy-heading-1').length, 1)
+    assert.equal($('h2#lazy-heading-2').length, 1)
+    assert.equal($('h3#lazy-heading-3').length, 1)
+    assert.equal($('h4#lazy-heading-4').length, 1)
+    assert.equal($('h5#lazy-heading-5').length, 1)
+    assert.equal($('h6#lazy-heading-6').length, 1)
   })
 
 })

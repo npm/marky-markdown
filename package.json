@@ -1,8 +1,7 @@
 {
   "name": "marky-markdown",
-  "version": "5.4.0",
+  "version": "5.5.1",
   "description": "The thing npm uses to clean up READMEs and other markdown files",
-  "tagline": "It's like ordinary markdown except it drops its pants for attention.",
   "main": "index.js",
   "scripts": {
     "test": "standard --format && mocha --timeout 5000"
@@ -30,21 +29,27 @@
   "homepage": "https://github.com/npm/marky-markdown",
   "dependencies": {
     "atom-language-nginx": "^0.4.0",
-    "cheerio": "^0.18.0",
-    "github-url-to-object": "^1.4.2",
-    "highlights": "^1.2.0",
+    "cheerio": "^0.19.0",
+    "github-url-to-object": "^2.1.0",
+    "highlights": "^1.3.0",
     "highlights-tokens": "^1.0.1",
     "html-frontmatter": "^1.3.2",
     "language-dart": "^0.1.1",
     "language-erlang": "^2.0.0",
-    "language-glsl": "^1.0.0",
+    "language-glsl": "^2.0.1",
     "language-haxe": "^0.2.1",
     "language-ini": "^1.7.0",
     "language-rust": "^0.4.3",
     "language-stylus": "^0.5.2",
+<<<<<<< HEAD
     "lodash": "^2.4.1",
     "markdown-it": "^4.4.0",
     "markdown-it-emoji": "^1.1.0",
+=======
+    "lodash": "^3.10.1",
+    "markdown-it": "^5.0.2",
+    "markdown-it-lazy-headers": "^0.1.3",
+>>>>>>> 87789e02f7f02d28f9b87084da599e102b8e73c9
     "property-ttl": "^1.0.0",
     "sanitize-html": "^1.6.1",
     "similarity": "^1.0.1",
@@ -58,6 +63,7 @@
     "glob": "^4.3.5",
     "grunt-angular-templates": "^0.5.7",
     "johnny-five": "^0.8.37",
+    "maintenance-modules": "1.0.2",
     "memoize": "~0.1.1",
     "mkhere": "~1.0.9",
     "mocha": "^2.0.1",
