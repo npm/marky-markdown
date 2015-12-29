@@ -82,6 +82,12 @@ describe('markdown processing and syntax highlighting', function () {
     assert(!~$.html().indexOf('<span>quot</span>'))
     assert(~$.html().indexOf('<span>&quot;</span>'))
   })
+
+  it('replaces markdown syntax for emoji with unicode for the emoji', function () {
+    assert(~fixtures.github.indexOf(':sparkles:'))
+    assert($('&#x2747;').length)
+  })
+
 })
 
 describe('sanitize', function () {
@@ -239,8 +245,6 @@ describe('github', function () {
       assert(~fixtures.github.indexOf('![](https://secure.com/good.png)'))
       assert($("img[src='https://secure.com/good.png']").length)
     })
-
-    //write a test for markdown-it-emoji
 
   })
 
