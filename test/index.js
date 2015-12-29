@@ -54,7 +54,7 @@ describe('markdown processing and syntax highlighting', function () {
     assert($('code.sh').length)
   })
 
-  it('adds sh class to shell blocks', function () {
+  it('adds coffeescript class to coffee blocks', function () {
     assert(~fixtures.basic.indexOf('```coffee'))
     assert($('code.coffeescript').length)
   })
@@ -72,7 +72,7 @@ describe('markdown processing and syntax highlighting', function () {
     assert($('.shell.builtin').length)
   })
 
-  it('applies inline syntax highlighting classes to coffeesript', function () {
+  it('applies inline syntax highlighting classes to coffeescript', function () {
     assert($('.coffee.begin').length)
   })
 
