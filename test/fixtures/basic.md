@@ -23,6 +23,11 @@ echo hi
 alert "hi"
 ```
 
+```diff
+-removed
++added
+```
+
 ### images
 
 ![](relative.png)

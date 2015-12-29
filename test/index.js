@@ -59,6 +59,11 @@ describe('markdown processing and syntax highlighting', function () {
     assert($('code.coffeescript').length)
   })
 
+  it('adds diff class to diff blocks', function () {
+    assert(~fixtures.basic.indexOf('```diff'))
+    assert($('code.diff').length)
+  })
+
   it('adds hightlight class to all blocks', function () {
     assert.equal($('code').length, $('code.highlight').length)
   })
@@ -74,6 +79,11 @@ describe('markdown processing and syntax highlighting', function () {
 
   it('applies inline syntax highlighting classes to coffeescript', function () {
     assert($('.coffee.begin').length)
+  })
+
+  it('applies inline syntax highlighting classes to diffs', function () {
+    assert($('.diff.inserted').length)
+    assert($('.diff.deleted').length)
   })
 
   it('does not encode entities within code blocks', function () {
