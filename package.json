@@ -46,6 +46,7 @@
     "lodash": "^3.10.1",
     "markdown-it": "^5.0.2",
     "markdown-it-lazy-headers": "^0.1.3",
+    "markdown-it-emoji": "^1.1.0",
     "property-ttl": "^1.0.0",
     "sanitize-html": "^1.6.1",
     "similarity": "^1.0.1"

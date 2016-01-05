@@ -64,7 +64,7 @@ describe('markdown processing and syntax highlighting', function () {
     assert($('code.diff').length)
   })
 
-  it('adds hightlight class to all blocks', function () {
+  it('adds highlight class to all blocks', function () {
     assert.equal($('code').length, $('code.highlight').length)
   })
 
@@ -97,6 +97,12 @@ describe('markdown processing and syntax highlighting', function () {
     assert(~fixtures['maintenance-modules'].indexOf('- https://gist.github.com/sindresorhus/8435329'))
     var $ = marky(fixtures['maintenance-modules'])
     assert($("a[href='https://gist.github.com/sindresorhus/8435329']").length)
+  })
+
+  it('replaces markdown syntax for emoji with unicode for the emoji', function () {
+    assert(~fixtures.github.indexOf(':sparkles:'))
+    var $ = marky(fixtures.github)
+    assert($.html().indexOf('✨'))
   })
 })
 
