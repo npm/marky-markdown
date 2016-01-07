@@ -1,6 +1,6 @@
 {
   "name": "marky-markdown",
-  "version": "6.0.0",
+  "version": "6.0.1",
   "description": "The thing npm uses to clean up READMEs and other markdown files",
   "main": "index.js",
   "scripts": {
