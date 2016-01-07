@@ -1,3 +1,10 @@
+# 6.0.1 (2016-01-07)
+
+### Bug Fix
+
+- `markdown-it@5.1.0` would break the build, so `package.json` was updated
+  to hold at minor version, `~5.0.2` ([pull/90][pull/93]) - by [ashleygwilliams]
+
 # 6.0.0 (2016-01-06)
 
 ### Breaking Changes
@@ -12,6 +19,9 @@
 - auto-linkify qualified URLs ([pull/79]) - by [zeke]
 - whitelist `ins`, `del`, `sub`, `sup` HTML tags ([issues/55], [pull/83]) - by [revin]
 
+[ashleygwilliams]: https://github.com/ashleygwilliams
+[pull/90]: https://github.com/npm/marky-markdown/pull/90
+[pull/93]: https://github.com/npm/marky-markdown/pull/93
 [issues/59]: https://github.com/npm/marky-markdown/issues/59
 [pull/87]: https://github.com/npm/marky-markdown/pull/87
 [patriciarealini]: https://github.com/patriciarealini
