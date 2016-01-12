@@ -80,8 +80,8 @@ with redundant readme content, etc
 
 ```js
 var package = {
-  name: "foo"
-  name: "foo is a thing"
+  name: "foo",
+  name: "foo is a thing",
   repository: {
     type: "git",
     url: "https://github.com/kung/foo"
