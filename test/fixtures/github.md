@@ -34,4 +34,6 @@
 
 ### exchange.bind_headers(exchange, routing [, bindCallback])
 
+Smiley! :)
+
 :sparkles:

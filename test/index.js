@@ -104,6 +104,12 @@ describe('markdown processing and syntax highlighting', function () {
     var $ = marky(fixtures.github)
     assert($.html().indexOf('✨'))
   })
+
+  it('does not convert text emoticons to unicode', function () {
+    assert(~fixtures.github.indexOf(':)'))
+    var $ = marky(fixtures.github)
+    assert(~$.html().indexOf(':)'))
+  })
 })
 
 describe('sanitize', function () {
