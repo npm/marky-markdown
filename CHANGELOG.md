@@ -1,3 +1,11 @@
+# 6.0.2 (2016-01-11)
+
+### Bug Fix
+
+- we were parsing `:)` into emoji, though this is not the desired behavior.
+  disabled shortcut emoji parsing in the markdown-it-emoji plugin. 
+  ([issue/95], [pull/97]) - reported by [cloakedninjas], solved by [revin]
+
 # 6.0.1 (2016-01-07)
 
 ### Bug Fix
@@ -19,6 +27,9 @@
 - auto-linkify qualified URLs ([pull/79]) - by [zeke]
 - whitelist `ins`, `del`, `sub`, `sup` HTML tags ([issues/55], [pull/83]) - by [revin]
 
+[cloakedninjas]: https://github.com/cloakedninjas
+[pull/97]: https://github.com/npm/marky-markdown/pull/97
+[issue/95]: https://github.com/npm/marky-markdown/issues/95
 [ashleygwilliams]: https://github.com/ashleygwilliams
 [pull/90]: https://github.com/npm/marky-markdown/pull/90
 [pull/93]: https://github.com/npm/marky-markdown/pull/93
