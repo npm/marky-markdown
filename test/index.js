@@ -393,12 +393,21 @@ describe('packagize', function () {
     dangledor: {
       name: 'dangledor',
       description: 'dangledor need not roar'
+    },
+    '@burble/wibble': {
+      name: '@burble/wibble',
+      description: 'A package called @burble/wibble!'
     }
   }
 
   describe('name', function () {
     it("adds .package-name-redundant class to first h1 if it's similar to package.name", function () {
       var $ = marky(fixtures.wibble, {package: packages.wibble})
+      assert.equal($('h1.package-name-redundant').length, 1)
+    })
+
+    it("adds .package-name-redundant class to first h1 if it's similar to a scoped package.name", function () {
+      var $ = marky(fixtures.burblewibble, {package: packages['@burble/wibble']})
       assert.equal($('h1.package-name-redundant').length, 1)
     })
 
