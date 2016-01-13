@@ -114,18 +114,30 @@ npm test
 ## Dependencies
 
 - [cheerio](https://github.com/cheeriojs/cheerio): Tiny, fast, and elegant implementation of core jQuery designed specifically for the server
-- [escape-html](https://github.com/component/escape-html): Escape HTML entities
+- [github-slugger](https://github.com/Flet/github-slugger): Generate a slug just like GitHub does for markdown headings
 - [github-url-to-object](https://github.com/zeke/github-url-to-object): Extract user, repo, and other interesting properties from GitHub URLs
 - [highlights](https://github.com/atom/highlights): Syntax highlighter
 - [highlights-tokens](https://github.com/zeke/highlights-tokens): A list of the language tokens used by the Atom.app [highlights](https://www.npmjs.com/package/highlights) syntax highlighter
 - [html-frontmatter](https://github.com/zeke/html-frontmatter): Extract key-value metadata from HTML comments
-- [js-beautify](https://github.com/beautify-web/js-beautify): jsbeautifier.org for node
 - [lodash](https://github.com/lodash/lodash): A utility library delivering consistency, customization, performance, &amp; extras.
 - [markdown-it](https://github.com/markdown-it/markdown-it): Markdown-it - modern pluggable markdown parser.
 - [markdown-it-emoji](https://github.com/markdown-it/markdown-it-emoji): Markdown-it-emoji extension for Markdown-it that parses markdown emoji syntax to unicode. 
+- [markdown-it-lazy-headers](https://github.com/Galadirith/markdown-it-lazy-headers): Lazy ATX headers plugin for markdown-it
+- [property-ttl](https://github.com/soldair/property-ttl): Save memory by nulling out a property after ttl if it has not been accessed
 - [sanitize-html](https://github.com/punkave/sanitize-html): Clean up user-submitted HTML, preserving whitelisted elements and whitelisted attributes on a per-element basis
 - [similarity](https://github.com/zeke/similarity): How similar are these two strings?
-- [string](https://github.com/jprichardson/string.js): string contains methods that aren&#39;t included in the vanilla JavaScript string such as escaping html, decoding html entities, stripping tags, etc.
+
+Extra syntax highlighting, in addition to what comes with [highlights](https://www.npmjs.com/package/highlights):
+
+- [atom-language-diff](https://github.com/revin/atom-language-diff): Diff/patch files
+- [atom-language-nginx](https://github.com/hnagato/atom-language-nginx): [NGINX](http://nginx.org/) configuration files
+- [language-dart](https://github.com/Daegalus/atom-language-dart): [Dart](https://www.dartlang.org/) language
+- [language-erlang](https://github.com/jonathanmarvens/atom-language-erlang): [Erlang](http://www.erlang.org/) language
+- [language-glsl](https://github.com/hughsk/language-glsl): [OpenGL Shading Language](https://www.opengl.org/documentation/glsl/) files
+- [language-haxe](https://github.com/theRemix/language-haxe): [Haxe](http://haxe.org/) language
+- [language-ini](https://github.com/jacobbednarz/atom-language-ini): .ini configuration files
+- [language-rust](https://github.com/zargony/atom-language-rust): [Rust](http://www.rust-lang.org/) language
+- [language-stylus](https://github.com/matthojo/language-stylus): [Stylus](http://stylus-lang.com/) CSS preprocessor
 
 ## License
 
