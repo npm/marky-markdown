@@ -1,3 +1,26 @@
+# 6.0.3 (2016-01-14)
+
+### Bug Fix
+
+- we strip `h1` tags from `README`s that have the same content as the
+  package name, however we did not update this feature to account for
+  scoped package names, e.g. @scope/pkg. now we remove the scope from
+  the package meta-data to check the `README`'s `h1`. 
+  ([issue/48][pull/103]) - reported by [sindresorhus], solved by [revin]
+
+### Documentation
+
+- fix syntax error in code example re: npm package parsing ([pull/102]) -
+  by [latentflip]
+- updated `README` to reflect current list of dependencies -
+  ([pull/107]) - by [revin]
+- updated author in `package.json` to reflect [ashleygwilliams] is current
+  maintainer ([pull/112]) - by [ashleygwilliams]
+
+### Dependencies
+
+- upgraded to `lodash 4.0.0` ([pull/106])- by [revin]
+
 # 6.0.2 (2016-01-11)
 
 ### Bug Fix
@@ -27,6 +50,14 @@
 - auto-linkify qualified URLs ([pull/79]) - by [zeke]
 - whitelist `ins`, `del`, `sub`, `sup` HTML tags ([issues/55], [pull/83]) - by [revin]
 
+[latentflip]: https://github.com/latentflip
+[pull/112]: https://github.com/npm/marky-markdown/pull/112
+[pull/107]: https://github.com/npm/marky-markdown/pull/107
+[pull/102]: https://github.com/npm/marky-markdown/pull/102
+[pull/106]: https://github.com/npm/marky-markdown/pull/106
+[sindresorhus]: https://github.com/sindresorhus
+[pull/103]: https://github.com/npm/marky-markdown/pull/103
+[issue/48]: https://github.com/npm/marky-markdown/issues/48
 [cloakedninjas]: https://github.com/cloakedninjas
 [pull/97]: https://github.com/npm/marky-markdown/pull/97
 [issue/95]: https://github.com/npm/marky-markdown/issues/95
