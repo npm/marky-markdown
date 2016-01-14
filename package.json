@@ -1,7 +1,7 @@
 {
   "name": "marky-markdown",
   "version": "6.0.2",
-  "description": "The thing npm uses to clean up READMEs and other markdown files",
+  "description": "npm's markdown parser",
   "main": "index.js",
   "scripts": {
     "test": "standard --format && mocha --timeout 5000"
@@ -21,7 +21,7 @@
     "github",
     "npm"
   ],
-  "author": "Zeke Sikelianos <zeke@sikelianos.com> (http://zeke.sikelianos.com/)",
+  "author": "Ashley Williams <ashley@npmjs.com> (http://ashleygwilliams.github.io/)",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/npm/marky-markdown/issues"
@@ -67,70 +67,5 @@
     "standard": "^3.7.0",
     "wzrd": "^1.1.1"
   },
-  "bin": "./bin/marky-markdown.js",
-  "contributors": [
-    {
-      "name": "Grant Bakker",
-      "email": "grant@bakker.pw",
-      "url": "https://github.com/bakkerthehacker",
-      "contributions": 1,
-      "additions": 0,
-      "deletions": 1,
-      "hireable": false
-    },
-    {
-      "name": "Alexander Early",
-      "email": null,
-      "url": "https://github.com/aearly",
-      "contributions": 1,
-      "additions": 1,
-      "deletions": 1,
-      "hireable": false
-    },
-    {
-      "name": "Laurie Voss",
-      "email": "github@seldo.com",
-      "url": "https://github.com/seldo",
-      "contributions": 1,
-      "additions": 64,
-      "deletions": 6,
-      "hireable": false
-    },
-    {
-      "name": "Eugene Sharygin",
-      "email": "",
-      "url": "https://github.com/eush77",
-      "contributions": 1,
-      "additions": 4,
-      "deletions": 4,
-      "hireable": false
-    },
-    {
-      "name": "Paul Salaets",
-      "email": "",
-      "url": "https://github.com/psalaets",
-      "contributions": 1,
-      "additions": 4,
-      "deletions": 4,
-      "hireable": true
-    },
-    {
-      "name": "Benjamin E. Coe",
-      "email": "ben@npmjs.com",
-      "url": "https://github.com/bcoe",
-      "contributions": 11,
-      "additions": 102,
-      "deletions": 42,
-      "hireable": false
-    },
-    {
-      "name": "Zeke Sikelianos",
-      "email": "zeke@sikelianos.com",
-      "url": "https://github.com/zeke",
-      "contributions": 97,
-      "additions": 7187,
-      "deletions": 3861,
-      "hireable": false
-    }
-  ]
+  "bin": "./bin/marky-markdown.js"
 }
