@@ -589,14 +589,6 @@ describe('headings', function () {
 
 })
 
-describe('frontmatter', function () {
-  it('rewrites HTML frontmatter as <meta> tags', function () {
-    var $ = marky(fixtures.frontmatter)
-    assert($("meta[name='hello']").length)
-    assert.equal($("meta[name='hello']").attr('content'), 'world')
-  })
-})
-
 describe('cdn', function () {
   describe('when serveImagesWithCDN is true', function () {
     var $
