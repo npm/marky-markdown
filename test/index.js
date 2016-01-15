@@ -478,17 +478,28 @@ describe('fixtures', function () {
     assert(keys.length)
     keys.forEach(function (key) {
       assert(fixtures[key])
-      if (key === 'packageNames') return
+      if (key === 'dependencies' || key === 'examples') return
       assert(typeof fixtures[key] === 'string')
     })
   })
 
   it('has a property that is an alphabetical list of dependencies', function () {
-    assert(Array.isArray(fixtures.packageNames))
-    assert(fixtures.packageNames.length)
+    assert(Array.isArray(fixtures.dependencies))
+    assert(fixtures.dependencies.length)
+  })
+
+  it('has a property that is an alphabetical list of saved examples', function () {
+    assert(Array.isArray(fixtures.examples))
+    assert(fixtures.examples.length)
   })
 
   it('includes some real package readmes right from node_modules', function () {
+    assert(fixtures.lodash.length)
+    assert(fixtures['property-ttl'].length)
+    assert(fixtures['sanitize-html'].length)
+  })
+
+  it('includes some real package readmes in static fixtures', function () {
     assert(fixtures.async.length)
     assert(fixtures.express.length)
     assert(fixtures['johnny-five'].length)
@@ -669,21 +680,30 @@ describe('cdn', function () {
 })
 
 describe('real readmes in the wild', function () {
-  it('parses readmes of all dependencies and devDependencies', function (done) {
-    var packages = fixtures.packageNames
-
+  function parsePackages (packages, done, getPackage) {
     assert(Array.isArray(packages))
     assert(packages.length)
     packages.forEach(function (name) {
       console.log('\t' + name)
       assert(typeof fixtures[name] === 'string')
-      var json = require(path.resolve('node_modules', name, 'package.json'))
-      var $ = marky(fixtures[name], {package: json})
+      var $ = marky(fixtures[name], {package: getPackage(name)})
       assert($.html().length > 100)
 
       if (name === packages[packages.length - 1]) {
         return done()
       }
+    })
+  }
+
+  it('parses all saved fixture readmes', function (done) {
+    parsePackages(fixtures.examples, done, function (name) {
+      return {name: name}
+    })
+  })
+
+  it('parses all dependency readmes', function (done) {
+    parsePackages(fixtures.dependencies, done, function (name) {
+      return require(path.resolve('node_modules', name, 'package.json'))
     })
   })
 

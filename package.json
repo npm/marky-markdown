@@ -52,20 +52,9 @@
     "similarity": "^1.0.1"
   },
   "devDependencies": {
-    "async": "^0.9.0",
-    "benchmark": "^1.0.0",
-    "cicada": "~1.1.1",
-    "express": "^4.10.7",
     "glob": "^4.3.5",
-    "grunt-angular-templates": "^0.5.7",
-    "johnny-five": "^0.8.37",
-    "maintenance-modules": "1.0.2",
-    "memoize": "~0.1.1",
-    "mkhere": "~1.0.9",
     "mocha": "^2.0.1",
-    "payform": "1.0.1",
-    "standard": "^3.7.0",
-    "wzrd": "^1.1.1"
+    "standard": "^3.7.0"
   },
   "bin": "./bin/marky-markdown.js",
   "contributors": [
