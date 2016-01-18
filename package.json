@@ -57,7 +57,7 @@
     "cicada": "~1.1.1",
     "express": "^4.10.7",
     "glob": "^4.3.5",
-    "grunt-angular-templates": "^0.5.7",
+    "grunt-angular-templates": "^1.0.1",
     "johnny-five": "^0.8.37",
     "maintenance-modules": "1.0.2",
     "memoize": "~0.1.1",
