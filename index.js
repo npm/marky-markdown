@@ -1,11 +1,9 @@
 var cheerio = require('cheerio')
 var defaults = require('lodash').defaults
-// var comments = require('./lib/comments')
 var render = require('./lib/render')
 var sanitize = require('./lib/sanitize')
 var badges = require('./lib/badges')
 var cdn = require('./lib/cdn')
-var frontmatter = require('./lib/frontmatter')
 var github = require('./lib/github')
 var youtube = require('./lib/youtube')
 var gravatar = require('./lib/gravatar')
@@ -40,9 +38,6 @@ var marky = module.exports = function (markdown, options) {
 
   log('Parse markdown into HTML and add syntax highlighting')
   html = render(markdown, options)
-
-  log('Convert HTML frontmatter into meta tags')
-  html = frontmatter(html)
 
   if (options.sanitize) {
     log('Sanitize malicious or malformed HTML')
