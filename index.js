@@ -64,14 +64,11 @@ var marky = module.exports = function (markdown, options) {
 
   log('Apply CSS classes to readme content already expressed by package metadata')
   $ = packagize($, options.package)
-
   if (options.serveImagesWithCDN) {
     log('Rewrite relative image source to use CDN')
     $ = cdn($, options.package)
   }
-
   return $
-
 }
 
 marky.parsePackageDescription = packagize.parsePackageDescription
