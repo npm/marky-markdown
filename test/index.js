@@ -25,7 +25,6 @@ describe('marky-markdown', function () {
       /first argument must be a string/
     )
   })
-
 })
 
 describe('markdown processing and syntax highlighting', function () {
@@ -192,7 +191,6 @@ describe('sanitize', function () {
     assert(~fixtures.dirty.indexOf('<sup>'))
     assert.equal($('sup').text(), 'superscript')
   })
-
 })
 
 describe('badges', function () {
@@ -211,7 +209,6 @@ describe('badges', function () {
     assert.equal($('p:not(.badge-only)').length, 2)
     assert.equal($('p.badge-only').length, $('p').length - 2)
   })
-
 })
 
 describe('gravatar', function () {
@@ -236,7 +233,6 @@ describe('gravatar', function () {
     assert(~fixtures.gravatar.indexOf('http://not-gravatar.com/foo'))
     assert.equal($('img').eq(2).attr('src'), 'http://not-gravatar.com/foo')
   })
-
 })
 
 describe('github', function () {
@@ -293,7 +289,6 @@ describe('github', function () {
       assert(~fixtures.github.indexOf('![](https://secure.com/good.png)'))
       assert($("img[src='https://secure.com/good.png']").length)
     })
-
   })
 
   describe('when package repo is NOT on github', function () {
@@ -349,9 +344,7 @@ describe('github', function () {
       assert(~fixtures.github.indexOf('![](https://secure.com/good.png)'))
       assert($("img[src='https://secure.com/good.png']").length)
     })
-
   })
-
 })
 
 describe('youtube', function () {
@@ -387,7 +380,6 @@ describe('youtube', function () {
     assert.equal(typeof iframe2.attr('frameborder'), 'undefined')
     assert.equal(typeof iframe2.attr('allowfullscreen'), 'undefined')
   })
-
 })
 
 describe('packagize', function () {
@@ -471,9 +463,7 @@ describe('packagize', function () {
       var description = marky.parsePackageDescription('Here comes a `<script>` tag')
       assert.equal(description, 'Here comes a <code>&lt;script&gt;</code> tag')
     })
-
   })
-
 })
 
 describe('fixtures', function () {
@@ -514,7 +504,6 @@ describe('fixtures', function () {
     assert(fixtures.express.length)
     assert(fixtures['johnny-five'].length)
   })
-
 })
 
 describe('headings', function () {
@@ -607,7 +596,6 @@ describe('headings', function () {
     assert.equal($('h5#lazy-heading-5').length, 1)
     assert.equal($('h6#lazy-heading-6').length, 1)
   })
-
 })
 
 describe('cdn', function () {
@@ -641,7 +629,6 @@ describe('cdn', function () {
       assert(~fixtures.basic.indexOf('![](https://secure.com/good.png)'))
       assert($("img[src='https://secure.com/good.png']").length)
     })
-
   })
 
   describe('when serveImagesWithCDN is false (default)', function () {
@@ -676,9 +663,7 @@ describe('cdn', function () {
       assert(~fixtures.basic.indexOf('![](https://secure.com/good.png)'))
       assert($("img[src='https://secure.com/good.png']").length)
     })
-
   })
-
 })
 
 describe('real readmes in the wild', function () {
@@ -708,5 +693,4 @@ describe('real readmes in the wild', function () {
       return require(path.resolve('node_modules', name, 'package.json'))
     })
   })
-
 })
