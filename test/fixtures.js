@@ -1,6 +1,7 @@
 var fs = require('fs')
 var path = require('path')
 var glob = require('glob')
+var pkg = require('../package.json')
 
 var fixtures = {
   dependencies: [], // our dependencies and devDependencies
@@ -16,8 +17,8 @@ fs.readdirSync(__dirname + '/fixtures').forEach(function (file) {
 })
 
 // Read in dependencies' and devDependencies' readmes
-fixtures.dependencies = Object.keys(require('../package.json').devDependencies)
-  .concat(Object.keys(require('../package.json').dependencies))
+fixtures.dependencies = Object.keys(pkg.devDependencies)
+  .concat(Object.keys(pkg.dependencies))
   .sort()
 fixtures.dependencies.forEach(function (name) {
   var modulePath = path.resolve('node_modules', name)
