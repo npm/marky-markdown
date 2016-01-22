@@ -12,6 +12,14 @@ app.get('/', function (req, res) {
   res.send('Hello World')
 })
 
+app.get('/indenting', function (req, res) {
+	res.send('Hello World')
+	res.send('Hello Someone Else')
+	if (foo) {
+		// doubly indented
+	}
+})
+
 app.listen(3000)
 ```
 
