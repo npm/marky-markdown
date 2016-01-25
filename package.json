@@ -42,7 +42,7 @@
     "language-ini": "^1.7.0",
     "language-rust": "^0.4.3",
     "language-stylus": "^0.5.2",
-    "lodash": "^4.0.0",
+    "lodash": "^4.0.1",
     "markdown-it": "~5.0.2",
     "markdown-it-lazy-headers": "^0.1.3",
     "markdown-it-emoji": "^1.1.0",
