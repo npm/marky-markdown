@@ -3,6 +3,8 @@
 [![Build Status](https://travis-ci.org/npm/marky-markdown.svg?branch=master)](https://travis-ci.org/npm/marky-markdown)
 [![Code Climate](https://codeclimate.com/github/npm/marky-markdown/badges/gpa.svg)](https://codeclimate.com/github/npm/marky-markdown)
 [![Dependency Status](https://david-dm.org/npm/marky-markdown.svg)](https://david-dm.org/npm/marky-markdown)
+[![Issue Stats](http://issuestats.com/github/npm/marky-markdown/badge/pr)](http://issuestats.com/github/npm/marky-markdown)
+[![Issue Stats](http://issuestats.com/github/npm/marky-markdown/badge/issue)](http://issuestats.com/github/npm/marky-markdown)
 
 The thing [npmjs.com](https://www.npmjs.com) uses to clean up READMEs and other markdown files.
 
