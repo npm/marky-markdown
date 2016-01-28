@@ -50,7 +50,8 @@
     "markdown-it-expand-tabs": "^1.0.7",
     "property-ttl": "^1.0.0",
     "sanitize-html": "^1.6.1",
-    "similarity": "^1.0.1"
+    "similarity": "^1.0.1",
+    "yargs": "^3.32.0"
   },
   "devDependencies": {
     "glob": "^7.0.0",
