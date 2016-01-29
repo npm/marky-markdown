@@ -84,12 +84,6 @@ describe('markdown processing and syntax highlighting', function () {
     assert($("a[href='https://gist.github.com/sindresorhus/8435329']").length)
   })
 
-  it('replaces markdown syntax for emoji with unicode for the emoji', function () {
-    assert(~fixtures.github.indexOf(':sparkles:'))
-    var $ = marky(fixtures.github)
-    assert($.html().indexOf('✨'))
-  })
-
   it('does not convert text emoticons to unicode', function () {
     assert(~fixtures.github.indexOf(':)'))
     var $ = marky(fixtures.github)

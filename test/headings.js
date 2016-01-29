@@ -39,31 +39,31 @@ describe('headings', function () {
 
   it('allows a dash in generated DOM ids just like GitHub', function () {
     assert(~fixtures.github.indexOf('### heading with a - dash'))
-    $ = marky(fixtures.github)
+    $ = marky(fixtures.github, {prefixHeadingIds: false})
     assert.equal($('h3#heading-with-a---dash a').length, 1)
   })
 
   it('allows a trailing dash in generated DOM ids just like GitHub', function () {
     assert(~fixtures.github.indexOf('### heading with a trailing dash -'))
-    $ = marky(fixtures.github)
+    $ = marky(fixtures.github, {prefixHeadingIds: false})
     assert.equal($('h3#heading-with-a-trailing-dash-- a').length, 1)
   })
 
   it('allows underscores in generated DOM ids like GitHub', function () {
     assert(~fixtures.github.indexOf('### heading with an _ underscore'))
-    $ = marky(fixtures.github)
+    $ = marky(fixtures.github, {prefixHeadingIds: false})
     assert.equal($('h3#heading-with-an-_-underscore a').length, 1)
   })
 
   it('filters periods in generated DOM ids like GitHub', function () {
     assert(~fixtures.github.indexOf('### heading with a period.txt'))
-    $ = marky(fixtures.github)
+    $ = marky(fixtures.github, {prefixHeadingIds: false})
     assert.equal($('h3#heading-with-a-periodtxt').length, 1)
   })
 
   it('allows two spaces even after filtering like GitHub', function () {
     assert(~fixtures.github.indexOf('### exchange.bind_headers(exchange, routing [, bindCallback])'))
-    $ = marky(fixtures.github)
+    $ = marky(fixtures.github, {prefixHeadingIds: false})
     assert.equal($('h3#exchangebind_headersexchange-routing--bindcallback').length, 1)
   })
 
@@ -71,7 +71,7 @@ describe('headings', function () {
     assert(~fixtures.github.indexOf('### duplicate'))
     assert(~fixtures.github.indexOf('### duplicate('))
     assert(~fixtures.github.indexOf('### duplicate)'))
-    $ = marky(fixtures.github)
+    $ = marky(fixtures.github, {prefixHeadingIds: false})
     assert.equal($('h3#duplicate a').length, 1)
     assert.equal($('h3#duplicate-1 a').length, 1)
     assert.equal($('h3#duplicate-2 a').length, 1)

@@ -1,5 +1,5 @@
 var cheerio = require('cheerio')
-var defaults = require('lodash').defaults
+var defaults = require('lodash.defaults')
 var render = require('./lib/render')
 var sanitize = require('./lib/sanitize')
 var badges = require('./lib/badges')
@@ -7,7 +7,6 @@ var cdn = require('./lib/cdn')
 var github = require('./lib/github')
 var youtube = require('./lib/youtube')
 var gravatar = require('./lib/gravatar')
-var headings = require('./lib/headings')
 var packagize = require('./lib/packagize')
 
 var marky = module.exports = function (markdown, options) {
@@ -58,9 +57,6 @@ var marky = module.exports = function (markdown, options) {
 
   log('Add CSS classes to paragraphs containing badges')
   $ = badges($)
-
-  log('Add fragment hyperlinks links to h1,h2,h3,h4,h5,h6')
-  $ = headings($, options)
 
   log('Apply CSS classes to readme content already expressed by package metadata')
   $ = packagize($, options.package)
