@@ -70,7 +70,7 @@ describe('fixtures', function () {
 describe('debug', function () {
   it('produces the same output in debug mode as in normal mode', function () {
     // drop anything going to stdout (so we don't wreck mocha's console output)
-    var unhookIntercept = intercept(function () { return "" })
+    var unhookIntercept = intercept(function () { return '' })
 
     var $ = marky(fixtures.benchmark)
     var debug = marky(fixtures.benchmark, {debug: true})
