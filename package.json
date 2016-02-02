@@ -4,7 +4,8 @@
   "description": "npm's markdown parser",
   "main": "index.js",
   "scripts": {
-    "test": "standard --format && mocha --timeout 5000"
+    "test": "standard --format && mocha --timeout 5000",
+    "benchmark": "node test/benchmark"
   },
   "repository": {
     "type": "git",
@@ -50,6 +51,7 @@
     "similarity": "^1.0.1"
   },
   "devDependencies": {
+    "benchmark": "^2.0.0",
     "glob": "^6.0.4",
     "mocha": "^2.0.1",
     "standard": "^5.4.1"
