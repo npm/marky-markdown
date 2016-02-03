@@ -37,3 +37,11 @@
 Smiley! :)
 
 :sparkles:
+
+<img src="" id='empty-src-img'/>
+
+<img id='no-src-img'/>
+
+<a href="" id='empty-href-link'>Link with empty href</a>
+
+<a id='no-href-link'>Link with no href</a>
