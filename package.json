@@ -52,7 +52,7 @@
   "devDependencies": {
     "glob": "^6.0.4",
     "mocha": "^2.0.1",
-    "standard": "^5.4.1"
+    "standard": "^6.0.0"
   },
   "bin": "./bin/marky-markdown.js"
 }
