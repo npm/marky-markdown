@@ -55,7 +55,7 @@ describe('fixtures', function () {
   })
 
   it('includes some real package readmes right from node_modules', function () {
-    assert(fixtures.lodash.length)
+    assert(fixtures['lodash.defaults'].length)
     assert(fixtures['property-ttl'].length)
     assert(fixtures['sanitize-html'].length)
   })
