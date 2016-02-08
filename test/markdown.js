@@ -17,31 +17,33 @@ describe('markdown processing and syntax highlighting', function () {
 
   it('converts github flavored fencing to code blocks', function () {
     assert(~fixtures.basic.indexOf('```js'))
-    assert($('code').length)
+    assert($('.highlight.js').length)
   })
 
   it('adds js class to javascript blocks', function () {
     assert(~fixtures.basic.indexOf('```js'))
-    assert($('code.js').length)
+    assert($('.highlight.js').length)
   })
 
   it('adds sh class to shell blocks', function () {
     assert(~fixtures.basic.indexOf('```sh'))
-    assert($('code.sh').length)
+    assert($('.highlight.sh').length)
   })
 
   it('adds coffeescript class to coffee blocks', function () {
     assert(~fixtures.basic.indexOf('```coffee'))
-    assert($('code.coffeescript').length)
+    assert($('.highlight.coffeescript').length)
   })
 
   it('adds diff class to diff blocks', function () {
     assert(~fixtures.basic.indexOf('```diff'))
-    assert($('code.diff').length)
+    assert($('.highlight.diff').length)
   })
 
-  it('adds highlight class to all blocks', function () {
-    assert.equal($('code').length, $('code.highlight').length)
+  it('wraps code highlighter output in div.highlight', function () {
+    // the idea here is that we have a 1:1 correspondence of <div class='highlight'>
+    // and their contained <pre class='editor'> elements coming from the highlighter
+    assert.equal($('div.highlight').length, $('div.highlight > pre.editor').length)
   })
 
   it('applies inline syntax highlighting classes to javascript', function () {

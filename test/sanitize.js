@@ -47,8 +47,8 @@ describe('sanitize', function () {
     assert(!$('.xxx').length)
   })
 
-  it('allows classnames on code tags', function () {
-    assert($('code.highlight').length)
+  it('allows classnames on div tags used for syntax highlighting', function () {
+    assert($('div.highlight').length)
   })
 
   it('allows the <s> strikethrough element', function () {
