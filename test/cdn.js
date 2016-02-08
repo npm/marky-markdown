@@ -5,6 +5,42 @@ var marky = require('..')
 var fixtures = require('./fixtures')
 
 describe('cdn', function () {
+  describe('handles missing or empty package data', function () {
+    var $
+
+    before(function () {
+      // generate a processed version with no CDN remapping, to use as a control
+      $ = marky(fixtures.basic)
+    })
+
+    it('skips CDN remap when lacking package data', function () {
+      var options = {
+        // leave package undefined
+        serveImagesWithCDN: true
+      }
+      var html = marky(fixtures.basic, options)
+      assert.equal(html.html(), $.html())
+    })
+
+    it('skips CDN remap when the package lacks a name', function () {
+      var options = {
+        package: {version: '1.0.0'},
+        serveImagesWithCDN: true
+      }
+      var html = marky(fixtures.basic, options)
+      assert.equal(html.html(), $.html())
+    })
+
+    it('skips CDN remap when the package lacks a version', function () {
+      var options = {
+        package: {name: 'foo'},
+        serveImagesWithCDN: true
+      }
+      var html = marky(fixtures.basic, options)
+      assert.equal(html.html(), $.html())
+    })
+  })
+
   describe('when serveImagesWithCDN is true', function () {
     var $
     var options = {
