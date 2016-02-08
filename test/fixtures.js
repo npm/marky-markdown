@@ -9,10 +9,10 @@ var fixtures = {
 }
 
 // Read in all the hand-written fixture files
-fs.readdirSync(__dirname + '/fixtures').forEach(function (file) {
+fs.readdirSync(path.join(__dirname, 'fixtures')).forEach(function (file) {
   var key = path.basename(file).replace('.md', '')
   if (key !== path.basename(file)) { // skip anything lacking a .md extension
-    fixtures[key] = fs.readFileSync(__dirname + '/fixtures/' + file).toString()
+    fixtures[key] = fs.readFileSync(path.join(__dirname, 'fixtures', file)).toString()
   }
 })
 
@@ -34,10 +34,10 @@ fixtures.dependencies.forEach(function (name) {
 })
 
 // Read in all the sample readmes saved as fixtures
-fs.readdirSync(__dirname + '/fixtures/readmes').forEach(function (file) {
+fs.readdirSync(path.join(__dirname, 'fixtures', 'readmes')).forEach(function (file) {
   var key = path.basename(file).replace('.md', '')
   if (key !== path.basename(file)) { // skip anything lacking a .md extension
-    fixtures[key] = fs.readFileSync(__dirname + '/fixtures/readmes/' + file).toString()
+    fixtures[key] = fs.readFileSync(path.join(__dirname, 'fixtures', 'readmes', file)).toString()
     fixtures.examples.push(key)
   }
 })
