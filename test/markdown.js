@@ -71,6 +71,13 @@ describe('markdown processing and syntax highlighting', function () {
     assert(~$.html().indexOf('<span>&quot;</span>'))
   })
 
+  it('converts leading tabs in code blocks to spaces', function () {
+    var $ = marky(fixtures.basic)
+    var indentHtml = $('.highlight.js .line .comment span:not(.js)').html()
+    assert(!~indentHtml.indexOf('\t'))
+    assert(~indentHtml.indexOf('&#xA0;'))
+  })
+
   it('linkifies fully-qualified URLs', function () {
     assert(~fixtures['maintenance-modules'].indexOf('- https://gist.github.com/sindresorhus/8435329'))
     var $ = marky(fixtures['maintenance-modules'])
