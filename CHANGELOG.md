@@ -1,3 +1,25 @@
+# 7.0.0 (2016-02-08)
+
+### Breaking Changes
+
+- updated `markdown-it` to `5.1.0` that broke the behavior of
+  fenced code blocks. updated tests to reflect new behavior.
+  ([pull/100]) by [revin]
+- we were seeing rendering issues because `markdown-it` does not
+  do anything with tab characters in fenced code blocks. we now
+  convert tab characters into four-spaces, which follows Github
+  flavored markdown ([issue/126],[pull/127]) by [revin]
+- converts emoji in heading IDs to emoji shortcode names to more
+  closely match Github flavored markdown ([issue/128], [pull/133])
+  filed by [chrisdickinson], fixed by [revin]
+
+[pull/100]: https://github.com/npm/marky-markdown/pull/100
+[pull/127]: https://github.com/npm/marky-markdown/pull/127
+[issue/126]: https://github.com/npm/marky-markdown/issues/126
+[issue/128]: https://github.com/npm/marky-markdown/issues/128
+[pull/133]: https://github.com/npm/marky-markdown/pull/133
+[chrisdickinson]: https://github.com/chrisdickinson
+
 # 6.0.4 (2016-02-08)
 
 ### Documentation
