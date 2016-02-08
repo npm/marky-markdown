@@ -1,3 +1,76 @@
+# 6.0.4 (2016-02-08)
+
+### Documentation
+
+- badges about the time til close for PRs and issues were added to
+  the `README` by [ashleygwilliams]
+- a line about `:emoji:` conversion was added to the `README` by
+  [revin]
+- a trailing comma in the options description was removed by [revin]
+
+### Tests
+
+- originally we were installing some packages as `devDependencies` in 
+  order to use their `README`s in tests. this became an issue when
+  greenkeeper would attempt to update them and break our tests :) 
+  we now have pulled in the `README`s as static assets ([issue/91]
+  [pull/114]), by [revin]
+- tests were all in a single file, broken up in categories
+  ([issue/122], [pull/123]) by [revin]
+- test coverage was greatly improved ([pull/138]) by [revin]
+  - our `packagize` module would error out if the package provided,
+    lacked a name, `if()` guard added
+  - ensure that `cdn` module bails if there isn't sufficient package
+    data supplied
+  - add a few lines to  `github.md` test fixture to make sure it
+    handles `<img>` elements with a blank/missing `src` attribute
+    and `<a>` elements with a blank/missing `href`
+  - ensure running marky with `{debug: true}` produces the same output
+    as normal execution
+
+[issue/91]: https://github.com/npm/marky-markdown/issues/91
+[pull/114]: https://github.com/npm/marky-markdown/pull/114
+[issue/122]: https://github.com/npm/marky-markdown/issues/122
+[pull/123]: https://github.com/npm/marky-markdown/pull/123
+[pull/138]: https://github.com/npm/marky-markdown/pull/138
+
+### Bug Fixes
+
+- any URL containing "//youtube.com" was make it through our iframe
+  filter, but the intent was to only allow actual YouTube URLs. 
+  ([issue/108], [pull/110]), filed by [lovasoa],  solved by [revin]
+
+[lovasoa]: https://github.com/lovasoa
+[issue/108]: https://github.com/npm/marky-markdown/issues/108
+[pull/110]: https://github.com/npm/marky-markdown/pull/110
+
+### Dependencies
+
+- `glob` updated to `6.0.4` ([pull/101])
+- remove `front-matter` ([pull/134]) by [revin]
+- `cheerio` updated to `0.20.0` ([pull/135])
+- `lodash` updated to `4.2.0` ([pull/136])
+- `standard` updated to `6.0.4` ([pull/144]) by [Flet]
+
+[pull/134]: https://github.com/npm/marky-markdown/pull/134
+[pull/101]: https://github.com/npm/marky-markdown/pull/101
+[pull/135]: https://github.com/npm/marky-markdown/pull/135
+[pull/136]: https://github.com/npm/marky-markdown/pull/136
+[pull/144]: https://github.com/npm/marky-markdown/pull/144
+
+### Other
+
+- some code existed for creating meta tags based on `README`
+  frontmatter that was not being used. it and its tests were removed.
+  ([issue/43], [pull/116]) by [revin]
+- a small module for removing HTML comments was still in the codebase
+  but had not been used in a while. was finally fully removed
+  ([pull/121]) by [revin]
+
+[pull/121]: https://github.com/npm/marky-markdown/pull/121
+[issue/43]: https://github.com/npm/marky-markdown/issues/43
+[pull/116]: https://github.com/npm/marky-markdown/pull/116
+
 # 6.0.3 (2016-01-14)
 
 ### Bug Fix
