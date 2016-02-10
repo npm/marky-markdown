@@ -78,12 +78,6 @@ describe('markdown processing and syntax highlighting', function () {
     assert(~indentHtml.indexOf('&#xA0;'))
   })
 
-  it('linkifies fully-qualified URLs', function () {
-    assert(~fixtures['maintenance-modules'].indexOf('- https://gist.github.com/sindresorhus/8435329'))
-    var $ = marky(fixtures['maintenance-modules'])
-    assert($("a[href='https://gist.github.com/sindresorhus/8435329']").length)
-  })
-
   it('does not convert text emoticons to unicode', function () {
     assert(~fixtures.github.indexOf(':)'))
     var $ = marky(fixtures.github)
@@ -116,5 +110,83 @@ describe('markdown processing and syntax highlighting', function () {
     assert(~$.html().indexOf('{{name.lastName}}'))
     assert(~$.html().indexOf('{{name.firstName}}'))
     assert(~$.html().indexOf('{{name.suffix}}'))
+  })
+
+  describe('linkify', function () {
+    it('linkifies fully-qualified URLs', function () {
+      assert(~fixtures['maintenance-modules'].indexOf('- https://gist.github.com/sindresorhus/8435329'))
+      var $ = marky(fixtures['maintenance-modules'])
+      assert($("a[href='https://gist.github.com/sindresorhus/8435329']").length)
+    })
+
+    it('linkifies raw quasi-hostnames starting with "www."', function () {
+      // github can also *ahem*, "correctly" linkify something like www.foo-bar%spam@eggs
+      // into <a href="http://www.foo-bar%25spam@eggs">...</a> but we're not going
+      // to test for that (we currently "fail" anyway)
+      var $ = marky('www.example.name \n www.test.example.name \n www.fakesite')
+      assert.equal($('a').length, 3)
+      assert($("a[href='http://www.example.name']").length)
+      assert($("a[href='http://www.test.example.name']").length)
+      assert($("a[href='http://www.fakesite']").length)
+    })
+
+    it('omits trailing dots from linkified quasi-hostnames', function () {
+      var $ = marky('www.example.name. \n www.test.example.name. \n www.fakesite.')
+      assert.equal($('a').length, 3)
+      assert($("a[href='http://www.example.name']").length)
+      assert($("a[href='http://www.test.example.name']").length)
+      assert($("a[href='http://www.fakesite']").length)
+    })
+
+    it('linkifies "www." but not "www"', function () {
+      var $ = marky('this is a www. www test.')
+      assert.equal($('a').length, 1)
+      assert($("a[href='http://www']").length)
+    })
+
+    it('linkifies www.[tld]', function () {
+      var $ = marky('www.md \n www.com \n www.name')
+      assert.equal($('a').length, 3)
+      assert($("a[href='http://www.md']").length)
+      assert($("a[href='http://www.com']").length)
+      assert($("a[href='http://www.name']").length)
+    })
+
+    it('does not linkify raw domain names', function () {
+      var $ = marky('readme.md \n example.name \n example.com')
+      assert(!$('a').length)
+    })
+
+    it('does not linkify protocol relative links', function () {
+      var $ = marky('//readme.md \n //example.name \n //www.example.com')
+      assert(!$('a').length)
+    })
+
+    it('does not linkify raw hostnames not starting with "www."', function () {
+      var $ = marky('marky.readme.md \n test.example.name \n testwww.example.com \n web.www.example.com')
+      assert(!$('a').length)
+    })
+
+    it('skips quoted hostnames', function () {
+      var $ = marky('"www.example.com" ' + "'www.example2.com'")
+      assert(!$('a').length)
+    })
+
+    it('linkifies bracketed/parenthetical hostnames', function () {
+      var $ = marky('[www.example.com] \n (www.example2.com) \n {www.do-not-link.com}')
+      assert($("a[href='http://www.example.com']").length)
+      assert($("a[href='http://www.example2.com']").length)
+      assert(!$("a[href='http://www.do-not-link.com']").length)
+    })
+
+    it('includes path components', function () {
+      var $ = marky('www.example.name/marky/markdown [www.example.name/marky/markdown] (www.example.name/marky/markdown)')
+      assert.equal($("a[href='http://www.example.name/marky/markdown']").length, 3)
+    })
+
+    it('includes query', function () {
+      var $ = marky('Testing www.example.name/marky?markdown=1&test here')
+      assert($("a[href='http://www.example.name/marky?markdown=1&test']").length)
+    })
   })
 })
