@@ -36,6 +36,13 @@ alert "hi"
 +added
 ```
 
+Mustache {{template}} variable {{do.not.replace}}
+
+```js
+// shouldn't replace these
+console.log(faker.fake('{{name.lastName}}, {{name.firstName}} {{name.suffix}}'));
+```
+
 ### images
 
 ![](relative.png)
