@@ -85,6 +85,16 @@ describe('markdown processing and syntax highlighting', function () {
     assert(~indentHtml.indexOf('&#xA0;'))
   })
 
+  it('renders relaxed link reference definitions the same as normal ones', function () {
+    assert(~fixtures['link-ref'].indexOf('[linkref]:'))
+    assert(~fixtures['link-ref-relaxed'].indexOf('[linkref]:'))
+    var $normal = marky(fixtures['link-ref'])
+    var $relaxed = marky(fixtures['link-ref-relaxed'])
+    assert($normal('a[href="/actual/link/here"]').length)
+    assert($relaxed('a[href="/actual/link/here"]').length)
+    assert.equal($normal.html(), $relaxed.html())
+  })
+
   it('does not convert text emoticons to unicode', function () {
     assert(~fixtures.github.indexOf(':)'))
     var $ = marky(fixtures.github)
