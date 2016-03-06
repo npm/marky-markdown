@@ -89,4 +89,32 @@ describe('markdown processing and syntax highlighting', function () {
     var $ = marky(fixtures.github)
     assert(~$.html().indexOf(':)'))
   })
+
+  it('does not convert mustache template variables in markdown', function () {
+    assert(~fixtures.basic.indexOf('{{template}}'))
+    assert(~fixtures.basic.indexOf('{{do.not.replace}}'))
+    var $ = marky(fixtures.basic)
+    assert(~$.html().indexOf('{{template}}'))
+    assert(~$.html().indexOf('{{do.not.replace}}'))
+  })
+
+  it('does not convert mustache template variables in fenced code blocks with highlighting on', function () {
+    assert(~fixtures.basic.indexOf('{{name.lastName}}'))
+    assert(~fixtures.basic.indexOf('{{name.firstName}}'))
+    assert(~fixtures.basic.indexOf('{{name.suffix}}'))
+    var $ = marky(fixtures.basic, {highlightSyntax: true})
+    assert(~$.html().indexOf('{{name.lastName}}'))
+    assert(~$.html().indexOf('{{name.firstName}}'))
+    assert(~$.html().indexOf('{{name.suffix}}'))
+  })
+
+  it('does not convert mustache template variables in fenced code blocks with highlighting off', function () {
+    assert(~fixtures.basic.indexOf('{{name.lastName}}'))
+    assert(~fixtures.basic.indexOf('{{name.firstName}}'))
+    assert(~fixtures.basic.indexOf('{{name.suffix}}'))
+    var $ = marky(fixtures.basic, {highlightSyntax: false})
+    assert(~$.html().indexOf('{{name.lastName}}'))
+    assert(~$.html().indexOf('{{name.firstName}}'))
+    assert(~$.html().indexOf('{{name.suffix}}'))
+  })
 })
