@@ -43,19 +43,22 @@
     "language-stylus": "^0.5.2",
     "lodash.assign": "^4.0.2",
     "lodash.defaults": "^4.0.1",
+    "lodash.omit": "^4.1.0",
     "lodash.pickby": "^4.2.1",
     "markdown-it": "^5.1.0",
-    "markdown-it-lazy-headers": "^0.1.3",
     "markdown-it-emoji": "^1.1.0",
     "markdown-it-expand-tabs": "^1.0.7",
+    "markdown-it-lazy-headers": "^0.1.3",
     "property-ttl": "^1.0.0",
     "sanitize-html": "^1.6.1",
-    "similarity": "^1.0.1"
+    "similarity": "^1.0.1",
+    "yargs": "^4.3.1"
   },
   "devDependencies": {
     "glob": "^7.0.0",
     "intercept-stdout": "^0.1.2",
     "mocha": "^2.0.1",
+    "mock-fs": "^3.8.0",
     "standard": "^6.0.4",
     "standard-format": "^2.1.0"
   },
