@@ -1,5 +1,6 @@
 // the unit test suite lives in these modules
 require('./marky')
+require('./cli')
 require('./markdown')
 require('./sanitize')
 require('./badges')
