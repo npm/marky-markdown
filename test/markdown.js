@@ -38,6 +38,51 @@ describe('markdown processing', function () {
       var $ = marky(fixtures.github)
       assert(~$.html().indexOf(':)'))
     })
+
+    describe('task lists', function () {
+      var $todo
+      before(function () {
+        $todo = marky(fixtures['task-list'])
+      })
+
+      it('adds input.task-list-item-checkbox in items', function () {
+        assert(~$todo('input.task-list-item-checkbox').length)
+      })
+
+      it('renders items marked up as [ ] as unchecked', function () {
+        var shouldBeUnchecked = (fixtures['task-list'].match(/[\.\*\+-]\s+\[ \]/g) || []).length
+        assert.equal(shouldBeUnchecked, $todo('input[type=checkbox].task-list-item-checkbox:not(:checked)').length)
+      })
+
+      it('renders items marked up as [x] as checked', function () {
+        var shouldBeChecked = (fixtures['task-list'].match(/[\.\*\+-]\s+\[x\]/g) || []).length
+        assert.equal(shouldBeChecked, $todo('input[type=checkbox].task-list-item-checkbox:checked').length)
+      })
+
+      it('always disables the rendered checkboxes', function () {
+        assert(!$todo('input[type=checkbox].task-list-item-checkbox:not([disabled])').length)
+      })
+
+      it('does NOT render [  ], [ x], [x ], or [ x ] as checkboxes', function () {
+        var html = $todo.html()
+        assert(~html.indexOf('[  ]'))
+        assert(~html.indexOf('[x ]'))
+        assert(~html.indexOf('[ x]'))
+        assert(~html.indexOf('[ x ]'))
+      })
+
+      it('adds class .task-list-item to parent <li>', function () {
+        assert(~$todo('li.task-list-item').length)
+      })
+
+      it('adds class .task-list to lists', function () {
+        assert(~$todo('ol.task-list, ul.task-list').length)
+      })
+
+      it('only adds .task-list to most immediate parent list', function () {
+        assert($todo('ol:not(.task-list) ul.task-list').length)
+      })
+    })
   })
 
   describe('syntax highlighting', function () {

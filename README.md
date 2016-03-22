@@ -19,6 +19,7 @@ The thing [npmjs.com](https://www.npmjs.com) uses to clean up READMEs and other 
 - Converts relative GitHub links to their absolute equivalents.
 - Converts relative GitHub images sources to their GitHub raw equivalents.
 - Converts insecure Gravatar URLs to HTTPS.
+- Converts list items with leading `[ ]` and `[x]` into [GitHub-style task lists](https://github.com/blog/1825-task-lists-in-all-markdown-documents)
 - Wraps embedded YouTube videos so they can be styled.
 - Parses and sanitizes `package.description` as markdown.
 - Applies CSS classes to redundant content that closely matches npm package name and description.
