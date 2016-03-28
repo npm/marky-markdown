@@ -33,3 +33,11 @@ some<sup>superscript</sup>
 <del>deleted</del>
 
 <ins>inserted</ins>
+
+<dl>
+  <dt>Term 1</dt>
+  <dd>Definition 1</dd>
+
+  <dt>Term 2</dt>
+  <dd>Definition 2</dd>
+</dl>
