@@ -1,4 +1,5 @@
 /* globals describe, it */
+var oldkeys = Object.keys(global)
 
 var assert = require('assert')
 var marky = require('..')
@@ -79,3 +80,9 @@ describe('debug', function () {
     unhookIntercept()
   })
 })
+
+describe('after', function () {
+  it('does not leak', function() {
+    assert.equal(Object.keys(global), oldkeys);
+  })
+});
