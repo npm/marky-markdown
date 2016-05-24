@@ -29,8 +29,15 @@ fixtures.dependencies.forEach(function (name) {
     cwd: modulePath
   })[0]
 
-  var readme = fs.readFileSync(path.resolve(modulePath, readmeFilename), 'utf-8')
-  fixtures[name] = readme
+  if (readmeFilename) {
+    var readme = fs.readFileSync(path.resolve(modulePath, readmeFilename), 'utf-8')
+    fixtures[name] = readme
+  }
+})
+
+// filter out any packages that didn't have a readme
+fixtures.dependencies = fixtures.dependencies.filter(function (name) {
+  return !!fixtures[name]
 })
 
 // Read in all the sample readmes saved as fixtures
