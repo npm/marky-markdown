@@ -1,4 +1,5 @@
 /* globals describe, it */
+var oldkeys = Object.keys(global)
 
 var assert = require('assert')
 var marky = require('..')
@@ -77,5 +78,21 @@ describe('debug', function () {
     assert.equal($.html(), debug.html())
 
     unhookIntercept()
+  })
+})
+
+describe('after', function () {
+  it('does not leak', function () {
+    if ('deepStrictEqual' in assert) {
+      assert.deepStrictEqual(Object.keys(global), oldkeys)
+    } else {
+      // node <= 0.12 lacks assert.deepStrictEqual(), just compare manually
+      oldkeys.sort()
+      var currentkeys = Object.keys(global).sort()
+      assert.equal(currentkeys.length, oldkeys.length)
+      currentkeys.forEach(function (key, index) {
+        assert.equal(key, oldkeys[index])
+      })
+    }
   })
 })
