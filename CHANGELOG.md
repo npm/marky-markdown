@@ -1,3 +1,43 @@
+# 7.0.1 (2016-05-28)
+
+- removed some unused configuration option handling from the process
+  by which we wrap markdown code blocks ([pull/154])
+
+### Tests
+
+- unit tests were breaking when dependencies's READMEs weren't in
+  our file tree (specifically mocha, a devDependency); now we skip
+  trying to process those ([pull/184])
+- a dependency was leaking a variable into the global scope; now we
+  test for that; thanks [aredridel]! ([issue/180], [pull/186])
+- added some tests to make sure marky doesn't accidentally do
+  mustache template variable replacement ([issue/160], [pull/161])
+
+
+### Dependencies
+
+- `glob` updated to `7.0.0` ([pull/150])
+- `lodash.pickBy` updated to `4.2.1` ([pull/155])
+- `github-url-to-object` held at `2.1.0` ([pull/158]) pending
+  resolution of [github-url-to-object-issue-19]
+- `standard` updated to `7.1.0` ([pull/179])
+- `mocha` updated to `2.5.2` ([pull/184])
+- `markdown-it-emoji` updated to `1.2.0` ([pull/189])
+
+[aredridel]: https://github.com/aredridel
+[pull/150]: https://github.com/npm/marky-markdown/pull/150
+[pull/154]: https://github.com/npm/marky-markdown/pull/154
+[pull/155]: https://github.com/npm/marky-markdown/pull/155
+[pull/158]: https://github.com/npm/marky-markdown/pull/158
+[issue/160]: https://github.com/npm/marky-markdown/issues/160
+[pull/161]: https://github.com/npm/marky-markdown/pull/161
+[github-url-to-object-issue-19]: https://github.com/zeke/github-url-to-object/issues/19
+[pull/179]: https://github.com/npm/marky-markdown/pull/179
+[issue/180]: https://github.com/npm/marky-markdown/issues/180
+[pull/184]: https://github.com/npm/marky-markdown/pull/184
+[pull/186]: https://github.com/npm/marky-markdown/pull/186
+[pull/189]: https://github.com/npm/marky-markdown/pull/189
+
 # 7.0.0 (2016-02-08)
 
 ### Breaking Changes
