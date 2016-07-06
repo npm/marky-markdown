@@ -4,6 +4,10 @@
 
 ### [h3](/already/linky)
 
+### <a href="/already/inline/linky">h3</a>
+
+### Heading with embedded <a href="/internal/inline/linky">link</a>
+
 #### This is a TEST
 
 ##### h5
