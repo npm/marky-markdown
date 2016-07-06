@@ -1,3 +1,11 @@
+# 7.0.2 (2016-07-06)
+
+- fixed a bug where markdown headings containing HTML links were still
+  wrongly being wrapped with generated anchor links ([issue/200], [pull/201])
+
+[issue/200]: https://github.com/npm/marky-markdown/issues/200
+[pull/201]: https://github.com/npm/marky-markdown/pull/201
+
 # 7.0.1 (2016-05-28)
 
 - removed some unused configuration option handling from the process
