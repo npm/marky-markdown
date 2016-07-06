@@ -21,9 +21,19 @@ describe('headings', function () {
     assert($("h1.deep-link a[href='#h1']").length)
   })
 
-  it("doesn't inject anchor tags into headings that already contain anchors", function () {
+  it("doesn't inject links into headings that already contain markdown links", function () {
     assert(~fixtures.dirty.indexOf('### [h3](/already/linky)'))
     assert($("h3 a[href='/already/linky']").length)
+  })
+
+  it("doesn't inject links into headings that already contain inline HTML links", function () {
+    assert(~fixtures.dirty.indexOf('### <a href="/already/inline/linky">h3</a>'))
+    assert($("h3 a[href='/already/inline/linky']").length)
+  })
+
+  it("doesn't inject links into headings that contain internal inline HTML links", function () {
+    assert(~fixtures.dirty.indexOf('### Heading with embedded <a href="/internal/inline/linky">link</a>'))
+    assert($("h3 a[href='/internal/inline/linky']").length)
   })
 
   it('applies a prefix to generated DOM ids by default', function () {
