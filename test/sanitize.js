@@ -84,4 +84,18 @@ describe('sanitize', function () {
     assert(~fixtures.dirty.indexOf('<sup>'))
     assert.equal($('sup').text(), 'superscript')
   })
+
+  it('allows the <dl> element', function () {
+    assert(~fixtures.dirty.indexOf('<dl>'))
+  })
+
+  it('allows the <dt> element', function () {
+    assert(~fixtures.dirty.indexOf('<dt>'))
+    assert.equal($('dt').eq(0).text(), 'Term 1')
+  })
+
+  it('allows the <dd> element', function () {
+    assert(~fixtures.dirty.indexOf('<dd>'))
+    assert.equal($('dd').eq(0).text(), 'Definition 1')
+  })
 })
