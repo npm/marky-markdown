@@ -1,8 +1,100 @@
+# 8.0.0 (2016-07-08)
+
+Progress toward feature parity with GitHub's markdown rendering continues...
+
+### New Features / Breaking Changes
+
+- changed the way certain links are auto-generated (i.e., linkifying
+  `www.example.com` but not `readme.md`) so as to more closely match
+  how Github does it ([pull/151], [issue/146]); thanks to [puzrin]
+  for help working out the details
+- `<` and `>` are no longer allowed in auto-linked text due to a
+  sub-dependency update coming in from `markdown-it` (see below, also
+  [linkify-it/26] for details)
+- we now allow [link reference definitions] to appear immediately
+  following paragraphs rather than requiring a blank link in between
+  them; this contradicts
+  [CommonMark](http://spec.commonmark.org/0.24/#example-172) but
+  matches Github's behavior. ([issue/159], [pull/164])
+- we now support Github flavored markdown [task lists] in markdown
+  documents. ([issue/166], [pull/168])
+- we no longer strip HTML `<dl>`, `<dt>`, and `<dd>` elements from
+  embedded markup, so you can write definition lists. HOWEVER: these
+  are not directly supported by any particular standard Markdown
+  syntax; since they are treated as inline HTML, any lines indented
+  with four or more spaces will get rendered as code blocks as per
+  CommonMark; see the discussion in [issue/169]. ([pull/170])
+- big thanks to [wmhilton] who swooped in out of the blue and made
+  it so **marky now works in a web browser!** :tada: :tada: :tada:
+  Unfortunately, you have to specify `{highlightSyntax: false}` in
+  the options because the deepest recesses of our dependency tree
+  have some native C++ stuff which can't be browserified. On the
+  other hand, leaving out syntax highlighting cuts the final bundle
+  size roughly in half, so that's a win. ([pull/203])
+- if you invoke marky with `{highlightSyntax: false}` in the options,
+  we no longer apply the syntax highlighting-related CSS classes to
+  the rendered HTML; e.g., rather than
+  `<div class="highlight js"><pre class="editor editor-colors">...</pre></div>`
+  we will render simply `<pre><code>...</code></pre>`. ([issue/162],
+  [pull/163])
+
+
+#### CommonMark 0.25
+
+Due to the update to `markdown-it` (see below), our markdown parsing now uses CommonMark 0.25 (up from 0.23) as a baseline. The [CommonMark 0.24 Changelog] and [CommonMark 0.25 Changelog] have the details; the main interesting parts are:
+
+  - setext headings can span multiple lines now
+
+    ```
+    This didn't work as a heading before
+    but now it does
+    =========
+    ```
+
+  - link destinations can no longer contain spaces, even when surrounded by angle brackets
+
+    ```
+    [link text](<this used to be valid.html>)
+    ```
+
+    *Note:* This has already caught a few people out; we have an issue tracking it (see [issue/195]) and are looking at reintroducing the more flexible (non-standard) parsing in the future.
+
+  - valid link schemes used to be enumerated ('http', 'https', 'ftp', etc...); now they're defined as "any sequence	of 2--32 characters beginning with an ASCII letter and followed by any combination of ASCII letters, digits, or the symbols plus ('+'), period ('.'), or hyphen ('-')"; in practice, this won't affect most documents, but it *is* more flexible and future-compatible.
+
+[pull/151]: https://github.com/npm/marky-markdown/pull/151
+[issue/146]: https://github.com/npm/marky-markdown/issues/146
+[puzrin]: https://github.com/puzrin
+[linkify-it/26]: https://github.com/markdown-it/linkify-it/issues/26
+[link reference definitions]: http://spec.commonmark.org/0.24/#link-reference-definitions
+[issue/159]: https://github.com/npm/marky-markdown/issues/159
+[pull/164]: https://github.com/npm/marky-markdown/pull/164
+[task lists]: https://github.com/blog/1375-task-lists-in-gfm-issues-pulls-comments
+[issue/166]: https://github.com/npm/marky-markdown/issues/166
+[pull/168]: https://github.com/npm/marky-markdown/pull/168
+[issue/169]: https://github.com/npm/marky-markdown/issues/169
+[pull/170]: https://github.com/npm/marky-markdown/pull/170
+[CommonMark 0.24 Changelog]: http://spec.commonmark.org/0.24/changes.html
+[CommonMark 0.25 Changelog]: http://spec.commonmark.org/0.25/changes.html
+[issue/162]: https://github.com/npm/marky-markdown/issues/162
+[pull/163]: https://github.com/npm/marky-markdown/pull/163
+[wmhilton]: https://github.com/wmhilton
+[pull/203]: https://github.com/npm/marky-markdown/pull/203
+[issue/195]: https://github.com/npm/marky-markdown/issues/195
+
+### Dependencies
+
+- `markdown-it` updated to `7.0.0` ([pull/153])
+- added `markdown-it-task-lists` at `1.0.0` ([pull/168])
+
+[pull/153]: https://github.com/npm/marky-markdown/pull/153
+
 # 7.0.2 (2016-07-06)
 
 - fixed a bug where markdown headings containing HTML links were still
-  wrongly being wrapped with generated anchor links ([issue/200], [pull/201])
+  wrongly being wrapped with generated anchor links, thanks to [jdalton]
+  for pointing it out! ([issue/200], [pull/201])
 
+[jdalton]: https://github.com/jdalton
 [issue/200]: https://github.com/npm/marky-markdown/issues/200
 [pull/201]: https://github.com/npm/marky-markdown/pull/201
 
