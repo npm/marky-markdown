@@ -20,6 +20,13 @@ describe('markdown processing and syntax highlighting', function () {
     assert($('.highlight.js').length)
   })
 
+  it("omits code blocks' highlighting wrapper element when syntax highlighting is off", function () {
+    assert(~fixtures.basic.indexOf('```js'))
+    var $ = marky(fixtures.basic, {highlightSyntax: false})
+    assert(~$.html().indexOf('var express = require(&apos;express&apos;)'))
+    assert.equal($('.highlight').length, 0)
+  })
+
   it('adds js class to javascript blocks', function () {
     assert(~fixtures.basic.indexOf('```js'))
     assert($('.highlight.js').length)
