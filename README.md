@@ -107,6 +107,30 @@ npm i -g marky-markdown
 marky-markdown some.md > some.html
 ```
 
+## In the Browser
+
+This module mostly works in the browser, with the exception of the `highlights` module.
+You can compile it to a standalone file using `browserify`.
+
+```shell
+git clone https://github.com/npm/marky-markdown
+browserify marky-markdown/index.js -i highlights -s markyMarkdown > marky-markdown.js
+```
+
+Here is an example using HTML5 to render text inside <marky-markdown> tags.
+
+```html
+<script src="marky-markdown.js"></script>
+
+<marky-markdown>**Here** _is_ some [Markdown](https://github.com/)</marky-markdown>
+
+<script>
+  for (el of document.getElementsByTagName('marky-markdown')) {
+    el.innerHTML = markyMarkdown(el.innerText, {highlightSyntax: false}).html()
+  }
+</script>
+```
+
 ## Tests
 
 ```sh
