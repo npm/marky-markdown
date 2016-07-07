@@ -117,7 +117,7 @@ git clone https://github.com/npm/marky-markdown
 browserify marky-markdown/index.js -i highlights -s markyMarkdown > marky-markdown.js
 ```
 
-Here is an example using HTML5 to render text inside <marky-markdown> tags.
+Here is an example using HTML5 to render text inside `<marky-markdown>` tags.
 
 ```html
 <script src="marky-markdown.js"></script>
