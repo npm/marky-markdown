@@ -4,6 +4,14 @@ Progress toward feature parity with GitHub's markdown rendering continues...
 
 ### New Features / Breaking Changes
 
+- get your `class` on: syntax highlighting now supports ES2015 ([pull/206])!
+  The changes to the rendered markup for highlighted JavaScript
+  aren't purely additive (we wish we could be more specific, but the
+  functionality comes from [atom/language-javascript], which currently
+  doesn't publish a changelog; if you're feeling particularly brave,
+  there's always the [diff](https://github.com/atom/language-javascript/compare/b47a7fe...5fb7053)
+  :flushed:), so dependening on how your CSS works, there may or may
+  not be non-trivial work for you to do
 - changed the way certain links are auto-generated (i.e., linkifying
   `www.example.com` but not `readme.md`) so as to more closely match
   how Github does it ([pull/151], [issue/146]); thanks to [puzrin]
@@ -14,7 +22,7 @@ Progress toward feature parity with GitHub's markdown rendering continues...
 - we now allow [link reference definitions] to appear immediately
   following paragraphs rather than requiring a blank link in between
   them; this contradicts
-  [CommonMark](http://spec.commonmark.org/0.24/#example-172) but
+  [CommonMark](http://spec.commonmark.org/0.25/#example-175) but
   matches Github's behavior. ([issue/159], [pull/164])
 - we now support Github flavored markdown [task lists] in markdown
   documents. ([issue/166], [pull/168])
@@ -61,6 +69,8 @@ Due to the update to `markdown-it` (see below), our markdown parsing now uses Co
 
   - valid link schemes used to be enumerated ('http', 'https', 'ftp', etc...); now they're defined as "any sequence	of 2--32 characters beginning with an ASCII letter and followed by any combination of ASCII letters, digits, or the symbols plus ('+'), period ('.'), or hyphen ('-')"; in practice, this won't affect most documents, but it *is* more flexible and future-compatible.
 
+[pull/206]: https://github.com/npm/marky-markdown/pull/206
+[atom/language-javascript]: https://github.com/atom/language-javascript/tree/5fb7053b459ba595459f93fea10f5341cd3cc206
 [pull/151]: https://github.com/npm/marky-markdown/pull/151
 [issue/146]: https://github.com/npm/marky-markdown/issues/146
 [puzrin]: https://github.com/puzrin

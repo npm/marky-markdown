@@ -118,7 +118,7 @@ describe('markdown processing', function () {
     })
 
     it('applies inline syntax highlighting classes to javascript', function () {
-      assert($('.js.modifier').length)
+      assert($('.js.punctuation').length)
       assert($('.js.function').length)
     })
 
