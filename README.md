@@ -6,24 +6,25 @@
 [![Issue Stats](http://issuestats.com/github/npm/marky-markdown/badge/pr)](http://issuestats.com/github/npm/marky-markdown)
 [![Issue Stats](http://issuestats.com/github/npm/marky-markdown/badge/issue)](http://issuestats.com/github/npm/marky-markdown)
 
-The thing [npmjs.com](https://www.npmjs.com) uses to clean up READMEs and other markdown files.
+`marky-markdown` is a markdown parser, written in NodeJS, that aims for 
+parity with [GitHub-style markdown]. It is built on top of [`markdown-it`],
+a [CommonMark] markdown parser. You can use marky-markdown: 
 
-## What it does
+- [programmatically in NodeJS]
+- [in your terminal]
+- [in the browser] *does not yet support syntax highlighting
 
-- Parses markdown with [markdown-it](https://github.com/markdown-it/markdown-it), a fast and [commonmark-compliant](http://commonmark.org/) parser.
-- Removes broken and malicious user input with [sanitize-html](https://www.npmjs.com/package/sanitize-html)
-- Applies syntax highlighting to [GitHub-flavored code blocks](https://help.github.com/articles/github-flavored-markdown/#fenced-code-blocks) using the [highlights](https://www.npmjs.com/package/highlights) library from [Atom](https://atom.io/).
-- Uses [cheerio](https://www.npmjs.com/package/cheerio) to perform various feats of DOM manipulation.
-- Converts `:emoji:`-style [shortcuts](http://www.emoji-cheat-sheet.com/) to unicode emojis.
-- Converts headings (h1, h2, etc) into anchored hyperlinks.
-- Converts relative GitHub links to their absolute equivalents.
-- Converts relative GitHub images sources to their GitHub raw equivalents.
-- Converts insecure Gravatar URLs to HTTPS.
-- Converts list items with leading `[ ]` and `[x]` into [GitHub-style task lists](https://github.com/blog/1825-task-lists-in-all-markdown-documents)
-- Wraps embedded YouTube videos so they can be styled.
-- Parses and sanitizes `package.description` as markdown.
-- Applies CSS classes to redundant content that closely matches npm package name and description.
-- Applies CSS classes to badge images, so we can do something interesting with them one day.
+`marky-markdown` is the thing that parses package READMEs on 
+http://www.npmjs.com. If you see a markdown parsing bug there,
+[file an issue here]!
+
+[file an issue here]: https://github.com/npm/marky-markdown/issues
+[GitHub-style markdown]: https://help.github.com/categories/writing-on-github/github
+[CommonMark]: http://spec.commonmark.org/
+[`markdown-it`]: https://github.com/markdown-it/markdown-it
+[programmatically in NodeJS]: #programmatic-usage
+[in your terminal]: #command-line-usage
+[in the browser]: #in-the-browser
 
 ## Installation
 
@@ -62,40 +63,6 @@ The default options are as follows:
   debug: false,               // console.log() all the things
   package: null               // npm package metadata
 }
-```
-
-### cheerio "middleware"
-
-marky-markdown always returns the generated HTML document as a [cheerio](https://www.npmjs.com/package/cheerio) DOM object that can be queried using a familiar jQuery syntax:
-
-```js
-var $ = marky("![cat](cat.png)")
-$("img").length
-// => 1
-$("img").attr("src")
-// => "cat.png"
-```
-
-### npm packages
-
-Pass in an npm `package` object to do stuff like rewriting relative URLs
-to their absolute equivalent on GitHub, normalizing package metadata
-with redundant readme content, etc
-
-```js
-var package = {
-  name: "foo",
-  name: "foo is a thing",
-  repository: {
-    type: "git",
-    url: "https://github.com/kung/foo"
-  }
-}
-
-marky(
-  "# hello, I am the foo readme",
-  {package: package}
-).html()
 ```
 
 ## Command-line Usage
@@ -137,6 +104,57 @@ Here is an example using HTML5 to render text inside `<marky-markdown>` tags.
 ```sh
 npm install
 npm test
+```
+
+## What it does
+
+- Parses markdown with [markdown-it](https://github.com/markdown-it/markdown-it), a fast and [commonmark-compliant](http://commonmark.org/) parser.
+- Removes broken and malicious user input with [sanitize-html](https://www.npmjs.com/package/sanitize-html)
+- Applies syntax highlighting to [GitHub-flavored code blocks](https://help.github.com/articles/github-flavored-markdown/#fenced-code-blocks) using the [highlights](https://www.npmjs.com/package/highlights) library from [Atom](https://atom.io/).
+- Uses [cheerio](https://www.npmjs.com/package/cheerio) to perform various feats of DOM manipulation.
+- Converts `:emoji:`-style [shortcuts](http://www.emoji-cheat-sheet.com/) to unicode emojis.
+- Converts headings (h1, h2, etc) into anchored hyperlinks.
+- Converts relative GitHub links to their absolute equivalents.
+- Converts relative GitHub images sources to their GitHub raw equivalents.
+- Converts insecure Gravatar URLs to HTTPS.
+- Converts list items with leading `[ ]` and `[x]` into [GitHub-style task lists](https://github.com/blog/1825-task-lists-in-all-markdown-documents)
+- Wraps embedded YouTube videos so they can be styled.
+- Parses and sanitizes `package.description` as markdown.
+- Applies CSS classes to redundant content that closely matches npm package name and description.
+- Applies CSS classes to badge images, so we can do something interesting with them one day.
+
+### cheerio "middleware"
+
+marky-markdown always returns the generated HTML document as a [cheerio](https://www.npmjs.com/package/cheerio) DOM object that can be queried using a familiar jQuery syntax:
+
+```js
+var $ = marky("![cat](cat.png)")
+$("img").length
+// => 1
+$("img").attr("src")
+// => "cat.png"
+```
+
+### npm packages
+
+Pass in an npm `package` object to do stuff like rewriting relative URLs
+to their absolute equivalent on GitHub, normalizing package metadata
+with redundant readme content, etc
+
+```js
+var package = {
+  name: "foo",
+  name: "foo is a thing",
+  repository: {
+    type: "git",
+    url: "https://github.com/kung/foo"
+  }
+}
+
+marky(
+  "# hello, I am the foo readme",
+  {package: package}
+).html()
 ```
 
 ## Dependencies
