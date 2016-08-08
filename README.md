@@ -111,12 +111,9 @@ marky-markdown some.md > some.html
 ## In the Browser
 
 This module mostly works in the browser, with the exception of the `highlights` module.
-You can compile it to a standalone file using `browserify`.
 
-```shell
-git clone https://github.com/npm/marky-markdown
-browserify marky-markdown/index.js -i highlights -s markyMarkdown > marky-markdown.js
-```
+You can `require('marky-markdown')` in scripts you browserify yourself,
+or just use the standalone file in [dist/marky-markdown.js].
 
 Here is an example using HTML5 to render text inside `<marky-markdown>` tags.
 
@@ -131,6 +128,10 @@ Here is an example using HTML5 to render text inside `<marky-markdown>` tags.
   }
 </script>
 ```
+
+Note: Usage with [webpack](https://webpack.github.io/) requires that your
+`webpack.config.js` configure a loader (such as
+[json-loader](https://github.com/webpack/json-loader)) for .json files.
 
 ## Tests
 
@@ -148,7 +149,7 @@ npm test
 - [highlights-tokens](https://github.com/zeke/highlights-tokens): A list of the language tokens used by the Atom.app [highlights](https://www.npmjs.com/package/highlights) syntax highlighter
 - [lodash](https://github.com/lodash/lodash): A utility library delivering consistency, customization, performance, &amp; extras.
 - [markdown-it](https://github.com/markdown-it/markdown-it): Markdown-it - modern pluggable markdown parser.
-- [markdown-it-emoji](https://github.com/markdown-it/markdown-it-emoji): Markdown-it-emoji extension for Markdown-it that parses markdown emoji syntax to unicode. 
+- [markdown-it-emoji](https://github.com/markdown-it/markdown-it-emoji): Markdown-it-emoji extension for Markdown-it that parses markdown emoji syntax to unicode.
 - [markdown-it-expand-tabs](https://github.com/revin/markdown-it-expand-tabs): Replace leading tabs with spaces in fenced code blocks
 - [markdown-it-lazy-headers](https://github.com/Galadirith/markdown-it-lazy-headers): Lazy ATX headers plugin for markdown-it
 - [markdown-it-task-lists](https://github.com/revin/markdown-it-task-lists): Render GitHub-style [task lists](https://github.com/blog/1375-task-lists-in-gfm-issues-pulls-comments)
