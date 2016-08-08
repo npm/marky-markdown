@@ -28,7 +28,7 @@
   "homepage": "https://github.com/npm/marky-markdown",
   "dependencies": {
     "atom-language-diff": "^1.0.0",
-    "atom-language-nginx": "^0.4.0",
+    "atom-language-nginx": "^0.6.1",
     "cheerio": "^0.20.0",
     "github-slugger": "^1.0.0",
     "github-url-to-object": "^2.2.3",
