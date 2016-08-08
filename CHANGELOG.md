@@ -1,3 +1,39 @@
+# 8.1.0 (2016-08-08)
+
+### New Features
+
+- Browserify- now easier than before! Following up on [wmhilton]'s
+  work from our `8.0.0` release, [zeke] added some scripts and docs
+  to make using marky with Browserify even easier. Among other things,
+  marky now ships with a browserified file ready to go! ([pull/211])
+
+### Bug Fixes
+
+- Table troubles be gone! Or at least, any troubles with text-alignment.
+  Marky was stripping `style` attributes from `<td>` and `<th>` elements-
+  and thanks to [revin]'s hardwork, it isn't anymore! 
+  ([issues/212], [pull/216])
+
+### Docs
+
+- A slightly new and reogranized README- refocused to make it easier for
+  potential users of marky to learn about what marky does and wants to do!
+  ([pull/221])
+
+### Dependencies
+
+- `mocha` updated to `3.0.2` ([pull/219])
+- `atom-language-nginx` update to `0.6.1`, adding support for highlighting
+  [lua directives]! ([pull/214])
+
+[pull/221]: https://github.com/npm/marky-markdown/pull/221
+[issues/212]: https://github.com/npm/marky-markdown/issues/212
+[pull/216]: https://github.com/npm/marky-markdown/pull/216
+[pull/211]: https://github.com/npm/marky-markdown/pull/211
+[pull/219]: https://github.com/npm/marky-markdown/pull/219
+[pull/214]: https://github.com/npm/marky-markdown/pull/214
+[lua directives]: https://github.com/hnagato/atom-language-nginx/commit/17c3533de833886a2be666506709f3a21776cb96
+
 # 8.0.0 (2016-07-08)
 
 Progress toward feature parity with GitHub's markdown rendering continues...
