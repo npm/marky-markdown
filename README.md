@@ -55,13 +55,14 @@ The default options are as follows:
 
 ```js
 {
-  sanitize: true,             // remove script tags and stuff
-  linkify: true,              // turn orphan URLs into hyperlinks
-  highlightSyntax: true,      // run highlights on fenced code blocks
-  prefixHeadingIds: true,     // prevent DOM id collisions
-  serveImagesWithCDN: false,  // use npm's CDN to proxy images over HTTPS
-  debug: false,               // console.log() all the things
-  package: null               // npm package metadata
+  sanitize: true,               // remove script tags and stuff
+  linkify: true,                // turn orphan URLs into hyperlinks
+  highlightSyntax: true,        // run highlights on fenced code blocks
+  prefixHeadingIds: true,       // prevent DOM id collisions
+  enableHeadingLinkIcons: true, // render icons inside generated section links
+  serveImagesWithCDN: false,    // use npm's CDN to proxy images over HTTPS
+  debug: false,                 // console.log() all the things
+  package: null                 // npm package metadata
 }
 ```
 
@@ -145,7 +146,7 @@ with redundant readme content, etc
 ```js
 var package = {
   name: "foo",
-  name: "foo is a thing",
+  description: "foo is a thing",
   repository: {
     type: "git",
     url: "https://github.com/kung/foo"
