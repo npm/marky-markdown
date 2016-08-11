@@ -19,7 +19,7 @@ http://www.npmjs.com. If you see a markdown parsing bug there,
 [file an issue here]!
 
 [file an issue here]: https://github.com/npm/marky-markdown/issues
-[GitHub-style markdown]: https://help.github.com/categories/writing-on-github/github
+[GitHub-style markdown]: https://help.github.com/articles/basic-writing-and-formatting-syntax/
 [CommonMark]: http://spec.commonmark.org/
 [`markdown-it`]: https://github.com/markdown-it/markdown-it
 [programmatically in NodeJS]: #programmatic-usage
@@ -111,7 +111,7 @@ npm test
 
 - Parses markdown with [markdown-it](https://github.com/markdown-it/markdown-it), a fast and [commonmark-compliant](http://commonmark.org/) parser.
 - Removes broken and malicious user input with [sanitize-html](https://www.npmjs.com/package/sanitize-html)
-- Applies syntax highlighting to [GitHub-flavored code blocks](https://help.github.com/articles/github-flavored-markdown/#fenced-code-blocks) using the [highlights](https://www.npmjs.com/package/highlights) library from [Atom](https://atom.io/).
+- Applies syntax highlighting to [GitHub-flavored code blocks](https://help.github.com/articles/creating-and-highlighting-code-blocks/) using the [highlights](https://www.npmjs.com/package/highlights) library from [Atom](https://atom.io/).
 - Uses [cheerio](https://www.npmjs.com/package/cheerio) to perform various feats of DOM manipulation.
 - Converts `:emoji:`-style [shortcuts](http://www.emoji-cheat-sheet.com/) to unicode emojis.
 - Converts headings (h1, h2, etc) into anchored hyperlinks.
