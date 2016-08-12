@@ -65,3 +65,10 @@ some<sup>superscript</sup>
     </tr>
   </tbody>
 </table>
+
+<h1 id="h1-id-test">H1 ID test</h1>
+<h2 id="h2-id-test">H2 ID test</h2>
+<h3 id="h3-id-test">H3 ID test</h3>
+<h4 id="h4-id-test">H4 ID test</h4>
+<h5 id="h5-id-test">H5 ID test</h5>
+<h6 id="h6-id-test">H6 ID test</h6>
