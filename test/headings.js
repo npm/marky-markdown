@@ -47,6 +47,15 @@ describe('headings', function () {
     assert.equal($('h4 a#this-is-a-test').length, 1)
   })
 
+  it('puts icons inside the generated heading links', function () {
+    assert(!!$('a.deep-link svg').length)
+  })
+
+  it("allows generated links' icons to be disabled", function () {
+    $ = marky(fixtures.dirty, {enableHeadingLinkIcons: false})
+    assert.equal($('a.deep-link svg').length, 0)
+  })
+
   it('allows a dash in generated DOM ids just like GitHub', function () {
     assert(~fixtures.github.indexOf('### heading with a - dash'))
     $ = marky(fixtures.github, {prefixHeadingIds: false})

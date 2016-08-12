@@ -23,6 +23,7 @@ var marky = module.exports = function (markdown, options) {
     linkify: true,
     highlightSyntax: true,
     prefixHeadingIds: true,
+    enableHeadingLinkIcons: true,
     serveImagesWithCDN: false,
     debug: false,
     package: null
@@ -356,7 +357,9 @@ var headings = module.exports = function (md, options) {
       // add 3 new token objects link_open, text, link_close
       var linkOpen = new Token('link_open', 'a', 1)
       var text = new Token('html_inline', '', 0)
-      text.content = svgLinkIconText
+      if (options && options.enableHeadingLinkIcons) {
+        text.content = svgLinkIconText
+      }
       var linkClose = new Token('link_close', 'a', -1)
 
       // add some link attributes
