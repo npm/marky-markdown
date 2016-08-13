@@ -1,3 +1,52 @@
+# 9.0.0 (2016-08-SOON)
+
+- **Node 6 support!** We've been blocked on supporting node 6.x for quite a
+  while now ([issue/176]), but thanks to some upstream work
+  ([here](https://github.com/atom/first-mate/pull/74) and
+  [here](https://github.com/atom/highlights/pull/44)), the blocker has been
+  removed, and now you can use marky in The Future™. ([pull/227] by
+  [ashleygwilliams])
+- **More GitHub-like heading rendering!** Working out a solution for [issue/224]
+  led us down a path that resulted in our generated headings getting closer to
+  what GitHub renders. Now the `deep-link` class and generated `id` slugs that
+  we formerly applied to heading elements themselves are added to a link we put
+  inside the heading. This means we no longer wrap headings' entire contents in
+  a link, which means we can generate an anchor for every heading, not just ones
+  that don't contain links to begin with. Win! (also, Mouthful!). The new-style
+  links contain an SVG icon that matches GitHub's hover icon; if you want to
+  disable it, you can pass `{enableHeadingLinkIcons: false}` in marky's
+  `options`. Big thanks to [nwhetsell] for the help! ([pull/225] by
+  [ashleygwilliams] and [revin])
+- **More GitHub-like link/image rendering!** Oops, we were stripping out `title`
+  attributes from links and images during the rendering process, but now we
+  handle those correctly, so, e.g., `[link](#url "title text")` turns into
+  `<a href="#url" title="title text">link</a>` like it should. ([pull/235])
+- **Even _more_ GitHub-like heading rendering!** [kasbah] clued us into the fact
+  that GitHub only considers `# header` text to be a header if there's no
+  leading whitespace before the `#` character (CommonMark allows up to three
+  leading spaces, see the [specification](http://spec.commonmark.org/0.26/#example-38)).
+  Thanks, [kasbah]! ([issue/233], [pull/234])
+- **Leaner published package!** We used to ship marky with the unit test suite
+  included, but now it's in our [npm ignore] file, so `npm install` no longer
+  gives you the tests. They're still here, of course; you just have to clone the
+  repo now :smile: ([pull/223] by [ashleygwilliams])
+
+### Dependencies
+
+- `highlights` updated to `x.y.z`
+
+[issue/176]: https://github.com/npm/marky-markdown/issues/176
+[issue/224]: https://github.com/npm/marky-markdown/issues/224
+[nwhetsell]: https://github.com/nwhetsell
+[pull/223]: https://github.com/npm/marky-markdown/pull/223
+[pull/225]: https://github.com/npm/marky-markdown/pull/225
+[pull/227]: https://github.com/npm/marky-markdown/pull/227
+[pull/235]: https://github.com/npm/marky-markdown/pull/235
+[kasbah]: https://github.com/kasbah
+[issue/233]: https://github.com/npm/marky-markdown/issues/233
+[pull/234]: https://github.com/npm/marky-markdown/issues/234
+[npm ignore]: https://github.com/npm/marky-markdown/blob/master/.npmignore
+
 # 8.1.0 (2016-08-08)
 
 ### New Features
