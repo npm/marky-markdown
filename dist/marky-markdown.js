@@ -536,7 +536,7 @@ var emoji = require('markdown-it-emoji')
 var codeWrap = require('./code-wrap')
 var expandTabs = require('markdown-it-expand-tabs')
 var githubTaskList = require('markdown-it-task-lists')
-var githubHeadings = require('./headings')
+var headingLinks = require('./heading-links')
 var githubLinkify = require('./linkify')
 var relaxedLinkRefs = require('./gfm/relaxed-link-reference')
 
@@ -588,7 +588,7 @@ module.exports = function (html, options) {
     .use(emoji, {shortcuts: {}})
     .use(expandTabs, {tabWidth: 4})
     .use(githubTaskList)
-    .use(githubHeadings, options)
+    .use(headingLinks, options)
     .use(relaxedLinkRefs)
 
   if (options.highlightSyntax) parser.use(codeWrap)
@@ -624,7 +624,7 @@ function scopeNameFromLang (highlighter, lang) {
 }
 
 }).call(this,require('_process'))
-},{"./cleanup":4,"./code-wrap":5,"./gfm/relaxed-link-reference":6,"./headings":9,"./linkify":11,"_process":175,"highlights":21,"lodash.pickby":99,"markdown-it":113,"markdown-it-emoji":104,"markdown-it-expand-tabs":110,"markdown-it-lazy-headers":111,"markdown-it-task-lists":112}],14:[function(require,module,exports){
+},{"./cleanup":4,"./code-wrap":5,"./gfm/relaxed-link-reference":6,"./heading-links":9,"./linkify":11,"_process":175,"highlights":21,"lodash.pickby":99,"markdown-it":113,"markdown-it-emoji":104,"markdown-it-expand-tabs":110,"markdown-it-lazy-headers":111,"markdown-it-task-lists":112}],14:[function(require,module,exports){
 var sanitizeHtml = require('sanitize-html')
 var sanitizer = module.exports = function (html) {
   return sanitizeHtml(html, sanitizer.config)
