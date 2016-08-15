@@ -11,6 +11,16 @@ describe('headings', function () {
     $ = marky(fixtures.dirty)
   })
 
+  it('does not parse indented ATX headings as headings', function () {
+    assert(~fixtures.dirty.indexOf(' # indented h1'))
+    assert(~fixtures.dirty.indexOf('  ## indented h2'))
+    assert(~fixtures.dirty.indexOf('   ### indented h3'))
+    assert.equal($('#indented h1').length, 0)
+    assert.equal($('#indented h2').length, 0)
+    assert.equal($('#indented h3').length, 0)
+    assert.equal($('#indented p').length, 3)
+  })
+
   it('injects hashy anchor tags into headings that have DOM ids', function () {
     assert(~fixtures.dirty.indexOf('# h1'))
     assert($("h1 a[href='#h1']").length)
