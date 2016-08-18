@@ -34,12 +34,12 @@ describe('sanitize', function () {
   })
 
   it('allows h1/h2/h3/h4/h5/h6 tags to preserve their dom id', function () {
-    assert($('h1').attr('id'))
-    assert($('h2').attr('id'))
-    assert(!$('h3').attr('id'))
-    assert($('h4').attr('id'))
-    assert($('h5').attr('id'))
-    assert($('h6').attr('id'))
+    assert($('h1[id]').length)
+    assert($('h2[id]').length)
+    assert($('h3[id]').length)
+    assert($('h4[id]').length)
+    assert($('h5[id]').length)
+    assert($('h6[id]').length)
   })
 
   it('removes classnames from elements', function () {
