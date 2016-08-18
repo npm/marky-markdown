@@ -22,7 +22,6 @@ var marky = module.exports = function (markdown, options) {
     linkify: true,
     highlightSyntax: true,
     prefixHeadingIds: true,
-    enableHeadingLinkIcons: true,
     serveImagesWithCDN: false,
     debug: false,
     package: null
