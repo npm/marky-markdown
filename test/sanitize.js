@@ -127,4 +127,16 @@ describe('sanitize', function () {
     // sanitized output contains none
     assert(!~html.indexOf('text-align: right'))
   })
+
+  it('allows title attributes on images', function () {
+    var title = 'Image title'
+    var $ = marky("![alt text](#url '" + title + "')")
+    assert.equal($('img').attr('title'), title)
+  })
+
+  it('allows title attributes on links', function () {
+    var title = "You don't know npm"
+    var $ = marky('[link text](https://www.youtube.com/watch?v=Zqm78_27lWA "' + title + '")')
+    assert.equal($('a').attr('title'), title)
+  })
 })
