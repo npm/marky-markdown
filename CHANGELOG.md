@@ -34,6 +34,7 @@
 ### Dependencies
 
 - `highlights` updated to `x.y.z`
+- `cheerio` updated to `0.22.0`
 
 [issue/176]: https://github.com/npm/marky-markdown/issues/176
 [issue/224]: https://github.com/npm/marky-markdown/issues/224
