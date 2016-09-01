@@ -99,6 +99,11 @@ describe('sanitize', function () {
     assert.equal($('dd').eq(0).text(), 'Definition 1')
   })
 
+  it('allows <p> alignment', function () {
+    assert(~fixtures.dirty.indexOf('<p align='))
+    assert($('p[align]').length > 0)
+  })
+
   it('allows table cell left alignment', function () {
     var html = marky(fixtures.dirty).html()
     assert(html.indexOf('<th style="text-align:left">') > -1)
