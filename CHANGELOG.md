@@ -17,10 +17,13 @@
   disable it, you can pass `{enableHeadingLinkIcons: false}` in marky's
   `options`. Big thanks to [nwhetsell] for the help! ([pull/225] by
   [ashleygwilliams] and [revin])
-- **More GitHub-like link/image rendering!** Oops, we were stripping out `title`
-  attributes from links and images during the rendering process, but now we
-  handle those correctly, so, e.g., `[link](#url "title text")` turns into
-  `<a href="#url" title="title text">link</a>` like it should. ([pull/235])
+- **More GitHub-like link/image/paragraph rendering!** Oops, we were stripping
+  out `title` attributes from links and images, as well as `align` attributes
+  from paragraphs during the rendering process, but now we handle those
+  correctly, so, e.g., `[link](#url "title text")` turns into
+  `<a href="#url" title="title text">link</a>` like it should, and if you have
+  inline HTML like `<p align="center">...</p>` the alignment doesn't get
+  stripped. ([pull/235], [issue/241] by [kasbah], [pull/242])
 - **Even _more_ GitHub-like heading rendering!** [kasbah] clued us into the fact
   that GitHub only considers `# header` text to be a header if there's no
   leading whitespace before the `#` character (CommonMark allows up to three
@@ -47,6 +50,8 @@
 [issue/233]: https://github.com/npm/marky-markdown/issues/233
 [pull/234]: https://github.com/npm/marky-markdown/issues/234
 [npm ignore]: https://github.com/npm/marky-markdown/blob/master/.npmignore
+[issue/241]: https://github.com/npm/marky-markdown/issues/241
+[pull/242]: https://github.com/npm/marky-markdown/issues/242
 
 # 8.1.0 (2016-08-08)
 
