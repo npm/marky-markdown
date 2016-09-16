@@ -1,4 +1,4 @@
-# 9.0.0 (2016-08-SOON)
+# 9.0.0 (2016-09-SOON)
 
 - **Node 6 support!** We've been blocked on supporting node 6.x for quite a
   while now ([issue/176]), but thanks to some upstream work
@@ -34,9 +34,29 @@
   gives you the tests. They're still here, of course; you just have to clone the
   repo now :smile: ([pull/223] by [ashleygwilliams])
 
+#### CommonMark 0.26
+
+The specification that forms the basis for "standard" Markdown parsing continues
+to evolve; it's up to [0.26](http://spec.commonmark.org/0.26/) now, with the
+changes implemented in [markdown-it 8.0.0]. The main updates are:
+
+  - When whitespace is used to specify a block (for example, the indentation
+    that creates a code block, or indenting lists), it's now legal to use tab
+    characters rather than spaces. Such leading tabs now behave as if they were
+    replaced by four spaces.
+  - Ordered lists that appear at the end of paragraphs are required to start
+    with a 1.
+  - It's now legal to have multiple blank lines between list items. CommonMark
+    used to treat those as separate lists, but now they collapse into the same
+    list (which is nice for us, because that's how GitHub has always done it).
+  - Text emphasis is calculated differently now. `*foo**bar**baz*` used to be
+    `<em>foo</em><em>bar</em><em>baz</em>` but now it becomes
+    `<em>foo</em><strong>bar</strong><em>baz</em>`.
+
 ### Dependencies
 
-- `highlights` updated to `x.y.z`
+- `markdown-it` updated to `8.0.0`
+- `highlights` updated to `1.4.0`
 - `cheerio` updated to `0.22.0`
 
 [issue/176]: https://github.com/npm/marky-markdown/issues/176
@@ -52,6 +72,7 @@
 [npm ignore]: https://github.com/npm/marky-markdown/blob/master/.npmignore
 [issue/241]: https://github.com/npm/marky-markdown/issues/241
 [pull/242]: https://github.com/npm/marky-markdown/issues/242
+[markdown-it 8.0.0]: https://github.com/markdown-it/markdown-it/blob/master/CHANGELOG.md#800--2016-09-16
 
 # 8.1.0 (2016-08-08)
 
