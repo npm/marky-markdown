@@ -6,6 +6,12 @@
   [here](https://github.com/atom/highlights/pull/44)), the blocker has been
   removed, and now you can use marky in The Future™. ([pull/227] by
   [ashleygwilliams])
+- **Node 0.10/0.12 dev environment no longer supported** We've updated our
+  devDependency on JS Standard to 8.1.0 which no longer support Node 0.10 and 0.12.
+  Node 0.10 and Node 0.12 are being EOLd this year, and as a result, we feel
+  ok no longer supporting them as development environments. You can still **use**
+  marky using 0.10 or 0.12, but if you want to develop it, you'll need to upgrade
+  to Node 4 or later. ([pull/239] by Greenkeeper)
 - **More GitHub-like heading rendering!** Working out a solution for [issue/224]
   led us down a path that resulted in our generated headings getting closer to
   what GitHub renders. Now the `deep-link` class and generated `id` slugs that
@@ -73,6 +79,7 @@ changes implemented in [markdown-it 8.0.0]. The main updates are:
 [issue/241]: https://github.com/npm/marky-markdown/issues/241
 [pull/242]: https://github.com/npm/marky-markdown/issues/242
 [markdown-it 8.0.0]: https://github.com/markdown-it/markdown-it/blob/master/CHANGELOG.md#800--2016-09-16
+[pull/239]: https://github.com/npm/marky-markdown/pull/239
 
 # 8.1.0 (2016-08-08)
 
