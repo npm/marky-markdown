@@ -14,6 +14,16 @@
 
 ###### h6
 
+<div id="indented">
+
+ # indented h1
+
+  ## indented h2
+
+   ### indented h3
+
+</div>
+
 <script charset="utf-8" src="http://malware.com" type="text/javascript">alert("haxorz")</script>
 
 <img src="local.png" width="600" height="400" valign="middle" onclick="maliciousClickHandler()"></img>
@@ -65,3 +75,10 @@ some<sup>superscript</sup>
     </tr>
   </tbody>
 </table>
+
+<h1 id="h1-id-test">H1 ID test</h1>
+<h2 id="h2-id-test">H2 ID test</h2>
+<h3 id="h3-id-test">H3 ID test</h3>
+<h4 id="h4-id-test">H4 ID test</h4>
+<h5 id="h5-id-test">H5 ID test</h5>
+<h6 id="h6-id-test">H6 ID test</h6>
