@@ -52,6 +52,8 @@ some<sup>superscript</sup>
   <dd>Definition 2</dd>
 </dl>
 
+<p align='center'>Centered paragraph</p>
+
 
 | First | Second | Third |
 |---:|:--:|:---|
