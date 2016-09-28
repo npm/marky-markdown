@@ -3,13 +3,14 @@
 var assert = require('assert')
 var marky = require('..')
 var fixtures = require('./fixtures')
+var cheerio = require('cheerio')
 
 describe('youtube', function () {
   var $
   var iframes
 
   before(function () {
-    $ = marky(fixtures.basic)
+    $ = cheerio.load(marky(fixtures.basic))
     iframes = $('.youtube-video > iframe')
   })
 

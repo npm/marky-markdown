@@ -1,16 +1,9 @@
-var cheerio = require('cheerio')
 var defaults = require('lodash.defaults')
 var render = require('./lib/render')
 var sanitize = require('./lib/sanitize')
-var badges = require('./lib/badges')
-var cdn = require('./lib/cdn')
-var github = require('./lib/github')
-var youtube = require('./lib/youtube')
-var gravatar = require('./lib/gravatar')
-var packagize = require('./lib/packagize')
 
 var marky = module.exports = function (markdown, options) {
-  var html, $
+  var html
 
   if (typeof markdown !== 'string') {
     throw Error('first argument must be a string')
@@ -44,28 +37,9 @@ var marky = module.exports = function (markdown, options) {
     html = sanitize(html)
   }
 
-  log('Parse HTML into a cheerio DOM object')
-  $ = cheerio.load(html)
-
-  log('Make gravatar image URLs secure')
-  $ = gravatar($)
-
-  log('Resolve relative GitHub link hrefs')
-  $ = github($, options.package)
-
-  log('Dress up Youtube iframes')
-  $ = youtube($)
-
-  log('Add CSS classes to paragraphs containing badges')
-  $ = badges($)
-
-  log('Apply CSS classes to readme content already expressed by package metadata')
-  $ = packagize($, options.package)
-  if (options.serveImagesWithCDN) {
-    log('Rewrite relative image source to use CDN')
-    $ = cdn($, options.package)
-  }
-  return $
+  return html
 }
 
-marky.parsePackageDescription = packagize.parsePackageDescription
+marky.parsePackageDescription = function (description) {
+  return sanitize(render.renderPackageDescription(description))
+}
