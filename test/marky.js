@@ -5,6 +5,7 @@ var assert = require('assert')
 var marky = require('..')
 var fixtures = require('./fixtures')
 var intercept = require('intercept-stdout')
+var cheerio = require('cheerio')
 
 describe('marky-markdown', function () {
   it('is a function', function () {
@@ -13,7 +14,7 @@ describe('marky-markdown', function () {
   })
 
   it('accepts a markdown string and returns a cheerio DOM object', function () {
-    var $ = marky('hello, world')
+    var $ = cheerio.load(marky('hello, world'))
     assert($.html)
     assert($._root)
     assert($._options)
@@ -73,9 +74,9 @@ describe('debug', function () {
     // drop anything going to stdout (so we don't wreck mocha's console output)
     var unhookIntercept = intercept(function () { return '' })
 
-    var $ = marky(fixtures.benchmark)
+    var normal = marky(fixtures.benchmark)
     var debug = marky(fixtures.benchmark, {debug: true})
-    assert.equal($.html(), debug.html())
+    assert.equal(normal, debug)
 
     unhookIntercept()
   })

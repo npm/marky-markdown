@@ -3,12 +3,13 @@
 var assert = require('assert')
 var marky = require('..')
 var fixtures = require('./fixtures')
+var cheerio = require('cheerio')
 
 describe('headings', function () {
   var $
 
   before(function () {
-    $ = marky(fixtures.dirty)
+    $ = cheerio.load(marky(fixtures.dirty))
   })
 
   it('does not parse indented ATX headings as headings', function () {
@@ -53,7 +54,7 @@ describe('headings', function () {
 
   it('allows id prefixes to be disabled with prefixHeadingIds', function () {
     assert(~fixtures.dirty.indexOf('#### This is a TEST'))
-    $ = marky(fixtures.dirty, {prefixHeadingIds: false})
+    $ = cheerio.load(marky(fixtures.dirty, {prefixHeadingIds: false}))
     assert.equal($('h4 a#this-is-a-test').length, 1)
   })
 
@@ -62,37 +63,37 @@ describe('headings', function () {
   })
 
   it("allows generated links' icons to be disabled", function () {
-    $ = marky(fixtures.dirty, {enableHeadingLinkIcons: false})
+    $ = cheerio.load(marky(fixtures.dirty, {enableHeadingLinkIcons: false}))
     assert.equal($('a.deep-link svg').length, 0)
   })
 
   it('allows a dash in generated DOM ids just like GitHub', function () {
     assert(~fixtures.github.indexOf('### heading with a - dash'))
-    $ = marky(fixtures.github, {prefixHeadingIds: false})
+    $ = cheerio.load(marky(fixtures.github, {prefixHeadingIds: false}))
     assert.equal($('h3 a#heading-with-a---dash').length, 1)
   })
 
   it('allows a trailing dash in generated DOM ids just like GitHub', function () {
     assert(~fixtures.github.indexOf('### heading with a trailing dash -'))
-    $ = marky(fixtures.github, {prefixHeadingIds: false})
+    $ = cheerio.load(marky(fixtures.github, {prefixHeadingIds: false}))
     assert.equal($('h3 a#heading-with-a-trailing-dash--').length, 1)
   })
 
   it('allows underscores in generated DOM ids like GitHub', function () {
     assert(~fixtures.github.indexOf('### heading with an _ underscore'))
-    $ = marky(fixtures.github, {prefixHeadingIds: false})
+    $ = cheerio.load(marky(fixtures.github, {prefixHeadingIds: false}))
     assert.equal($('h3 a#heading-with-an-_-underscore').length, 1)
   })
 
   it('filters periods in generated DOM ids like GitHub', function () {
     assert(~fixtures.github.indexOf('### heading with a period.txt'))
-    $ = marky(fixtures.github, {prefixHeadingIds: false})
+    $ = cheerio.load(marky(fixtures.github, {prefixHeadingIds: false}))
     assert.equal($('h3 a#heading-with-a-periodtxt').length, 1)
   })
 
   it('allows two spaces even after filtering like GitHub', function () {
     assert(~fixtures.github.indexOf('### exchange.bind_headers(exchange, routing [, bindCallback])'))
-    $ = marky(fixtures.github, {prefixHeadingIds: false})
+    $ = cheerio.load(marky(fixtures.github, {prefixHeadingIds: false}))
     assert.equal($('h3 a#exchangebind_headersexchange-routing--bindcallback').length, 1)
   })
 
@@ -100,7 +101,7 @@ describe('headings', function () {
     assert(~fixtures.github.indexOf('### duplicate'))
     assert(~fixtures.github.indexOf('### duplicate('))
     assert(~fixtures.github.indexOf('### duplicate)'))
-    $ = marky(fixtures.github, {prefixHeadingIds: false})
+    $ = cheerio.load(marky(fixtures.github, {prefixHeadingIds: false}))
     assert.equal($('h3 a#duplicate').length, 1)
     assert.equal($('h3 a#duplicate-1').length, 1)
     assert.equal($('h3 a#duplicate-2').length, 1)
@@ -108,14 +109,14 @@ describe('headings', function () {
 
   it('encodes innerHTML and removes angle brackets before generating ids', function () {
     assert(~fixtures.payform.indexOf('## Browser `<input>` Helpers'))
-    $ = marky(fixtures.payform, {prefixHeadingIds: false})
+    $ = cheerio.load(marky(fixtures.payform, {prefixHeadingIds: false}))
     assert.equal($('h2 a#browser-input-helpers').length, 1)
     assert.equal($('h2 a#browser-input-helpers + code').length, 1)
   })
 
   it('properly handles headings lacking a space between the leading #(s) and heading text', function () {
     assert(~fixtures.lazyheading.indexOf('#lazy heading'))
-    $ = marky(fixtures.lazyheading, {prefixHeadingIds: false})
+    $ = cheerio.load(marky(fixtures.lazyheading, {prefixHeadingIds: false}))
     assert.equal($('h1 a#lazy-heading-1').length, 1)
     assert.equal($('h2 a#lazy-heading-2').length, 1)
     assert.equal($('h3 a#lazy-heading-3').length, 1)

@@ -12,8 +12,8 @@ describe('real readmes in the wild', function () {
     packages.forEach(function (name) {
       console.log('\t' + name)
       assert(typeof fixtures[name] === 'string')
-      var $ = marky(fixtures[name], {package: getPackage(name)})
-      assert($.html().length > 100)
+      var html = marky(fixtures[name], {package: getPackage(name)})
+      assert(html.length > 100)
 
       if (name === packages[packages.length - 1]) {
         return done()

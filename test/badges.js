@@ -3,12 +3,13 @@
 var assert = require('assert')
 var marky = require('..')
 var fixtures = require('./fixtures')
+var cheerio = require('cheerio')
 
 describe('badges', function () {
   var $
 
   before(function () {
-    $ = marky(fixtures.badges)
+    $ = cheerio.load(marky(fixtures.badges))
   })
 
   it('adds a badge class to img tags containing badge images', function () {

@@ -3,6 +3,7 @@
 var assert = require('assert')
 var marky = require('..')
 var fixtures = require('./fixtures')
+var cheerio = require('cheerio')
 
 describe('packagize', function () {
   var packages = {
@@ -26,17 +27,17 @@ describe('packagize', function () {
 
   describe('name', function () {
     it("adds .package-name-redundant class to first h1 if it's similar to package.name", function () {
-      var $ = marky(fixtures.wibble, {package: packages.wibble})
+      var $ = cheerio.load(marky(fixtures.wibble, {package: packages.wibble}))
       assert.equal($('h1.package-name-redundant').length, 1)
     })
 
     it("adds .package-name-redundant class to first h1 if it's similar to a scoped package.name", function () {
-      var $ = marky(fixtures.burblewibble, {package: packages['@burble/wibble']})
+      var $ = cheerio.load(marky(fixtures.burblewibble, {package: packages['@burble/wibble']}))
       assert.equal($('h1.package-name-redundant').length, 1)
     })
 
     it('leaves first h1 alone if it differs from package.name', function () {
-      var $ = marky(fixtures.wibble, {package: packages.dangledor})
+      var $ = cheerio.load(marky(fixtures.wibble, {package: packages.dangledor}))
       assert.equal($('h1.package-name-redundant').length, 0)
       assert.equal($('h1:not(.package-name)').text(), 'wibble.js')
     })
@@ -44,23 +45,23 @@ describe('packagize', function () {
 
   describe('description', function () {
     it("adds .package-description-redundant class to first h1 if it's similar to package.description", function () {
-      var $ = marky(fixtures.wibble, {package: packages.wobble})
+      var $ = cheerio.load(marky(fixtures.wibble, {package: packages.wobble}))
       assert.equal($('h1.package-description-redundant').length, 1)
     })
 
     it('leaves first h1 alone if it differs from package.description', function () {
-      var $ = marky(fixtures.wibble, {package: packages.dangledor})
+      var $ = cheerio.load(marky(fixtures.wibble, {package: packages.dangledor}))
       assert.equal($('h1.package-description-redundant').length, 0)
       assert.equal($('h1:not(.package-name)').text(), 'wibble.js')
     })
 
     it("adds .package-description-redundant class to first p if it's similar to package.description", function () {
-      var $ = marky(fixtures.wibble, {package: packages.wibble})
+      var $ = cheerio.load(marky(fixtures.wibble, {package: packages.wibble}))
       assert.equal($('p.package-description-redundant').length, 1)
     })
 
     it('leaves first p alone if it differs from package.description', function () {
-      var $ = marky(fixtures.wibble, {package: packages.dangledor})
+      var $ = cheerio.load(marky(fixtures.wibble, {package: packages.dangledor}))
       assert.equal($('p.package-description-redundant').length, 0)
       assert.equal($('p:not(.package-description)').first().text(), 'A package called wibble!')
     })

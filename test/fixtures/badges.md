@@ -23,3 +23,5 @@ neighboring ![](https://travis-ci.org/foo-package) content
 ![](https://secure.travis-ci.org/foo-package)
 
 I'm just a paragraph without images.
+
+![some alt text](https://secure.travis-ci.org/bar-package 'bar-package title')

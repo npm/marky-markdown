@@ -3,12 +3,13 @@
 var assert = require('assert')
 var marky = require('..')
 var fixtures = require('./fixtures')
+var cheerio = require('cheerio')
 
 describe('sanitize', function () {
   var $
 
   before(function () {
-    $ = marky(fixtures.dirty)
+    $ = cheerio.load(marky(fixtures.dirty))
   })
 
   it('removes script tags', function () {
@@ -18,7 +19,7 @@ describe('sanitize', function () {
 
   it('can be disabled to allow input from trusted sources', function () {
     assert(~fixtures.dirty.indexOf('<script'))
-    var $ = marky(fixtures.dirty, {sanitize: false})
+    var $ = cheerio.load(marky(fixtures.dirty, {sanitize: false}))
     assert.equal($('script').length, 1)
     assert.equal($("script[src='http://malware.com']").length, 1)
     assert.equal($("script[type='text/javascript']").length, 1)
@@ -57,7 +58,7 @@ describe('sanitize', function () {
   })
 
   it('disallows iframes from sources other than youtube', function () {
-    var $ = marky(fixtures.basic)
+    var $ = cheerio.load(marky(fixtures.basic))
     assert(~fixtures.basic.indexOf('<iframe src="//www.youtube.com/embed/3I78ELjTzlQ'))
     assert(~fixtures.basic.indexOf('<iframe src="//malware.com'))
     assert.equal($('iframe').length, 2)
@@ -105,25 +106,25 @@ describe('sanitize', function () {
   })
 
   it('allows table cell left alignment', function () {
-    var html = marky(fixtures.dirty).html()
+    var html = marky(fixtures.dirty)
     assert(html.indexOf('<th style="text-align:left">') > -1)
     assert(html.indexOf('<td style="text-align:left">') > -1)
   })
 
   it('allows table cell right alignment', function () {
-    var html = marky(fixtures.dirty).html()
+    var html = marky(fixtures.dirty)
     assert(html.indexOf('<th style="text-align:right">') > -1)
     assert(html.indexOf('<td style="text-align:right">') > -1)
   })
 
   it('allows table cell center alignment', function () {
-    var html = marky(fixtures.dirty).html()
+    var html = marky(fixtures.dirty)
     assert(html.indexOf('<th style="text-align:center">') > -1)
     assert(html.indexOf('<td style="text-align:center">') > -1)
   })
 
   it('strips non-alignment table cell style', function () {
-    var html = marky(fixtures.dirty).html()
+    var html = marky(fixtures.dirty)
     assert(!~html.indexOf('color:red;'))
     assert(!~html.indexOf('width: 100%;'))
 
@@ -135,13 +136,13 @@ describe('sanitize', function () {
 
   it('allows title attributes on images', function () {
     var title = 'Image title'
-    var $ = marky("![alt text](#url '" + title + "')")
+    var $ = cheerio.load(marky("![alt text](#url '" + title + "')"))
     assert.equal($('img').attr('title'), title)
   })
 
   it('allows title attributes on links', function () {
     var title = "You don't know npm"
-    var $ = marky('[link text](https://www.youtube.com/watch?v=Zqm78_27lWA "' + title + '")')
+    var $ = cheerio.load(marky('[link text](https://www.youtube.com/watch?v=Zqm78_27lWA "' + title + '")'))
     assert.equal($('a').attr('title'), title)
   })
 })

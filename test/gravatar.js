@@ -3,12 +3,13 @@
 var assert = require('assert')
 var marky = require('..')
 var fixtures = require('./fixtures')
+var cheerio = require('cheerio')
 
 describe('gravatar', function () {
   var $
 
   before(function () {
-    $ = marky(fixtures.gravatar)
+    $ = cheerio.load(marky(fixtures.gravatar))
   })
 
   it('replaces insecure gravatar img src URLs with secure HTTPS URLs', function () {

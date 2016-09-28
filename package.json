@@ -34,7 +34,6 @@
   "dependencies": {
     "atom-language-diff": "^1.0.0",
     "atom-language-nginx": "^0.6.1",
-    "cheerio": "^0.22.0",
     "github-slugger": "^1.0.0",
     "github-url-to-object": "^2.2.3",
     "highlights": "^1.4.1",
@@ -60,6 +59,7 @@
   },
   "devDependencies": {
     "browserify": "^13.0.1",
+    "cheerio": "^0.22.0",
     "glob": "^7.0.0",
     "intercept-stdout": "^0.1.2",
     "mocha": "^3.0.2",
