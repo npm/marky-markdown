@@ -35,6 +35,8 @@
   leading whitespace before the `#` character (CommonMark allows up to three
   leading spaces, see the [specification](http://spec.commonmark.org/0.26/#example-38)).
   Thanks, [kasbah]! ([issue/233], [pull/234])
+- **Faster parsing!** No more cheerio. Waiting on [pull/251 to write. but here's a
+  placeholder. ([pull/246], [pull/251] by [revin])
 - **Leaner published package!** We used to ship marky with the unit test suite
   included, but now it's in our [npm ignore] file, so `npm install` no longer
   gives you the tests. They're still here, of course; you just have to clone the
@@ -64,6 +66,7 @@ changes implemented in [markdown-it 8.0.0]. The main updates are:
 - `markdown-it` updated to `8.0.0`
 - `highlights` updated to `1.4.0`
 - `cheerio` updated to `0.22.0`
+- `markdown-it-emoji` updated to `1.3.0`
 
 [issue/176]: https://github.com/npm/marky-markdown/issues/176
 [issue/224]: https://github.com/npm/marky-markdown/issues/224
@@ -80,6 +83,8 @@ changes implemented in [markdown-it 8.0.0]. The main updates are:
 [pull/242]: https://github.com/npm/marky-markdown/issues/242
 [markdown-it 8.0.0]: https://github.com/markdown-it/markdown-it/blob/master/CHANGELOG.md#800--2016-09-16
 [pull/239]: https://github.com/npm/marky-markdown/pull/239
+[pull/251]: https://github.com/npm/marky-markdown/pull/251
+[pull/246]: https://github.com/npm/marky-markdown/pull/246
 
 # 8.1.0 (2016-08-08)
 
