@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "browserify index.js -i highlights -s markyMarkdown > dist/marky-markdown.js",
-    "test": "standard-format -w && standard && mocha --timeout 5000",
+    "test": "standard-format -w && standard && mocha --timeout 8000",
     "pretest": "npm run build"
   },
   "browser": {
