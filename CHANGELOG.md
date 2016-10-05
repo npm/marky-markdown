@@ -7,7 +7,7 @@
   removed, and now you can use marky in The Future™. ([pull/227] by
   [ashleygwilliams])
 - **Node 0.10/0.12 dev environment no longer supported** We've updated our
-  devDependency on JS Standard to 8.1.0 which no longer support Node 0.10 and 0.12.
+  devDependency on JS Standard to 8.x which no longer support Node 0.10 and 0.12.
   Node 0.10 and Node 0.12 are being EOLd this year, and as a result, we feel
   ok no longer supporting them as development environments. You can still **use**
   marky using 0.10 or 0.12, but if you want to develop it, you'll need to upgrade
