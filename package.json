@@ -64,7 +64,7 @@
     "glob": "^7.1.1",
     "intercept-stdout": "^0.1.2",
     "mocha": "^3.1.2",
-    "standard": "^8.3.0",
+    "standard": "^8.4.0",
     "standard-format": "^2.1.0"
   },
   "bin": "./bin/marky-markdown.js",
