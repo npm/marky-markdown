@@ -29,6 +29,7 @@ describe('sanitize', function () {
     assert($('img').length)
     assert.equal($('img').attr('width'), '600')
     assert.equal($('img').attr('height'), '400')
+    assert.equal($('img').attr('align'), 'right')
     assert.equal($('img').attr('valign'), 'middle')
     assert.equal($('img').attr('onclick'), undefined)
   })
