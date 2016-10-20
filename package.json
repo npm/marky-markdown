@@ -4,13 +4,10 @@
   "description": "npm's markdown parser",
   "main": "index.js",
   "scripts": {
-    "build": "browserify index.js -i highlights -s markyMarkdown > dist/marky-markdown.js",
+    "build": "rm -rf dist && mkdir dist && touch dist/marky-markdown.js && browserify index.js -i highlights -s markyMarkdown > dist/marky-markdown.js",
     "test": "standard-format -w && standard && mocha --timeout 8000",
     "pretest": "npm run build"
   },
-  "files": [
-    "dist"
-  ],
   "browser": {
     "highlights": false
   },
