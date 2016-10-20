@@ -8,6 +8,9 @@
     "test": "standard-format -w && standard && mocha --timeout 8000",
     "pretest": "npm run build"
   },
+  "files": [
+    "dist"
+  ],
   "browser": {
     "highlights": false
   },
