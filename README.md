@@ -113,7 +113,6 @@ npm test
 - Parses markdown with [markdown-it](https://github.com/markdown-it/markdown-it), a fast and [commonmark-compliant](http://commonmark.org/) parser.
 - Removes broken and malicious user input with [sanitize-html](https://www.npmjs.com/package/sanitize-html)
 - Applies syntax highlighting to [GitHub-flavored code blocks](https://help.github.com/articles/creating-and-highlighting-code-blocks/) using the [highlights](https://www.npmjs.com/package/highlights) library from [Atom](https://atom.io/).
-- Uses [cheerio](https://www.npmjs.com/package/cheerio) to perform various feats of DOM manipulation.
 - Converts `:emoji:`-style [shortcuts](http://www.emoji-cheat-sheet.com/) to unicode emojis.
 - Converts headings (h1, h2, etc) into anchored hyperlinks.
 - Converts relative GitHub links to their absolute equivalents.
@@ -124,18 +123,6 @@ npm test
 - Parses and sanitizes `package.description` as markdown.
 - Applies CSS classes to redundant content that closely matches npm package name and description.
 - Applies CSS classes to badge images, so we can do something interesting with them one day.
-
-### cheerio "middleware"
-
-marky-markdown always returns the generated HTML document as a [cheerio](https://www.npmjs.com/package/cheerio) DOM object that can be queried using a familiar jQuery syntax:
-
-```js
-var $ = marky("![cat](cat.png)")
-$("img").length
-// => 1
-$("img").attr("src")
-// => "cat.png"
-```
 
 ### npm packages
 
@@ -161,11 +148,12 @@ marky(
 
 ## Dependencies
 
-- [cheerio](https://github.com/cheeriojs/cheerio): Tiny, fast, and elegant implementation of core jQuery designed specifically for the server
 - [github-slugger](https://github.com/Flet/github-slugger): Generate a slug just like GitHub does for markdown headings
 - [github-url-to-object](https://github.com/zeke/github-url-to-object): Extract user, repo, and other interesting properties from GitHub URLs
 - [highlights](https://github.com/atom/highlights): Syntax highlighter
 - [highlights-tokens](https://github.com/zeke/highlights-tokens): A list of the language tokens used by the Atom.app [highlights](https://www.npmjs.com/package/highlights) syntax highlighter
+- [innertext](https://github.com/revin/innertext): Extract the `innerText` from a snippet of HTML
+- [is-badge](https://github.com/wooorm/is-badge): Check if a URL is a badge
 - [lodash](https://github.com/lodash/lodash): A utility library delivering consistency, customization, performance, &amp; extras.
 - [markdown-it](https://github.com/markdown-it/markdown-it): Markdown-it - modern pluggable markdown parser.
 - [markdown-it-emoji](https://github.com/markdown-it/markdown-it-emoji): Markdown-it-emoji extension for Markdown-it that parses markdown emoji syntax to unicode.

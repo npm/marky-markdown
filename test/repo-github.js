@@ -3,6 +3,7 @@
 var assert = require('assert')
 var marky = require('..')
 var fixtures = require('./fixtures')
+var cheerio = require('cheerio')
 
 describe('when package repo is on github', function () {
   var $
@@ -15,7 +16,7 @@ describe('when package repo is on github', function () {
   }
 
   before(function () {
-    $ = marky(fixtures.github, {package: pkg})
+    $ = cheerio.load(marky(fixtures.github, {package: pkg}))
   })
 
   it('rewrites relative link hrefs to absolute', function () {

@@ -3,14 +3,15 @@
 var assert = require('assert')
 var marky = require('..')
 var fixtures = require('./fixtures')
+var cheerio = require('cheerio')
 
 describe('cdn', function () {
   describe('handles missing or empty package data', function () {
-    var $
+    var controlHtml
 
     before(function () {
       // generate a processed version with no CDN remapping, to use as a control
-      $ = marky(fixtures.basic)
+      controlHtml = marky(fixtures.basic)
     })
 
     it('skips CDN remap when lacking package data', function () {
@@ -19,7 +20,7 @@ describe('cdn', function () {
         serveImagesWithCDN: true
       }
       var html = marky(fixtures.basic, options)
-      assert.equal(html.html(), $.html())
+      assert.equal(html, controlHtml)
     })
 
     it('skips CDN remap when the package lacks a name', function () {
@@ -28,7 +29,7 @@ describe('cdn', function () {
         serveImagesWithCDN: true
       }
       var html = marky(fixtures.basic, options)
-      assert.equal(html.html(), $.html())
+      assert.equal(html, controlHtml)
     })
 
     it('skips CDN remap when the package lacks a version', function () {
@@ -37,7 +38,7 @@ describe('cdn', function () {
         serveImagesWithCDN: true
       }
       var html = marky(fixtures.basic, options)
-      assert.equal(html.html(), $.html())
+      assert.equal(html, controlHtml)
     })
   })
 
@@ -49,7 +50,7 @@ describe('cdn', function () {
     }
 
     before(function () {
-      $ = marky(fixtures.basic, options)
+      $ = cheerio.load(marky(fixtures.basic, options))
     })
 
     it('replaces relative img URLs with npm CDN URLs', function () {
@@ -83,7 +84,7 @@ describe('cdn', function () {
     }
 
     before(function () {
-      $ = marky(fixtures.basic, options)
+      $ = cheerio.load(marky(fixtures.basic, options))
     })
 
     it('leaves relative img alone', function () {
