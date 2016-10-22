@@ -26,6 +26,17 @@ http://www.npmjs.com. If you see a markdown parsing bug there,
 [in your terminal]: #command-line-usage
 [in the browser]: #in-the-browser
 
+## Node Version Support
+
+marky-markdown strives to support all LTS, current, and maintenance
+versions of Node.js. When a version of Node.js is EOL, we will EOL 
+support for that version for marky-markdown.
+
+For more information on Node.js LTS and support, click [here](https://github.com/nodejs/LTS).
+
+- marky-markdown < `9.0.0` supports `0.10`, `0.12`, `iojs`, `4`, `5`
+- marky-markdown >= `9.0.0` supports `0.12`, `4`, `6`
+
 ## Installation
 
 ```sh
