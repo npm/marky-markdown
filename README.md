@@ -50,7 +50,7 @@ takes a single argument: a string to convert.
 
 ```js
 var marky = require("marky-markdown")
-marky("# hello, I'm markdown").html()
+var html = marky("# hello, I'm markdown")
 ```
 
 ### Options
@@ -59,7 +59,7 @@ The exported function takes an optional options object
 as its second argument:
 
 ```js
-marky("some trusted string", {sanitize: false}).html()
+marky("some trusted string", {sanitize: false})
 ```
 
 The default options are as follows:
@@ -103,7 +103,7 @@ Here is an example using HTML5 to render text inside `<marky-markdown>` tags.
 
 <script>
   for (el of document.getElementsByTagName('marky-markdown')) {
-    el.innerHTML = markyMarkdown(el.innerText, {highlightSyntax: false}).html()
+    el.innerHTML = markyMarkdown(el.innerText, {highlightSyntax: false})
   }
 </script>
 ```
@@ -154,7 +154,7 @@ var package = {
 marky(
   "# hello, I am the foo readme",
   {package: package}
-).html()
+)
 ```
 
 ## Dependencies
