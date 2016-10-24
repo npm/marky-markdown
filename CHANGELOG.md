@@ -1,3 +1,141 @@
+# 9.0.0 (2016-10-31)
+
+## Breaking API Change
+
+**marky-markdown now returns an HTML string rather than a cheerio DOM object.**
+
+With this release, we took cheerio out of the processing pipeline and replaced
+formerly cheerio-based operations with custom markdown-it plugins. Removing the
+overhead of creating a DOM object for every document speeds marky-markdown up
+by 15–20% on average, but it _does_ also result in a change to the API.
+
+So what used to be:
+```js
+var marky = require('marky-markdown')
+var html = marky('# Some markdown string').html()
+```
+is now:
+```js
+var marky = require('marky-markdown')
+var html = marky('# Some markdown string') // no longer need `.html()`
+```
+
+Many marky-markdown users will only need to remove the `.html()` method call,
+because all they needed is raw HTML anyway. For any users who do need the
+cheerio DOM object, the migration path is to create the DOM object yourself:
+```js
+var marky = require('marky-markdown')
+var html = marky('# Some markdown string')
+
+var cheerio = require('cheerio')
+var dom = cheerio.load(html)
+```
+
+Cheerio, cheerio! (HT [wmhilton])
+
+## Other Changes in this Release
+
+- **Node 6 support!** We've been blocked on supporting node 6.x for quite a
+  while now ([issue/176]), but thanks to some upstream work
+  ([here](https://github.com/atom/first-mate/pull/74) and
+  [here](https://github.com/atom/highlights/pull/44)), the blocker has been
+  removed, and now you can use marky in The Future™. ([pull/227] by
+  [ashleygwilliams])
+- **Node 0.10 dev environment no longer supported** We've updated our
+  devDependency on JS Standard to 8.x which no longer supports Node 0.10 and
+  0.12.  Node 0.10 is being EOLd this year, and as a result, we feel ok no
+  longer supporting them as development environments. You can still **use**
+  marky using 0.10, but if you want to **develop** it, you'll need to upgrade
+  to Node 4 or later. ([pull/239] by Greenkeeper)
+- **More GitHub-like heading rendering!** Working out a solution for [issue/224]
+  led us down a path that resulted in our generated headings getting closer to
+  what GitHub renders. Now the `deep-link` class and generated `id` slugs that
+  we formerly applied to heading elements themselves are added to a link we put
+  inside the heading. This means we no longer wrap headings' entire contents in
+  a link, which means we can generate an anchor for every heading, not just ones
+  that don't contain links to begin with. Win! (also, Mouthful!). The new-style
+  links contain an SVG icon that matches GitHub's hover icon; if you want to
+  disable it, you can pass `{enableHeadingLinkIcons: false}` in marky's
+  `options`. Big thanks to [nwhetsell] for the help! ([pull/225] by
+  [ashleygwilliams] and [revin])
+- **More GitHub-like link/image/paragraph rendering!** Oops, we were stripping
+  out `title` attributes from links and images, as well as `align` attributes
+  from paragraphs during the rendering process, but now we handle those
+  correctly, so, e.g., `[link](#url "title text")` turns into
+  `<a href="#url" title="title text">link</a>` like it should, and if you have
+  inline HTML like `<p align="center">...</p>` the alignment doesn't get
+  stripped. ([pull/235], [issue/241] by [kasbah], [pull/242]). The `align`
+  attribute is also supported on inline HTML `<img>` elements too. ([pull/270],
+  [issue/269] by [revelt])
+- **Even _more_ GitHub-like heading rendering!** [kasbah] clued us into the fact
+  that GitHub only considers `# header` text to be a header if there's no
+  leading whitespace before the `#` character (CommonMark allows up to three
+  leading spaces, see the [specification](http://spec.commonmark.org/0.26/#example-38)).
+  Thanks, [kasbah]! ([issue/233], [pull/234])
+- **Faster parsing!** As above: no more cheerio. ([pull/246], [pull/251] by
+  [revin])
+- **Leaner published package!** We used to ship marky with the unit test suite
+  included, but now it's in our [npm ignore] file, so `npm install` no longer
+  gives you the tests. They're still here, of course; you just have to clone the
+  repo now :smile: ([pull/223] by [ashleygwilliams])
+- **Git repository cleanup!** We were getting tired of dealing with merge
+  conflicts in our browserify bundle, so in response to [issue/262],
+  [karanjthakkar] heroically submitted [pull/271] to help us make our
+  development experience nicer (now the bundle is in the published package, but
+  not tracked by git). Thank you!
+
+#### CommonMark 0.26
+
+The specification that forms the basis for "standard" Markdown parsing continues
+to evolve; it's up to [0.26](http://spec.commonmark.org/0.26/) now, with the
+changes implemented in [markdown-it 8.0.0]. The main updates are:
+
+  - When whitespace is used to specify a block (for example, the indentation
+    that creates a code block, or indenting lists), it's now legal to use tab
+    characters rather than spaces. Such leading tabs now behave as if they were
+    replaced by four spaces.
+  - Ordered lists that appear at the end of paragraphs are required to start
+    with a 1.
+  - It's now legal to have multiple blank lines between list items. CommonMark
+    used to treat those as separate lists, but now they collapse into the same
+    list (which is nice for us, because that's how GitHub has always done it).
+  - Text emphasis is calculated differently now. `*foo**bar**baz*` used to be
+    `<em>foo</em><em>bar</em><em>baz</em>` but now it becomes
+    `<em>foo</em><strong>bar</strong><em>baz</em>`.
+
+### Dependencies
+
+- `markdown-it` updated to `^8.0.0`
+- `highlights` updated to `^1.4.1`
+- `cheerio` updated to `^0.22.0`
+- `markdown-it-emoji` updated to `^1.3.0`
+- `innertext` added at `^1.0.1`
+- `is-badge` added at `^1.1.0`
+
+[issue/176]: https://github.com/npm/marky-markdown/issues/176
+[issue/224]: https://github.com/npm/marky-markdown/issues/224
+[nwhetsell]: https://github.com/nwhetsell
+[pull/223]: https://github.com/npm/marky-markdown/pull/223
+[pull/225]: https://github.com/npm/marky-markdown/pull/225
+[pull/227]: https://github.com/npm/marky-markdown/pull/227
+[pull/235]: https://github.com/npm/marky-markdown/pull/235
+[kasbah]: https://github.com/kasbah
+[issue/233]: https://github.com/npm/marky-markdown/issues/233
+[pull/234]: https://github.com/npm/marky-markdown/issues/234
+[npm ignore]: https://github.com/npm/marky-markdown/blob/master/.npmignore
+[issue/241]: https://github.com/npm/marky-markdown/issues/241
+[pull/242]: https://github.com/npm/marky-markdown/issues/242
+[markdown-it 8.0.0]: https://github.com/markdown-it/markdown-it/blob/master/CHANGELOG.md#800--2016-09-16
+[pull/239]: https://github.com/npm/marky-markdown/pull/239
+[pull/251]: https://github.com/npm/marky-markdown/pull/251
+[pull/246]: https://github.com/npm/marky-markdown/pull/246
+[issue/269]: https://github.com/npm/marky-markdown/issues/269
+[pull/270]: https://github.com/npm/marky-markdown/pull/270
+[revelt]: https://github.com/revelt
+[issue/262]: https://github.com/npm/marky-markdown/issues/262
+[pull/271]: https://github.com/npm/marky-markdown/pull/271
+[karanjthakkar]: https://github.com/karanjthakkar
+
 # 8.1.0 (2016-08-08)
 
 ### New Features
