@@ -158,4 +158,10 @@ describe('sanitize', function () {
     assert.equal($('img').attr('src'), 'https://badges.gitter.im/Join%20Chat.svg')
     assert.equal($('img').attr('title'), title)
   })
+
+  it('allows spaces in path names of images used as anchors', function () {
+    var $ = cheerio.load(marky('[![Gitter](https://badges.gitter.im/Join Chat.svg)](#url)'))
+    assert.equal($('img').attr('src'), 'https://badges.gitter.im/Join%20Chat.svg')
+    assert.equal($('a').attr('href'), '#url')
+  })
 })
