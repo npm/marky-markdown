@@ -1,3 +1,14 @@
+# 9.0.1 (2016-10-31)
+
+### Bug Fix! 🐞
+
+- Fixed a bug in our CLI script that appeared because we forgot to update it to
+  account for the breaking API change in v9, lololol. Thanks to [sjking] for
+  coming to the rescue! ([pull/276])
+
+[sjking]: https://github.com/sjking
+[pull/276]: https://github.com/npm/marky-markdown/pull/276
+
 # 9.0.0 (2016-10-31)
 
 ## Breaking API Change
