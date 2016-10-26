@@ -1,3 +1,5 @@
+/* globals before, describe, it */
+
 var assert = require('assert')
 var marky = require('..')
 var fixtures = require('./fixtures')
