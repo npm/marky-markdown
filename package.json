@@ -55,6 +55,7 @@
     "markdown-it-expand-tabs": "^1.0.7",
     "markdown-it-lazy-headers": "^0.1.3",
     "markdown-it-task-lists": "^1.0.0",
+    "pkgize": "^0.1.1",
     "property-ttl": "^1.0.0",
     "sanitize-html": "^1.6.1",
     "similarity": "^1.0.1"
