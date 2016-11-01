@@ -84,6 +84,37 @@ describe('markdown processing', function () {
         assert($todo('ol:not(.task-list) ul.task-list').length)
       })
     })
+
+    describe('tables', function () {
+      var tables
+      before(function () {
+        tables = marky(fixtures['tables'])
+      })
+
+      it('does not escape backticks inside code blocks', function () {
+        assert(~tables.indexOf('<td><code>\\</code></td>'))
+      })
+
+      it('escapes backticks when not inside code blocks', function () {
+        assert(~tables.indexOf('<td>`</td>'))
+      })
+
+      it('does not escape backticks when double-backslashed inside code blocks', function () {
+        assert(~tables.indexOf('<td><code>\\\\</code></td>'))
+      })
+
+      it('escapes pipe characters', function () {
+        assert(~tables.indexOf('<td>|</td>'))
+      })
+
+      it('does not require escaping pipe characters inside code blocks', function () {
+        assert(~tables.indexOf('<td><code>|</code></td>'))
+      })
+
+      it('does not escape backslashed pipe characters inside code blocks', function () {
+        assert(~tables.indexOf('<td><code>\\|</code></td>'))
+      })
+    })
   })
 
   describe('syntax highlighting', function () {
