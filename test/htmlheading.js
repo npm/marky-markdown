@@ -14,12 +14,7 @@ describe('html-headings', function () {
     })
 
     it('preserves the header tags', function () {
-      var headers = $('h1')
-      assert(headers.length > 4)
-      var values = ['hello', 'there', 'one space', 'two spaces', 'three spaces']
-      for (var i = 0; i < values.length; i++) {
-        assert.equal(headers[i].children[1].data, values[i])
-      }
+      assert.equal($('h1').length, 5)
     })
 
     it('wraps the blocks in <p> tags', function () {
@@ -36,6 +31,53 @@ describe('html-headings', function () {
     it('treats four spaces as code block', function () {
       assert.equal($('h3').length, 0)
       assert.equal($('pre > code').length, 1)
+    })
+  })
+
+  describe('tags', function () {
+    it('injects hashy anchor tags into headings that have DOM ids', function () {
+      assert(~fixtures.htmlheading.indexOf('<h1>one space</h1>'))
+      assert($("h1 a[href='#one-space']").length)
+    })
+
+    it('adds deep-link class to added heading links', function () {
+      assert(~fixtures.htmlheading.indexOf('<h1>one space</h1>'))
+      assert($("h1 a.deep-link[href='#one-space']").length)
+    })
+
+    it("doesn't inject links into headings that already contain markdown links", function () {
+      assert(~fixtures.htmlheading.indexOf('[hello](/already/linky)'))
+      assert($("h1 a[href='/already/linky']").length)
+    })
+
+    it("doesn't inject links into headings that already contain inline HTML links", function () {
+      assert(~fixtures.htmlheading.indexOf('<a href="/already/inline/linky">there</a>'))
+      assert($("h1 a[href='/already/inline/linky']").length)
+    })
+
+    it("doesn't inject links into headings that contain internal inline HTML links", function () {
+      assert(~fixtures.htmlheading.indexOf('<a href="/internal/inline/linky">link</a>'))
+      assert($("h1 a[href='/internal/inline/linky']").length)
+    })
+
+    it('applies a prefix to generated DOM ids by default', function () {
+      assert(~fixtures.htmlheading.indexOf('<h1>one space</h1>'))
+      assert.equal($('h1 a#user-content-one-space').length, 1)
+    })
+
+    it('allows id prefixes to be disabled with prefixHeadingIds', function () {
+      assert(~fixtures.htmlheading.indexOf('<h1>one space</h1>'))
+      $ = cheerio.load(marky(fixtures.htmlheading, {prefixHeadingIds: false}))
+      assert.equal($('h1 a#one-space').length, 1)
+    })
+
+    it('puts icons inside the generated heading links', function () {
+      assert(!!$('a.deep-link svg').length)
+    })
+
+    it("allows generated links' icons to be disabled", function () {
+      $ = cheerio.load(marky(fixtures.htmlheading, {enableHeadingLinkIcons: false}))
+      assert.equal($('a.deep-link svg').length, 0)
     })
   })
 })
