@@ -14,12 +14,12 @@ describe('html-headings', function () {
     })
 
     it('preserves the header tags', function () {
-	var headers = $('h1')
-	assert(headers.length > 4)
-	var values = ['hello', 'there', 'one space', 'two spaces', 'three spaces']
-	for (var i = 0; i < values.length; i++) {
-	    assert.equal(headers[i].children[1].data, values[i])
-	}
+      var headers = $('h1')
+      assert(headers.length > 4)
+      var values = ['hello', 'there', 'one space', 'two spaces', 'three spaces']
+      for (var i = 0; i < values.length; i++) {
+        assert.equal(headers[i].children[1].data, values[i])
+      }
     })
 
     it('wraps the blocks in <p> tags', function () {
@@ -29,13 +29,13 @@ describe('html-headings', function () {
       assert.notEqual($('p a[href=d]').length, 0)
     })
 
-      it('ignores up to three spaces', function () {
-	  assert($('h1').length == 5)
-      })
+    it('ignores up to three spaces', function () {
+      assert($('h1').length === 5)
+    })
 
-      it('treats four spaces as code block', function () {
-	  assert.equal($('h3').length, 0)
-	  assert.equal($('pre > code').length, 1)
-      })
+    it('treats four spaces as code block', function () {
+      assert.equal($('h3').length, 0)
+      assert.equal($('pre > code').length, 1)
+    })
   })
 })
