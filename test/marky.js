@@ -5,7 +5,7 @@ var assert = require('assert')
 var marky = require('..')
 var fixtures = require('./fixtures')
 var intercept = require('intercept-stdout')
-var cheerio = require('cheerio')
+var markdownIt = require('markdown-it')
 
 describe('marky-markdown', function () {
   it('is a function', function () {
@@ -13,12 +13,9 @@ describe('marky-markdown', function () {
     assert(typeof marky === 'function')
   })
 
-  it('accepts a markdown string and returns a cheerio DOM object', function () {
-    var $ = cheerio.load(marky('hello, world'))
-    assert($.html)
-    assert($._root)
-    assert($._options)
-    assert(~$.html().indexOf('<p>hello, world</p>\n'))
+  it('accepts a markdown string and returns an HTML string', function () {
+    var html = marky('hello, world')
+    assert(~html.toLowerCase().indexOf('<p>hello, world</p>\n'))
   })
 
   it('throws an error if first argument is not a string', function () {
@@ -26,6 +23,26 @@ describe('marky-markdown', function () {
       function () { marky(null) },
       /first argument must be a string/
     )
+  })
+
+  it('has a getParser method', function () {
+    assert(typeof marky.getParser === 'function')
+  })
+
+  it('getParser returns a markdown-it parser', function () {
+    assert(marky.getParser() instanceof markdownIt)
+  })
+
+  it('getParser.render returns the same as marky.render (sanitize: true)', function () {
+    var html = marky(fixtures.benchmark)
+    var parserHtml = marky.getParser().render(fixtures.benchmark)
+    assert.equal(html, parserHtml)
+  })
+
+  it('getParser.render returns the same as marky.render (sanitize: false)', function () {
+    var html = marky(fixtures.benchmark, {sanitize: false})
+    var parserHtml = marky.getParser({sanitize: false}).render(fixtures.benchmark)
+    assert.equal(html, parserHtml)
   })
 })
 

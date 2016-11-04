@@ -77,6 +77,25 @@ The default options are as follows:
 }
 ```
 
+### Low Level Parser Access
+
+If you need lower level access to the markdown-it parser (to add your own
+[markdown-it plugins](https://www.npmjs.com/search?q=markdown-it-plugin), for
+example), you can call the `getParser` method:
+
+```js
+var parser = marky.getParser()
+parser.use(someMarkdownItPlugin)
+var html = parser.render("# markdown string")
+```
+
+`getParser` takes an optional `options` argument, the same format as the main
+marky-markdown export function. If you omit it, it uses the same default options
+described above.
+
+When you're done customizing the parser, call `parser.render(markdown)` to
+render to HTML.
+
 ## Command-line Usage
 
 You can use marky-markdown to parse markdown files in the shell.
