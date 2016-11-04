@@ -47,5 +47,15 @@ marky.parsePackageDescription = function (description) {
 }
 
 marky.getParser = function (options) {
-  return render.getParser(defaults(options || {}, defaultOptions))
+  options = options || {}
+
+  var parser = render.getParser(defaults(options, defaultOptions))
+
+  if (options.sanitize) {
+    var originalRender = parser.render
+    parser.render = function (markdown) {
+      return sanitize(originalRender.call(parser, markdown))
+    }
+  }
+  return parser
 }
