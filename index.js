@@ -2,6 +2,17 @@ var defaults = require('lodash.defaults')
 var render = require('./lib/render')
 var sanitize = require('./lib/sanitize')
 
+var defaultOptions = {
+  sanitize: true,
+  linkify: true,
+  highlightSyntax: true,
+  prefixHeadingIds: true,
+  enableHeadingLinkIcons: true,
+  serveImagesWithCDN: false,
+  debug: false,
+  package: null
+}
+
 var marky = module.exports = function (markdown, options) {
   var html
 
@@ -10,16 +21,7 @@ var marky = module.exports = function (markdown, options) {
   }
 
   options = options || {}
-  defaults(options, {
-    sanitize: true,
-    linkify: true,
-    highlightSyntax: true,
-    prefixHeadingIds: true,
-    enableHeadingLinkIcons: true,
-    serveImagesWithCDN: false,
-    debug: false,
-    package: null
-  })
+  defaults(options, defaultOptions)
 
   var log = function (msg) {
     if (options.debug) {
@@ -42,4 +44,8 @@ var marky = module.exports = function (markdown, options) {
 
 marky.parsePackageDescription = function (description) {
   return sanitize(render.renderPackageDescription(description))
+}
+
+marky.getParser = function (options) {
+  return render.getParser(defaults(options || {}, defaultOptions))
 }

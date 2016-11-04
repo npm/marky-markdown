@@ -1,6 +1,6 @@
 {
   "name": "marky-markdown",
-  "version": "9.0.0",
+  "version": "9.0.1",
   "description": "npm's markdown parser",
   "main": "index.js",
   "scripts": {
@@ -50,7 +50,7 @@
     "lodash.assign": "^4.0.2",
     "lodash.defaults": "^4.0.1",
     "lodash.pickby": "^4.2.1",
-    "markdown-it": "^8.0.0",
+    "markdown-it": "^8.1.0",
     "markdown-it-emoji": "^1.3.0",
     "markdown-it-expand-tabs": "^1.0.7",
     "markdown-it-lazy-headers": "^0.1.3",
