@@ -45,6 +45,11 @@ describe('html-headings', function () {
       assert($("h1 a.anchor[href='#one-space']").length)
     })
 
+    it('adds aria-hidden=true to added heading links', function () {
+      assert(~fixtures.htmlheading.indexOf('<h1>one space</h1>'))
+      assert($("h1 a.anchor[aria-hidden='true']").length)
+    })
+
     it("doesn't inject links into headings that already contain markdown links", function () {
       assert(~fixtures.htmlheading.indexOf('[hello](/already/linky)'))
       assert($("h1 a[href='/already/linky']").length)
