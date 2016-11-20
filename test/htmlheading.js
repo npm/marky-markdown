@@ -72,12 +72,12 @@ describe('html-headings', function () {
     })
 
     it('puts icons inside the generated heading links', function () {
-      assert(!!$('a.deep-link svg').length)
+      assert(!!$('a.anchor svg').length)
     })
 
     it("allows generated links' icons to be disabled", function () {
       $ = cheerio.load(marky(fixtures.htmlheading, {enableHeadingLinkIcons: false}))
-      assert.equal($('a.deep-link svg').length, 0)
+      assert.equal($('a.anchor svg').length, 0)
     })
   })
 })

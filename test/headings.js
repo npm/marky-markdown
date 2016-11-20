@@ -59,12 +59,12 @@ describe('headings', function () {
   })
 
   it('puts icons inside the generated heading links', function () {
-    assert(!!$('a.deep-link svg').length)
+    assert(!!$('a.anchor svg').length)
   })
 
   it("allows generated links' icons to be disabled", function () {
     $ = cheerio.load(marky(fixtures.dirty, {enableHeadingLinkIcons: false}))
-    assert.equal($('a.deep-link svg').length, 0)
+    assert.equal($('a.anchor svg').length, 0)
   })
 
   it('allows a dash in generated DOM ids just like GitHub', function () {
