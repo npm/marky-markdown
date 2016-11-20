@@ -32,6 +32,11 @@ describe('headings', function () {
     assert($("h1 a.anchor[href='#h1']").length)
   })
 
+  it('adds aria-hidden attr to added heading links', function () {
+    assert(~fixtures.dirty.indexOf('# h1'))
+    assert($("h1 a.anchor[aria-hidden='true']").length)
+  })
+
   it("doesn't inject links into headings that already contain markdown links", function () {
     assert(~fixtures.dirty.indexOf('### [h3](/already/linky)'))
     assert($("h3 a[href='/already/linky']").length)
