@@ -27,9 +27,9 @@ describe('headings', function () {
     assert($("h1 a[href='#h1']").length)
   })
 
-  it('adds deep-link class to added heading links', function () {
+  it('adds anchor class to added heading links', function () {
     assert(~fixtures.dirty.indexOf('# h1'))
-    assert($("h1 a.deep-link[href='#h1']").length)
+    assert($("h1 a.anchor[href='#h1']").length)
   })
 
   it("doesn't inject links into headings that already contain markdown links", function () {

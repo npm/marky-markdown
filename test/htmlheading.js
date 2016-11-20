@@ -40,9 +40,9 @@ describe('html-headings', function () {
       assert($("h1 a[href='#one-space']").length)
     })
 
-    it('adds deep-link class to added heading links', function () {
+    it('adds anchor class to added heading links', function () {
       assert(~fixtures.htmlheading.indexOf('<h1>one space</h1>'))
-      assert($("h1 a.deep-link[href='#one-space']").length)
+      assert($("h1 a.anchor[href='#one-space']").length)
     })
 
     it("doesn't inject links into headings that already contain markdown links", function () {
