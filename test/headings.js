@@ -27,9 +27,9 @@ describe('headings', function () {
     assert($("h1 a[href='#h1']").length)
   })
 
-  it('adds deep-link class to added heading links', function () {
+  it('adds anchor class to added heading links', function () {
     assert(~fixtures.dirty.indexOf('# h1'))
-    assert($("h1 a.deep-link[href='#h1']").length)
+    assert($("h1 a.anchor[href='#h1']").length)
   })
 
   it("doesn't inject links into headings that already contain markdown links", function () {
@@ -59,12 +59,12 @@ describe('headings', function () {
   })
 
   it('puts icons inside the generated heading links', function () {
-    assert(!!$('a.deep-link svg').length)
+    assert(!!$('a.anchor svg').length)
   })
 
   it("allows generated links' icons to be disabled", function () {
     $ = cheerio.load(marky(fixtures.dirty, {enableHeadingLinkIcons: false}))
-    assert.equal($('a.deep-link svg').length, 0)
+    assert.equal($('a.anchor svg').length, 0)
   })
 
   it('allows a dash in generated DOM ids just like GitHub', function () {
