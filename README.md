@@ -152,7 +152,6 @@ npm test
 - Wraps embedded YouTube videos so they can be styled.
 - Parses and sanitizes `package.description` as markdown.
 - Applies CSS classes to redundant content that closely matches npm package name and description.
-- Applies CSS classes to badge images, so we can do something interesting with them one day.
 
 ### npm packages
 
@@ -183,7 +182,6 @@ marky(
 - [highlights](https://github.com/atom/highlights): Syntax highlighter
 - [highlights-tokens](https://github.com/zeke/highlights-tokens): A list of the language tokens used by the Atom.app [highlights](https://www.npmjs.com/package/highlights) syntax highlighter
 - [innertext](https://github.com/revin/innertext): Extract the `innerText` from a snippet of HTML
-- [is-badge](https://github.com/wooorm/is-badge): Check if a URL is a badge
 - [lodash](https://github.com/lodash/lodash): A utility library delivering consistency, customization, performance, &amp; extras.
 - [markdown-it](https://github.com/markdown-it/markdown-it): Markdown-it - modern pluggable markdown parser.
 - [markdown-it-emoji](https://github.com/markdown-it/markdown-it-emoji): Markdown-it-emoji extension for Markdown-it that parses markdown emoji syntax to unicode.
