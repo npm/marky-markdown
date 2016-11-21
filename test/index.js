@@ -2,7 +2,6 @@
 require('./marky')
 require('./markdown')
 require('./sanitize')
-require('./badges')
 require('./gravatar')
 require('./github')
 require('./youtube')
