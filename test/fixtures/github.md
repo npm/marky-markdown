@@ -45,3 +45,12 @@ Smiley! :)
 <a href="" id='empty-href-link'>Link with empty href</a>
 
 <a id='no-href-link'>Link with no href</a>
+
+# Heading with HTML image <img src="html-image.png">
+
+# Heading with HTML <a href="html-page.html">link</a>
+
+# Heading with HTML image and <img src="html-page-and-image.png" alt="alt text"> <a href="html-page-and-image.html">link</a>
+
+# Heading with nested image/link: <a href="nested/link/image"><img src="nested/link/image/image.png"></a>. Nice.
+
