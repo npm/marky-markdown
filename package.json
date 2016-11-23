@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "rm -rf dist && mkdir dist && touch dist/marky-markdown.js && browserify index.js -i highlights -s markyMarkdown > dist/marky-markdown.js",
-    "test": "standard-format -w && standard && mocha --timeout 8000",
+    "test": "standard --fix && mocha --timeout 8000",
     "pretest": "npm run build"
   },
   "browser": {
@@ -64,8 +64,7 @@
     "glob": "^7.1.1",
     "intercept-stdout": "^0.1.2",
     "mocha": "^3.1.2",
-    "standard": "^8.4.0",
-    "standard-format": "^2.1.0"
+    "standard": "^8.4.0"
   },
   "bin": "./bin/marky-markdown.js",
   "standard": {
