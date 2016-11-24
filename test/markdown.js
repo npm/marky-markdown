@@ -51,12 +51,12 @@ describe('markdown processing', function () {
       })
 
       it('renders items marked up as [ ] as unchecked', function () {
-        var shouldBeUnchecked = (fixtures['task-list'].match(/[\.\*\+-]\s+\[ \]/g) || []).length
+        var shouldBeUnchecked = (fixtures['task-list'].match(/[.*+-]\s+\[ ]/g) || []).length
         assert.equal(shouldBeUnchecked, $todo('input[type=checkbox].task-list-item-checkbox:not(:checked)').length)
       })
 
       it('renders items marked up as [x] as checked', function () {
-        var shouldBeChecked = (fixtures['task-list'].match(/[\.\*\+-]\s+\[x\]/g) || []).length
+        var shouldBeChecked = (fixtures['task-list'].match(/[.*+-]\s+\[x]/g) || []).length
         assert.equal(shouldBeChecked, $todo('input[type=checkbox].task-list-item-checkbox:checked').length)
       })
 
