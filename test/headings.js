@@ -202,4 +202,10 @@ describe('headings', function () {
     assert.equal($('h5 a#lazy-heading-5').length, 1)
     assert.equal($('h6 a#lazy-heading-6').length, 1)
   })
+
+  it('allows headings to interrupt paragraphs', function () {
+    var markdown = 'this is a paragraph\n# Heading text\nSome more text here\nand another line'
+    $ = cheerio.load(marky(markdown, {prefixHeadingIds: false}))
+    assert.equal($('h1').length, 1)
+  })
 })
