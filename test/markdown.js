@@ -115,6 +115,40 @@ describe('markdown processing', function () {
         assert(~tables.indexOf('<td><code>\\|</code></td>'))
       })
     })
+
+    describe('loose link labels', function () {
+      it('still parses link references properly', function () {
+        var markdown = 'a [link] here\n\n[link]: #destination'
+        var $ = cheerio.load(marky(markdown))
+        assert($('a[href="#destination"]').length)
+      })
+
+      it('allows whitespace between link labels and destinations', function () {
+        var markdown = 'a [link] (#destination) here'
+        var $ = cheerio.load(marky(markdown))
+        assert($('a[href="#destination"]').length)
+      })
+
+      it('allows whitespace between image text and src', function () {
+        var markdown = 'an image: ![alt] (path/to/image)'
+        var $ = cheerio.load(marky(markdown))
+        assert($('img[src="path/to/image"]').length)
+      })
+
+      it('allows whitespace in linked images with whitespace between text and src', function () {
+        var markdown = 'an image: [ ![alt] (path/to/image) ] (path/to/link)'
+        var $ = cheerio.load(marky(markdown))
+        assert($('img[src="path/to/image"]').length)
+        assert($('a[href="path/to/link"]').length)
+      })
+
+      it('allows loose link labels to override link references', function () {
+        var markdown = 'a [link] (or is it) here\n\n[link]: #destination'
+        var $ = cheerio.load(marky(markdown))
+        assert(!$('a[href="#destination"]').length)
+        assert($('a[href="or%20is%20it"]').length)
+      })
+    })
   })
 
   describe('syntax highlighting', function () {
@@ -272,14 +306,14 @@ describe('markdown processing', function () {
     })
 
     it('linkifies bracketed/parenthetical hostnames', function () {
-      var $ = cheerio.load(marky('[www.example.com] \n (www.example2.com) \n {www.do-not-link.com}'))
+      var $ = cheerio.load(marky('[www.example.com] \n {www.do-no-link.com} \n (www.example2.com)'))
       assert($("a[href='http://www.example.com']").length)
       assert($("a[href='http://www.example2.com']").length)
       assert(!$("a[href='http://www.do-not-link.com']").length)
     })
 
     it('includes path components', function () {
-      var $ = cheerio.load(marky('www.example.name/marky/markdown [www.example.name/marky/markdown] (www.example.name/marky/markdown)'))
+      var $ = cheerio.load(marky('[www.example.name/marky/markdown] www.example.name/marky/markdown (www.example.name/marky/markdown)'))
       assert.equal($("a[href='http://www.example.name/marky/markdown']").length, 3)
     })
 
