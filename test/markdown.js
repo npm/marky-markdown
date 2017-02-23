@@ -149,6 +149,10 @@ describe('markdown processing', function () {
       assert.equal($('div.highlight').length, $('div.highlight > pre.editor').length)
     })
 
+    it('skips code highlighter wrapper when no language is specified', function () {
+      assert(!~marky('```\nsomething()\n```').indexOf('highlight'))
+    })
+
     it('applies inline syntax highlighting classes to javascript', function () {
       assert($('.js.punctuation').length)
       assert($('.js.function').length)
