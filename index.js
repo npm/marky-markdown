@@ -1,4 +1,5 @@
 var defaults = require('lodash.defaults')
+var isPlainObj = require('is-plain-obj')
 var render = require('./lib/render')
 var sanitize = require('./lib/sanitize')
 
@@ -18,6 +19,9 @@ var marky = module.exports = function (markdown, options) {
 
   if (typeof markdown !== 'string') {
     throw Error('first argument must be a string')
+  }
+  if (typeof options !== 'undefined' && !isPlainObj(options)) {
+    throw Error('second argument must be an object')
   }
 
   options = options || {}
