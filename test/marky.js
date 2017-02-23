@@ -25,6 +25,18 @@ describe('marky-markdown', function () {
     )
   })
 
+  it('throws an error if second argument is provided and not an object', function () {
+    var err = /second argument must be an object/
+    assert.throws(function () { marky('', 'no strings allowed') }, err)
+    assert.throws(function () { marky('', 3) }, err)
+    assert.throws(function () { marky('', ['not', 'an', 'array']) }, err)
+    assert.throws(function () { marky('', null) }, err)
+    assert.throws(function () { marky('', new function () { this.prop = 'no constructed instances' }()) }, err)
+
+    assert.doesNotThrow(function () { marky('') })
+    assert.doesNotThrow(function () { marky('', {}) })
+  })
+
   it('has a getParser method', function () {
     assert(typeof marky.getParser === 'function')
   })

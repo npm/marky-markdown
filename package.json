@@ -35,10 +35,11 @@
     "atom-language-diff": "^1.0.0",
     "atom-language-nginx": "^0.6.1",
     "github-slugger": "^1.0.0",
-    "github-url-to-object": "^2.2.3",
-    "highlights": "^1.4.1",
+    "github-url-to-object": "^3.0.0",
+    "highlights": "^2.1.1",
     "highlights-tokens": "^1.0.1",
     "innertext": "^1.0.1",
+    "is-plain-obj": "^1.1.0",
     "language-dart": "^0.1.1",
     "language-erlang": "^2.0.0",
     "language-glsl": "^2.0.1",
@@ -59,7 +60,7 @@
     "similarity": "^1.0.1"
   },
   "devDependencies": {
-    "browserify": "^13.0.1",
+    "browserify": "^14.1.0",
     "cheerio": "^0.22.0",
     "glob": "^7.1.1",
     "intercept-stdout": "^0.1.2",

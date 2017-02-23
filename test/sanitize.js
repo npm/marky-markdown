@@ -182,4 +182,11 @@ describe('sanitize', function () {
     assert.equal($('img').attr('src'), 'http://example.com/an%20image.png')
     assert.equal($('a').attr('href'), 'http://example.com/link%20me.html')
   })
+
+  it('allows the <details>/<summary> elements', function () {
+    var src = '# Test\n\n<details><summary>Summary here</summary>\nLong long information, War & Peace, etc...</details>\n'
+    var $ = cheerio.load(marky(src))
+    assert.equal($('details').length, 1)
+    assert.equal($('summary').length, 1)
+  })
 })

@@ -183,6 +183,10 @@ describe('markdown processing', function () {
       assert.equal($('div.highlight').length, $('div.highlight > pre.editor').length)
     })
 
+    it('skips code highlighter wrapper when no language is specified', function () {
+      assert(!~marky('```\nsomething()\n```').indexOf('highlight'))
+    })
+
     it('applies inline syntax highlighting classes to javascript', function () {
       assert($('.js.punctuation').length)
       assert($('.js.function').length)
@@ -320,6 +324,37 @@ describe('markdown processing', function () {
     it('includes query', function () {
       var $ = cheerio.load(marky('Testing www.example.name/marky?markdown=1&test here'))
       assert($("a[href='http://www.example.name/marky?markdown=1&test']").length)
+    })
+  })
+
+  describe('markdown after HTML blocks without an intervening blank line', function () {
+    var $
+    before(function () {
+      $ = cheerio.load(marky(fixtures['abstemious-html-block']))
+    })
+
+    it('processes a list', function () {
+      assert.equal($('ul').length, 1)
+    })
+
+    it('processes a blockquote', function () {
+      assert.equal($('blockquote').length, 1)
+    })
+
+    it('processes a #-style heading', function () {
+      assert.equal($('h1').length, 1)
+    })
+
+    it('processes a --- style heading', function () {
+      assert.equal($('h2').length, 1)
+    })
+
+    it('processes a code fence', function () {
+      assert.equal($('div.highlight.js').length, 1)
+    })
+
+    it('processes a table', function () {
+      assert.equal($('table').length, 1)
     })
   })
 })

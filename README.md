@@ -122,7 +122,7 @@ Here is an example using HTML5 to render text inside `<marky-markdown>` tags.
 
 <script>
   for (el of document.getElementsByTagName('marky-markdown')) {
-    el.innerHTML = markyMarkdown(el.innerText, {highlightSyntax: false})
+    el.innerHTML = markyMarkdown(el.innerHTML, {highlightSyntax: false})
   }
 </script>
 ```

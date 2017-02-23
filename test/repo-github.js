@@ -38,7 +38,9 @@ describe('when package repo is on github', function () {
 
   it('rewrites slashy relative links hrefs to absolute (HTML)', function () {
     assert(~fixtures.github.indexOf('<a href="nested/link/image">'))
+    assert(~fixtures.github.indexOf('<a href="html/block.html">Link in an HTML block</a>'))
     assert($("a[href='https://github.com/mark/wahlberg/blob/master/nested/link/image']").length)
+    assert($("a[href='https://github.com/mark/wahlberg/blob/master/html/block.html']").length)
   })
 
   it('leaves protocol-relative URLs alone', function () {
@@ -70,7 +72,9 @@ describe('when package repo is on github', function () {
 
   it('replaces slashy relative img URLs with github URLs (HTML)', function () {
     assert(~fixtures.github.indexOf('<img src="nested/link/image/image.png">'))
+    assert(~fixtures.github.indexOf('<img src="html/block.png" />'))
     assert($("img[src='https://raw.githubusercontent.com/mark/wahlberg/master/nested/link/image/image.png']").length)
+    assert($("img[src='https://raw.githubusercontent.com/mark/wahlberg/master/html/block.png']").length)
   })
 
   it('leaves protocol relative URLs alone', function () {
