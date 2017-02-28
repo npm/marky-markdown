@@ -3,6 +3,7 @@ var oldkeys = Object.keys(global)
 
 var assert = require('assert')
 var marky = require('..')
+var markyPackage = require('../package.json')
 var fixtures = require('./fixtures')
 var intercept = require('intercept-stdout')
 var markdownIt = require('markdown-it')
@@ -99,15 +100,33 @@ describe('fixtures', function () {
 })
 
 describe('debug', function () {
-  it('produces the same output in debug mode as in normal mode', function () {
-    // drop anything going to stdout (so we don't wreck mocha's console output)
-    var unhookIntercept = intercept(function () { return '' })
+  // the unhookIntercept thing in these tests here drops anything going to
+  // stdout; it'd be nice to do the setup/teardown in a before()/after() pair,
+  // but then it stops mocha from showing the test results
+  function hideOutput () { return '' }
+
+  it('prepends a debug comment to the rendered HTML', function () {
+    var unhookIntercept = intercept(hideOutput)
+
+    var output = marky(fixtures.benchmark, {debug: true})
+    var firstLine = output.split('\n')[0].trim()
+
+    unhookIntercept()
+
+    assert(firstLine.indexOf(markyPackage.version) > -1)
+    assert.equal(firstLine.indexOf('<!--'), 0)
+    assert.equal(firstLine.indexOf('-->'), firstLine.length - 3)
+  })
+
+  it('produces the same HTML in debug mode as in normal mode', function () {
+    var unhookIntercept = intercept(hideOutput)
 
     var normal = marky(fixtures.benchmark)
     var debug = marky(fixtures.benchmark, {debug: true})
-    assert.equal(normal, debug)
 
     unhookIntercept()
+
+    assert.equal(normal, debug.split('\n').slice(1).join('\n'))
   })
 })
 
