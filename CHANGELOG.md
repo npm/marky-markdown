@@ -1,4 +1,12 @@
+# 9.0.2 (2017-03-03)
+
+### Dependencies
+
+- Bumped `highlights` to `2.1.3` because a new version of its dep `fs-plus` 
+  broke Node 4 builds
+
 # 9.0.1 (2016-10-31)
+    "standard": "^8.6.0",
 
 ### Bug Fix! 🐞
 
@@ -53,7 +61,7 @@ Cheerio, cheerio! (HT [wmhilton])
   removed, and now you can use marky in The Future™. ([pull/227] by
   [ashleygwilliams])
 - **Node 0.10 dev environment no longer supported** We've updated our
-  devDependency on JS Standard to 8.x which no longer supports Node 0.10 and
+  dev on JS Standard to 8.x which no longer supports Node 0.10 and
   0.12.  Node 0.10 is being EOLd this year, and as a result, we feel ok no
   longer supporting them as development environments. You can still **use**
   marky using 0.10, but if you want to **develop** it, you'll need to upgrade
