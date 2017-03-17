@@ -17,12 +17,14 @@
   },
   "keywords": [
     "readme",
+    "gfm",
+    "github",
+    "formatted",
     "markdown",
     "md",
     "documentation",
     "syntax highlighting",
     "html",
-    "github",
     "npm"
   ],
   "author": "Ashley Williams <ashley@npmjs.com> (http://ashleygwilliams.github.io/)",
