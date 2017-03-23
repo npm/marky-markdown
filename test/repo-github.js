@@ -21,26 +21,26 @@ describe('when package repo is on github', function () {
 
   it('rewrites relative link hrefs to absolute', function () {
     assert(~fixtures.github.indexOf('(relative/file.js)'))
-    assert($("a[href='https://github.com/mark/wahlberg/blob/master/relative/file.js']").length)
+    assert($("a[href='https://github.com/mark/wahlberg/blob/HEAD/relative/file.js']").length)
   })
 
   it('rewrites relative link hrefs to absolute (HTML)', function () {
     assert(~fixtures.github.indexOf('<a href="html-page.html">'))
     assert(~fixtures.github.indexOf('<a href="html-page-and-image.html">'))
-    assert($("a[href='https://github.com/mark/wahlberg/blob/master/html-page.html']").length)
-    assert($("a[href='https://github.com/mark/wahlberg/blob/master/html-page-and-image.html']").length)
+    assert($("a[href='https://github.com/mark/wahlberg/blob/HEAD/html-page.html']").length)
+    assert($("a[href='https://github.com/mark/wahlberg/blob/HEAD/html-page-and-image.html']").length)
   })
 
   it('rewrites slashy relative links hrefs to absolute', function () {
     assert(~fixtures.github.indexOf('(/slashy/poo)'))
-    assert($("a[href='https://github.com/mark/wahlberg/blob/master/slashy/poo']").length)
+    assert($("a[href='https://github.com/mark/wahlberg/blob/HEAD/slashy/poo']").length)
   })
 
   it('rewrites slashy relative links hrefs to absolute (HTML)', function () {
     assert(~fixtures.github.indexOf('<a href="nested/link/image">'))
     assert(~fixtures.github.indexOf('<a href="html/block.html">Link in an HTML block</a>'))
-    assert($("a[href='https://github.com/mark/wahlberg/blob/master/nested/link/image']").length)
-    assert($("a[href='https://github.com/mark/wahlberg/blob/master/html/block.html']").length)
+    assert($("a[href='https://github.com/mark/wahlberg/blob/HEAD/nested/link/image']").length)
+    assert($("a[href='https://github.com/mark/wahlberg/blob/HEAD/html/block.html']").length)
   })
 
   it('leaves protocol-relative URLs alone', function () {
@@ -55,26 +55,26 @@ describe('when package repo is on github', function () {
 
   it('replaces relative img URLs with github URLs', function () {
     assert(~fixtures.github.indexOf('![](relative.png)'))
-    assert($("img[src='https://raw.githubusercontent.com/mark/wahlberg/master/relative.png']").length)
+    assert($("img[src='https://raw.githubusercontent.com/mark/wahlberg/HEAD/relative.png']").length)
   })
 
   it('replaces relative img URLs with github URLs (HTML)', function () {
     assert(~fixtures.github.indexOf('<img src="html-image.png">'))
     assert(~fixtures.github.indexOf('<img src="html-page-and-image.png" alt="alt text">'))
-    assert($("img[src='https://raw.githubusercontent.com/mark/wahlberg/master/html-image.png']").length)
-    assert($("img[src='https://raw.githubusercontent.com/mark/wahlberg/master/html-page-and-image.png']").length)
+    assert($("img[src='https://raw.githubusercontent.com/mark/wahlberg/HEAD/html-image.png']").length)
+    assert($("img[src='https://raw.githubusercontent.com/mark/wahlberg/HEAD/html-page-and-image.png']").length)
   })
 
   it('replaces slashy relative img URLs with github URLs', function () {
     assert(~fixtures.github.indexOf('![](/slashy/deep.png)'))
-    assert($("img[src='https://raw.githubusercontent.com/mark/wahlberg/master/slashy/deep.png']").length)
+    assert($("img[src='https://raw.githubusercontent.com/mark/wahlberg/HEAD/slashy/deep.png']").length)
   })
 
   it('replaces slashy relative img URLs with github URLs (HTML)', function () {
     assert(~fixtures.github.indexOf('<img src="nested/link/image/image.png">'))
     assert(~fixtures.github.indexOf('<img src="html/block.png" />'))
-    assert($("img[src='https://raw.githubusercontent.com/mark/wahlberg/master/nested/link/image/image.png']").length)
-    assert($("img[src='https://raw.githubusercontent.com/mark/wahlberg/master/html/block.png']").length)
+    assert($("img[src='https://raw.githubusercontent.com/mark/wahlberg/HEAD/nested/link/image/image.png']").length)
+    assert($("img[src='https://raw.githubusercontent.com/mark/wahlberg/HEAD/html/block.png']").length)
   })
 
   it('leaves protocol relative URLs alone', function () {
