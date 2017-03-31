@@ -76,12 +76,12 @@ describe('markdown processing', function () {
         assert(~$todo('li.task-list-item').length)
       })
 
-      it('adds class .task-list to lists', function () {
-        assert(~$todo('ol.task-list, ul.task-list').length)
+      it('adds class .contains-task-list to lists', function () {
+        assert(~$todo('ol.contains-task-list, ul.contains-task-list').length)
       })
 
-      it('only adds .task-list to most immediate parent list', function () {
-        assert($todo('ol:not(.task-list) ul.task-list').length)
+      it('only adds .contains-task-list to most immediate parent list', function () {
+        assert($todo('ol:not(.contains-task-list) ul.contains-task-list').length)
       })
     })
 
