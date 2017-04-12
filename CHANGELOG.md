@@ -1,3 +1,12 @@
+# 9.0.3 (2017-04-12)
+
+### Bug Fix! 🐛
+
+- Updated sanitization to ensure that user-generated ids that are in HTML
+  blocks are also prefixed. ([pull/357])
+
+[pull/357]: https://github.com/npm/marky-markdown/pull/357
+
 # 9.0.2 (2017-03-03)
 
 ### Dependencies
