@@ -146,4 +146,9 @@ describe('sanitize', function () {
     var $ = cheerio.load(marky('[link text](https://www.youtube.com/watch?v=Zqm78_27lWA "' + title + '")'))
     assert.equal($('a').attr('title'), title)
   })
+
+  it('prefixes ids from user-generated html', function () {
+    var $ = cheerio.load(marky('<div id="oh-no">Foo.</div>'))
+    assert.equal($('div').attr('id'), 'user-content-oh-no')
+  })
 })

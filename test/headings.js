@@ -16,10 +16,10 @@ describe('headings', function () {
     assert(~fixtures.dirty.indexOf(' # indented h1'))
     assert(~fixtures.dirty.indexOf('  ## indented h2'))
     assert(~fixtures.dirty.indexOf('   ### indented h3'))
-    assert.equal($('#indented h1').length, 0)
-    assert.equal($('#indented h2').length, 0)
-    assert.equal($('#indented h3').length, 0)
-    assert.equal($('#indented p').length, 3)
+    assert.equal($('#user-content-indented h1').length, 0)
+    assert.equal($('#user-content-indented h2').length, 0)
+    assert.equal($('#user-content-indented h3').length, 0)
+    assert.equal($('#user-content-indented p').length, 3)
   })
 
   it('injects hashy anchor tags into headings that have DOM ids', function () {
