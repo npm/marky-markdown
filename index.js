@@ -34,7 +34,7 @@ var marky = module.exports = function (markdown, options) {
 
   if (options.sanitize) {
     log('Sanitize malicious or malformed HTML')
-    html = sanitize(html)
+    html = sanitize(html, options)
   }
 
   return html
