@@ -189,4 +189,9 @@ describe('sanitize', function () {
     assert.equal($('details').length, 1)
     assert.equal($('summary').length, 1)
   })
+
+  it('prefixes ids from user-generated html', function () {
+    var $ = cheerio.load(marky('<div id="oh-no">Foo.</div>'))
+    assert.equal($('div').attr('id'), 'user-content-oh-no')
+  })
 })
