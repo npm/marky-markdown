@@ -38,7 +38,7 @@
 
 ## Breaking Changes
 
-- any options provided must now be an object. ([pull/323]).
+- any options provided must now be an object. ([pull/323])
 - ids in user generated HTML are now prefixed. ([pull/358])
 
 # 9.0.1 (2016-10-31)
