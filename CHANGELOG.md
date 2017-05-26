@@ -1,8 +1,28 @@
-# 10.0.0 (2017-06-26)
+# 10.0.0 (2017-05-26)
+
+We're fine tuning a lot of small but noticeable behavioral differences between
+our renderer and GitHub's, as we discover situations where GitHub differs from
+CommonMark. The closer we get to full GitHub compatibility, the edge-case-ier
+our changes become. Without a doubt, version 10 is the edge-case-fix-iest
+release of marky-markdown yet!
+
+## Breaking Changes
+
+- links generated in headers are created differently:
+  - links now use class `anchor` rather than `deep-link`. ([pull/289])
+  - SVG icons in links now use class `octicon` and `octicon-link` rather than
+    `deep-link-icon`. ([pull/292])
+  - headings now have `aria-hidden=true`. ([pull/293])
+- we no longer do special processing on badge images. ([pull/303])
+- any options provided must now be an object. ([pull/323])
+- ids in user generated HTML are now prefixed. ([pull/358])
 
 ## Features
 
-- spaces are now supported in image and url paths, thanks [sjking]! ([pull/280]).
+- spaces are now supported in image and url paths, thanks [sjking]! ([pull/280])
+- new `getParser` method to provide access to the underlying markdown-it parser
+  instance in case you want to use [custom markdown-it plugins] in your own
+  apps. ([pull/285], [pull/287]; see [low level parser access])
 - marky-markdown now understands relative GitHub links, e.g., `[logo](/logo.png)` 😄 ([pull/308])
 - support for spaces between link labels and paths. ([pull/329])
 - `details` and `summary` are now white-listed HTML tags. ([pull/333])
@@ -13,6 +33,7 @@
 
 ## Fixes
 
+- stop stripping `style` attributes from `img` elements. ([pull/299])
 - HTML blocks are no longer greedy. ([pull/325])
 - syntax highlighting no longer applied if no language is specified in code block. ([pull/327])
 - headings can now interrupt paragraphs, and will be rendered appropriately. ([pull/326])
@@ -21,6 +42,15 @@
 - enforce that if options are passed, they must be an object. ([pull/323])
 
 [pull/280]: https://github.com/npm/marky-markdown/pull/280
+[custom markdown-it plugins]: https://www.npmjs.com/search?q=markdown-it-plugin
+[low level parser access]: https://github.com/npm/marky-markdown/tree/abc7919e840977efaf4e9212879339b258981db0#low-level-parser-access
+[pull/285]: https://github.com/npm/marky-markdown/pull/285
+[pull/287]: https://github.com/npm/marky-markdown/pull/287
+[pull/289]: https://github.com/npm/marky-markdown/pull/289
+[pull/292]: https://github.com/npm/marky-markdown/pull/292
+[pull/293]: https://github.com/npm/marky-markdown/pull/293
+[pull/299]: https://github.com/npm/marky-markdown/pull/299
+[pull/303]: https://github.com/npm/marky-markdown/pull/303
 [pull/308]: https://github.com/npm/marky-markdown/pull/308
 [pull/316]: https://github.com/npm/marky-markdown/pull/316
 [pull/322]: https://github.com/npm/marky-markdown/pull/322
@@ -35,11 +65,6 @@
 [pull/358]: https://github.com/npm/marky-markdown/pull/358
 [pull/369]: https://github.com/npm/marky-markdown/pull/369
 [zkat]: https://github.com/zkat
-
-## Breaking Changes
-
-- any options provided must now be an object. ([pull/323])
-- ids in user generated HTML are now prefixed. ([pull/358])
 
 # 9.0.3 (2017-04-12)
 
