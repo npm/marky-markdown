@@ -41,6 +41,22 @@
 - any options provided must now be an object. ([pull/323])
 - ids in user generated HTML are now prefixed. ([pull/358])
 
+# 9.0.3 (2017-04-12)
+
+### Bug Fix! 🐛
+
+- Updated sanitization to ensure that user-generated ids that are in HTML
+  blocks are also prefixed. ([pull/357])
+
+[pull/357]: https://github.com/npm/marky-markdown/pull/357
+
+# 9.0.2 (2017-03-03)
+
+### Dependencies
+
+- Bumped `highlights` to `2.1.3` because a new version of its dep `fs-plus` 
+  broke Node 4 builds
+
 # 9.0.1 (2016-10-31)
 
 ### Bug Fix! 🐞
