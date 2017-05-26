@@ -1,3 +1,34 @@
+# 10.0.0 (2017-06-26)
+
+## Features
+
+- spaces are now supported in image and url paths, thanks [sjking]! ([pull/280]).
+- marky-markdown now understands relative GitHub links, e.g., `[logo](/logo.png)` 😄 ([pull/308])
+- support for spaces between link labels and paths. ([pull/329])
+- `details` and `summary` are now white-listed HTML tags (([pull/333]))
+
+## Fixes
+
+- HTML blocks are no longer greedy.([pull/325])
+- syntax highlighting no longer applied if no language is specified in code block ([pull/327])
+- headings can now interrupt paragraphs, and will be rendered appropriately ([pull/326])
+- markdown-it now properly renders tables with internal code blocks. ([pull/316])
+- enforce that if options are passed, they must be an object. ([pull/323])
+
+[pull/280]: https://github.com/npm/marky-markdown/pull/280
+[pull/308]: https://github.com/npm/marky-markdown/pull/308
+[pull/316]: https://github.com/npm/marky-markdown/pull/316
+[pull/323]: https://github.com/npm/marky-markdown/pull/323
+[pull/325]: https://github.com/npm/marky-markdown/pull/325
+[pull/326]: https://github.com/npm/marky-markdown/pull/326
+[pull/327]: https://github.com/npm/marky-markdown/pull/327
+[pull/329]: https://github.com/npm/marky-markdown/pull/329
+[pull/333]: https://github.com/npm/marky-markdown/pull/333
+
+## Breaking Changes
+
+- any options provided must now be an object ([pull/323]).
+
 # 9.0.1 (2016-10-31)
 
 ### Bug Fix! 🐞
@@ -160,7 +191,7 @@ changes implemented in [markdown-it 8.0.0]. The main updates are:
 
 - Table troubles be gone! Or at least, any troubles with text-alignment.
   Marky was stripping `style` attributes from `<td>` and `<th>` elements-
-  and thanks to [revin]'s hardwork, it isn't anymore! 
+  and thanks to [revin]'s hardwork, it isn't anymore!
   ([issues/212], [pull/216])
 
 ### Docs
@@ -367,9 +398,9 @@ Due to the update to `markdown-it` (see below), our markdown parsing now uses Co
 
 ### Tests
 
-- originally we were installing some packages as `devDependencies` in 
+- originally we were installing some packages as `devDependencies` in
   order to use their `README`s in tests. this became an issue when
-  greenkeeper would attempt to update them and break our tests :) 
+  greenkeeper would attempt to update them and break our tests :)
   we now have pulled in the `README`s as static assets ([issue/91]
   [pull/114]), by [revin]
 - tests were all in a single file, broken up in categories
@@ -394,7 +425,7 @@ Due to the update to `markdown-it` (see below), our markdown parsing now uses Co
 ### Bug Fixes
 
 - any URL containing "//youtube.com" was make it through our iframe
-  filter, but the intent was to only allow actual YouTube URLs. 
+  filter, but the intent was to only allow actual YouTube URLs.
   ([issue/108], [pull/110]), filed by [lovasoa],  solved by [revin]
 
 [lovasoa]: https://github.com/lovasoa
@@ -435,7 +466,7 @@ Due to the update to `markdown-it` (see below), our markdown parsing now uses Co
 - we strip `h1` tags from `README`s that have the same content as the
   package name, however we did not update this feature to account for
   scoped package names, e.g. @scope/pkg. now we remove the scope from
-  the package meta-data to check the `README`'s `h1`. 
+  the package meta-data to check the `README`'s `h1`.
   ([issue/48][pull/103]) - reported by [sindresorhus], solved by [revin]
 
 ### Documentation
@@ -456,7 +487,7 @@ Due to the update to `markdown-it` (see below), our markdown parsing now uses Co
 ### Bug Fix
 
 - we were parsing `:)` into emoji, though this is not the desired behavior.
-  disabled shortcut emoji parsing in the markdown-it-emoji plugin. 
+  disabled shortcut emoji parsing in the markdown-it-emoji plugin.
   ([issue/95], [pull/97]) - reported by [cloakedninjas], solved by [revin]
 
 # 6.0.1 (2016-01-07)
