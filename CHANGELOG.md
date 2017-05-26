@@ -5,7 +5,11 @@
 - spaces are now supported in image and url paths, thanks [sjking]! ([pull/280]).
 - marky-markdown now understands relative GitHub links, e.g., `[logo](/logo.png)` 😄 ([pull/308])
 - support for spaces between link labels and paths. ([pull/329])
-- `details` and `summary` are now white-listed HTML tags ([pull/333])
+- `details` and `summary` are now white-listed HTML tags. ([pull/333])
+- support for GitHub repos that have no master branch. thanks [zkat]! ([pull/351])
+- **security:** ids in user generated HTML are now prefixed. ([pull/358])
+- add debug information to footer if debug is enabled. ([pull/346])
+- support string repository shorthand in package.json. ([pull/369])
 
 ## Fixes
 
@@ -13,21 +17,29 @@
 - syntax highlighting no longer applied if no language is specified in code block. ([pull/327])
 - headings can now interrupt paragraphs, and will be rendered appropriately. ([pull/326])
 - markdown-it now properly renders tables with internal code blocks. ([pull/316])
+- fix bug with relative images and links. ([pull/323])
 - enforce that if options are passed, they must be an object. ([pull/323])
 
 [pull/280]: https://github.com/npm/marky-markdown/pull/280
 [pull/308]: https://github.com/npm/marky-markdown/pull/308
 [pull/316]: https://github.com/npm/marky-markdown/pull/316
+[pull/322]: https://github.com/npm/marky-markdown/pull/322
 [pull/323]: https://github.com/npm/marky-markdown/pull/323
 [pull/325]: https://github.com/npm/marky-markdown/pull/325
 [pull/326]: https://github.com/npm/marky-markdown/pull/326
 [pull/327]: https://github.com/npm/marky-markdown/pull/327
 [pull/329]: https://github.com/npm/marky-markdown/pull/329
 [pull/333]: https://github.com/npm/marky-markdown/pull/333
+[pull/346]: https://github.com/npm/marky-markdown/pull/346
+[pull/351]: https://github.com/npm/marky-markdown/pull/351
+[pull/358]: https://github.com/npm/marky-markdown/pull/358
+[pull/369]: https://github.com/npm/marky-markdown/pull/369
+[zkat]: https://github.com/zkat
 
 ## Breaking Changes
 
-- any options provided must now be an object ([pull/323]).
+- any options provided must now be an object. ([pull/323]).
+- ids in user generated HTML are now prefixed. ([pull/358])
 
 # 9.0.1 (2016-10-31)
 
