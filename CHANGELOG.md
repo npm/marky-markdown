@@ -11,7 +11,7 @@
 
 - HTML blocks are no longer greedy. ([pull/325])
 - syntax highlighting no longer applied if no language is specified in code block. ([pull/327])
-- headings can now interrupt paragraphs, and will be rendered appropriately .([pull/326])
+- headings can now interrupt paragraphs, and will be rendered appropriately. ([pull/326])
 - markdown-it now properly renders tables with internal code blocks. ([pull/316])
 - enforce that if options are passed, they must be an object. ([pull/323])
 
