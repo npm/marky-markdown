@@ -8,7 +8,7 @@
     "build": "rm -rf dist && mkdir dist && touch dist/marky-markdown.js && browserify index.js -i highlights -s markyMarkdown > dist/marky-markdown.js",
     "test": "standard --fix && mocha --timeout 8000",
     "pretest": "npm run build",
-    "postversion": "node bin/build-marky-info.js && npm run build"
+    "version": "npm run build && git add marky.json"
   },
   "browser": {
     "highlights": false
