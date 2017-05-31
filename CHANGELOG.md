@@ -1,3 +1,9 @@
+# 10.0.1 (2017-05-31)
+
+- Fix the browserify build, which had broken due to the inclusion of some ES6+ code. ([pull/372])
+
+[pull/372]: https://github.com/npm/marky-markdown/pull/372
+
 # 10.0.0 (2017-05-26)
 
 We're fine tuning a lot of small but noticeable behavioral differences between
