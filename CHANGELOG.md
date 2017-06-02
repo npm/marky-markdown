@@ -1,3 +1,8 @@
+# Change Log
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+<a name="10.0.1"></a>
 # 10.0.1 (2017-05-31)
 
 - Fix the browserify build, which had broken due to the inclusion of some ES6+ code. ([pull/372])
@@ -85,7 +90,7 @@ release of marky-markdown yet!
 
 ### Dependencies
 
-- Bumped `highlights` to `2.1.3` because a new version of its dep `fs-plus` 
+- Bumped `highlights` to `2.1.3` because a new version of its dep `fs-plus`
   broke Node 4 builds
 
 # 9.0.1 (2016-10-31)

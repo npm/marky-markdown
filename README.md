@@ -5,6 +5,7 @@
 [![Dependency Status](https://david-dm.org/npm/marky-markdown.svg)](https://david-dm.org/npm/marky-markdown)
 [![Issue Stats](http://issuestats.com/github/npm/marky-markdown/badge/pr)](http://issuestats.com/github/npm/marky-markdown)
 [![Issue Stats](http://issuestats.com/github/npm/marky-markdown/badge/issue)](http://issuestats.com/github/npm/marky-markdown)
+[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 
 `marky-markdown` is a markdown parser, written in NodeJS, that aims for
 parity with [GitHub-style markdown]. It is built on top of [`markdown-it`],
