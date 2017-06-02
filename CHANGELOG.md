@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="10.1.0"></a>
+# [10.1.0](https://github.com/npm/marky-markdown/compare/v10.0.1...v10.1.0) (2017-06-02)
+
+
+### Features
+
+* classes attached to anchor and svg in headings can now be configured ([f7a0883](https://github.com/npm/marky-markdown/commit/f7a0883))
+
+
+
 <a name="10.0.1"></a>
 # 10.0.1 (2017-05-31)
 
