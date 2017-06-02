@@ -208,4 +208,10 @@ describe('headings', function () {
     $ = cheerio.load(marky(markdown, {prefixHeadingIds: false}))
     assert.equal($('h1').length, 1)
   })
+
+  it('allows an alternative anchor class to be configured', function () {
+    $ = cheerio.load(marky(fixtures.dirty, {headingClassName: 'foo'}))
+
+    assert($("h1 a.foo[href='#h1']").length)
+  })
 })

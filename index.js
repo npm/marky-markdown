@@ -12,7 +12,8 @@ var defaultOptions = {
   enableHeadingLinkIcons: true,
   serveImagesWithCDN: false,
   debug: false,
-  package: null
+  package: null,
+  headingClassName: 'anchor'
 }
 
 var marky = module.exports = function (markdown, options) {

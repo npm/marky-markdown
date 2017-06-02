@@ -6,15 +6,15 @@
 [![Issue Stats](http://issuestats.com/github/npm/marky-markdown/badge/pr)](http://issuestats.com/github/npm/marky-markdown)
 [![Issue Stats](http://issuestats.com/github/npm/marky-markdown/badge/issue)](http://issuestats.com/github/npm/marky-markdown)
 
-`marky-markdown` is a markdown parser, written in NodeJS, that aims for 
+`marky-markdown` is a markdown parser, written in NodeJS, that aims for
 parity with [GitHub-style markdown]. It is built on top of [`markdown-it`],
-a [CommonMark] markdown parser. You can use marky-markdown: 
+a [CommonMark] markdown parser. You can use marky-markdown:
 
 - [programmatically in NodeJS]
 - [in your terminal]
 - [in the browser] *does not yet support syntax highlighting
 
-`marky-markdown` is the thing that parses package READMEs on 
+`marky-markdown` is the thing that parses package READMEs on
 http://www.npmjs.com. If you see a markdown parsing bug there,
 [file an issue here]!
 
@@ -29,7 +29,7 @@ http://www.npmjs.com. If you see a markdown parsing bug there,
 ## Node Version Support
 
 marky-markdown strives to support all LTS, current, and maintenance
-versions of Node.js. When a version of Node.js is EOL, we will EOL 
+versions of Node.js. When a version of Node.js is EOL, we will EOL
 support for that version for marky-markdown.
 
 For more information on Node.js LTS and support, click [here](https://github.com/nodejs/LTS).
@@ -73,7 +73,8 @@ The default options are as follows:
   enableHeadingLinkIcons: true, // render icons inside generated section links
   serveImagesWithCDN: false,    // use npm's CDN to proxy images over HTTPS
   debug: false,                 // console.log() all the things
-  package: null                 // npm package metadata
+  package: null,                // npm package metadata,
+  headingClassName: 'anchor'    // the classname used for anchors in headings.
 }
 ```
 
