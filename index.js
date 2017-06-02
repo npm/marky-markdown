@@ -12,7 +12,9 @@ var defaultOptions = {
   enableHeadingLinkIcons: true,
   serveImagesWithCDN: false,
   debug: false,
-  package: null
+  package: null,
+  headingAnchorClass: 'anchor',
+  headingSvgClass: ['octicon', 'octicon-link']
 }
 
 var marky = module.exports = function (markdown, options) {
