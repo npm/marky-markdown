@@ -74,7 +74,8 @@ The default options are as follows:
   serveImagesWithCDN: false,    // use npm's CDN to proxy images over HTTPS
   debug: false,                 // console.log() all the things
   package: null,                // npm package metadata,
-  headingClassName: 'anchor'    // the classname used for anchors in headings.
+  headingAnchorClass: 'anchor', // the classname used for anchors in headings.
+  headingSvgClass: ['octicon']  // the class used for svg icon in headings.
 }
 ```
 

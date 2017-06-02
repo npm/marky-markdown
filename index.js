@@ -13,7 +13,8 @@ var defaultOptions = {
   serveImagesWithCDN: false,
   debug: false,
   package: null,
-  headingClassName: 'anchor'
+  headingAnchorClass: 'anchor',
+  headingSvgClass: ['octicon', 'octicon-link']
 }
 
 var marky = module.exports = function (markdown, options) {
