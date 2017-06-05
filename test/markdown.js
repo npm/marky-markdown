@@ -4,6 +4,7 @@ var assert = require('assert')
 var marky = require('..')
 var fixtures = require('./fixtures')
 var cheerio = require('cheerio')
+var tripwire = require('tripwire')
 
 describe('markdown processing', function () {
   var $
@@ -355,6 +356,29 @@ describe('markdown processing', function () {
 
     it('processes a table', function () {
       assert.equal($('table').length, 1)
+    })
+
+    it('properly renders long documents containing many consecutive HTML blocks', function (done) {
+      // the failure mode here is an infinite loop that mocha can't interfere
+      // with, so we need to set up an environment that can do it
+      //
+      function handleException (e) {
+        if (tripwire.getContext()) {
+          // tripwire caused this exception; probably was our test blocking
+          assert(false)
+          done(false)
+        }
+      }
+      process.on('uncaughtException', handleException)
+      tripwire.resetTripwire(8000, { name: 'abstemious-pathology' })
+
+      var exploder = marky(fixtures['abstemious-pathology'])
+
+      tripwire.clearTripwire()
+      process.removeListener('uncaughtException', handleException)
+
+      assert(exploder.length)
+      done()
     })
   })
 })
