@@ -10,7 +10,13 @@
     "pretest": "npm run build",
     "version": "npm run build && git add marky.json",
     "prepublish": "npm run build",
-    "release": "standard-version"
+    "release": "standard-version --commit-all"
+  },
+  "standard-version": {
+    "scripts": {
+      "postbump": "npm run build",
+      "precommit": "git add dist/marky-markdown.js marky.json"
+    }
   },
   "browser": {
     "highlights": false
@@ -73,7 +79,7 @@
     "mocha": "^3.4.1",
     "oniguruma": "~6.1.1",
     "standard": "^10.0.0",
-    "standard-version": "^4.0.0",
+    "standard-version": "^4.1.0-candidate.1",
     "tripwire": "^4.1.0"
   },
   "bin": "./bin/marky-markdown.js",
