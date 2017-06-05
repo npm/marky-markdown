@@ -8,14 +8,13 @@
     "build": "rm -rf dist && mkdir dist && touch dist/marky-markdown.js && browserify index.js -i highlights -s markyMarkdown > dist/marky-markdown.js",
     "test": "standard --fix && mocha --timeout 8000",
     "pretest": "npm run build",
-    "version": "npm run build && git add marky.json",
     "prepublish": "npm run build",
     "release": "standard-version --commit-all"
   },
   "standard-version": {
     "scripts": {
       "postbump": "npm run build",
-      "precommit": "git add dist/marky-markdown.js marky.json"
+      "precommit": "git add marky.json"
     }
   },
   "browser": {
