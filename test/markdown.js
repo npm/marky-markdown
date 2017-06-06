@@ -124,6 +124,17 @@ describe('markdown processing', function () {
         assert($('a[href="#destination"]').length)
       })
 
+      it('allows link titles, delimited by \'\', "", or ()', function () {
+        var markdown = 'a [one] and a [two] and a [three]'
+        markdown += '\n\n'
+        markdown += "[one]: #destination 'with a title'\n"
+        markdown += '[two]: #destination "with a title"\n'
+        markdown += '[three]: #destination (with a title)\n'
+        var $ = cheerio.load(marky(markdown))
+        assert.equal($('a').length, 3)
+        assert.equal($('a[title="with a title"]').length, 3)
+      })
+
       it('allows whitespace between link labels and destinations', function () {
         var markdown = 'a [link] (#destination) here'
         var $ = cheerio.load(marky(markdown))
