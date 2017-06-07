@@ -108,4 +108,20 @@ describe('when package repo is on github', function () {
     assert($("img[src='https://secure.com/good.png']").length)
     assert($short("img[src='https://secure.com/good.png']").length)
   })
+
+  it('survives a falsy repository.url', function () {
+    var errorPkg = {
+      name: 'wahlberg',
+      repository: {
+        type: 'git',
+        url: undefined
+      }}
+    assert(marky(fixtures.github, {package: errorPkg}).length)
+
+    errorPkg.url = null
+    assert(marky(fixtures.github, {package: errorPkg}).length)
+
+    errorPkg.url = ''
+    assert(marky(fixtures.github, {package: errorPkg}).length)
+  })
 })
