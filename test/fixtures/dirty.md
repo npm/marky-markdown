@@ -14,16 +14,6 @@
 
 ###### h6
 
-<div id="indented">
-
- # indented h1
-
-  ## indented h2
-
-   ### indented h3
-
-</div>
-
 <script charset="utf-8" src="http://malware.com" type="text/javascript">alert("haxorz")</script>
 
 <img src="local.png" width="600" height="400" align="right" valign="middle" onclick="maliciousClickHandler()"></img>

@@ -147,42 +147,6 @@ describe('sanitize', function () {
     assert.equal($('a').attr('title'), title)
   })
 
-  it('allows spaces in path names', function () {
-    // images
-    var $ = cheerio.load(marky('![Gitter](https://badges.gitter.im/Join Chat.svg)'))
-    assert.equal($('img').attr('src'), 'https://badges.gitter.im/Join%20Chat.svg')
-    // anchors
-    $ = cheerio.load(marky('[link text](https://example.com/link me.html)'))
-    assert.equal($('a').attr('href'), 'https://example.com/link%20me.html')
-  })
-
-  it('allows spaces in path names with title attributes', function () {
-    // images
-    var title = 'Image title'
-    var $ = cheerio.load(marky('![Gitter](https://badges.gitter.im/Join Chat.svg "' + title + '")'))
-    assert.equal($('img').attr('src'), 'https://badges.gitter.im/Join%20Chat.svg')
-    assert.equal($('img').attr('title'), title)
-    // anchors
-    title = 'Link title'
-    $ = cheerio.load(marky('[link text](https://example.com/link me.html "' + title + '")'))
-    assert.equal($('a').attr('href'), 'https://example.com/link%20me.html')
-    assert.equal($('a').attr('title'), title)
-  })
-
-  it('allows spaces in path names of images used as anchors', function () {
-    var $ = cheerio.load(marky('[![Gitter](https://badges.gitter.im/Join Chat.svg)](#url)'))
-    assert.equal($('img').attr('src'), 'https://badges.gitter.im/Join%20Chat.svg')
-    assert.equal($('a').attr('href'), '#url')
-  })
-
-  it('allows spaces in path names when inline element is in paragraph', function () {
-    var src = 'I am a paragraph. This is a [link](http://example.com/link me.html).'
-    src += 'And here is an image: ![image](http://example.com/an image.png). This paragraph is now over.'
-    var $ = cheerio.load(marky(src))
-    assert.equal($('img').attr('src'), 'http://example.com/an%20image.png')
-    assert.equal($('a').attr('href'), 'http://example.com/link%20me.html')
-  })
-
   it('allows the <details>/<summary> elements', function () {
     var src = '# Test\n\n<details><summary>Summary here</summary>\nLong long information, War & Peace, etc...</details>\n'
     var $ = cheerio.load(marky(src))

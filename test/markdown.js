@@ -17,23 +17,6 @@ describe('markdown processing', function () {
   })
 
   describe('github flavored markdown', function () {
-    it('renders relaxed link reference definitions the same as normal ones', function () {
-      assert(~fixtures['link-ref'].indexOf('[linkref]:'))
-      assert(~fixtures['link-ref-relaxed'].indexOf('[linkref]:'))
-      var $normal = cheerio.load(marky(fixtures['link-ref']))
-      var $relaxed = cheerio.load(marky(fixtures['link-ref-relaxed']))
-      assert($normal('a[href="/actual/link/here"]').length)
-      assert($relaxed('a[href="/actual/link/here"]').length)
-      assert.equal($normal.html(), $relaxed.html())
-    })
-
-    it('converts leading tabs in code blocks to spaces', function () {
-      var $ = cheerio.load(marky(fixtures.basic))
-      var indentHtml = $('.highlight.js .line .comment span:not(.js)').html()
-      assert(!~indentHtml.indexOf('\t'))
-      assert(~indentHtml.indexOf('&#xA0;'))
-    })
-
     it('does not convert text emoticons to unicode', function () {
       assert(~fixtures.github.indexOf(':)'))
       var $ = cheerio.load(marky(fixtures.github))
@@ -113,51 +96,6 @@ describe('markdown processing', function () {
 
       it('does not escape backslashed pipe characters inside code blocks', function () {
         assert(~tables.indexOf('<td><code>\\|</code></td>'))
-      })
-    })
-
-    describe('loose link labels', function () {
-      it('still parses link references properly', function () {
-        var markdown = 'a [link] here\n\n[link]: #destination'
-        var $ = cheerio.load(marky(markdown))
-        assert($('a[href="#destination"]').length)
-      })
-
-      it('allows link titles, delimited by \'\', "", or ()', function () {
-        var markdown = 'a [one] and a [two] and a [three]'
-        markdown += '\n\n'
-        markdown += "[one]: #destination 'with a title'\n"
-        markdown += '[two]: #destination "with a title"\n'
-        markdown += '[three]: #destination (with a title)\n'
-        var $ = cheerio.load(marky(markdown))
-        assert.equal($('a').length, 3)
-        assert.equal($('a[title="with a title"]').length, 3)
-      })
-
-      it('allows whitespace between link labels and destinations', function () {
-        var markdown = 'a [link] (#destination) here'
-        var $ = cheerio.load(marky(markdown))
-        assert($('a[href="#destination"]').length)
-      })
-
-      it('allows whitespace between image text and src', function () {
-        var markdown = 'an image: ![alt] (path/to/image)'
-        var $ = cheerio.load(marky(markdown))
-        assert($('img[src="path/to/image"]').length)
-      })
-
-      it('allows whitespace in linked images with whitespace between text and src', function () {
-        var markdown = 'an image: [ ![alt] (path/to/image) ] (path/to/link)'
-        var $ = cheerio.load(marky(markdown))
-        assert($('img[src="path/to/image"]').length)
-        assert($('a[href="path/to/link"]').length)
-      })
-
-      it('allows loose link labels to override link references', function () {
-        var markdown = 'a [link] (or is it) here\n\n[link]: #destination'
-        var $ = cheerio.load(marky(markdown))
-        assert(!$('a[href="#destination"]').length)
-        assert($('a[href="or%20is%20it"]').length)
       })
     })
   })
