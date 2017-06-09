@@ -4,7 +4,6 @@ var assert = require('assert')
 var marky = require('..')
 var fixtures = require('./fixtures')
 var cheerio = require('cheerio')
-var tripwire = require('tripwire')
 
 describe('markdown processing', function () {
   var $
@@ -336,60 +335,6 @@ describe('markdown processing', function () {
     it('includes query', function () {
       var $ = cheerio.load(marky('Testing www.example.name/marky?markdown=1&test here'))
       assert($("a[href='http://www.example.name/marky?markdown=1&test']").length)
-    })
-  })
-
-  describe('markdown after HTML blocks without an intervening blank line', function () {
-    var $
-    before(function () {
-      $ = cheerio.load(marky(fixtures['abstemious-html-block']))
-    })
-
-    it('processes a list', function () {
-      assert.equal($('ul').length, 1)
-    })
-
-    it('processes a blockquote', function () {
-      assert.equal($('blockquote').length, 1)
-    })
-
-    it('processes a #-style heading', function () {
-      assert.equal($('h1').length, 1)
-    })
-
-    it('processes a --- style heading', function () {
-      assert.equal($('h2').length, 1)
-    })
-
-    it('processes a code fence', function () {
-      assert.equal($('div.highlight.js').length, 1)
-    })
-
-    it('processes a table', function () {
-      assert.equal($('table').length, 1)
-    })
-
-    it('properly renders long documents containing many consecutive HTML blocks', function (done) {
-      // the failure mode here is an infinite loop that mocha can't interfere
-      // with, so we need to set up an environment that can do it
-      //
-      function handleException (e) {
-        if (tripwire.getContext()) {
-          // tripwire caused this exception; probably was our test blocking
-          assert(false)
-          done(false)
-        }
-      }
-      process.on('uncaughtException', handleException)
-      tripwire.resetTripwire(8000, { name: 'abstemious-pathology' })
-
-      var exploder = marky(fixtures['abstemious-pathology'])
-
-      tripwire.clearTripwire()
-      process.removeListener('uncaughtException', handleException)
-
-      assert(exploder.length)
-      done()
     })
   })
 })
