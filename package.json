@@ -78,8 +78,7 @@
     "mocha": "^3.4.1",
     "oniguruma": "~6.1.1",
     "standard": "^10.0.0",
-    "standard-version": "^4.1.0",
-    "tripwire": "^4.1.0"
+    "standard-version": "^4.1.0"
   },
   "bin": "./bin/marky-markdown.js",
   "standard": {
