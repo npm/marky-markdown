@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="11.0.0"></a>
+# [11.0.0](https://github.com/npm/marky-markdown/compare/v10.1.4...v11.0.0) (2017-06-09)
+
+
+### Bug Fixes
+
+* switch back to CommonMark HTML block parsing to match GitHub's new implementation ([c15349c](https://github.com/npm/marky-markdown/commit/c15349c))
+
+
+### BREAKING CHANGES
+
+* HTML blocks must (once again) be terminated by a blank line rather than allowing markdown to interrupt the HTML block. This matches marky-markdown@<10.x behavior, as well as CommonMark.
+
+
+
 <a name="10.1.4"></a>
 ## [10.1.4](https://github.com/npm/marky-markdown/compare/v10.1.3...v10.1.4) (2017-06-08)
 
