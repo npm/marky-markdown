@@ -29,7 +29,7 @@ describe('markdown processing', function () {
 
     it('converts leading tabs in code blocks to spaces', function () {
       var $ = cheerio.load(marky(fixtures.basic))
-      var indentHtml = $('.highlight.js .line .comment span:not(.js)').html()
+      var indentHtml = $('.highlight.js .line .meta:first-of-type > .meta:first-of-type > span:not(.js):first-of-type').html()
       assert(!~indentHtml.indexOf('\t'))
       assert(~indentHtml.indexOf('&#xA0;'))
     })
@@ -194,6 +194,11 @@ describe('markdown processing', function () {
       assert($('.highlight.diff').length)
     })
 
+    it('adds jsx class to jsx blocks', function () {
+      assert(~fixtures.basic.indexOf('```jsx'))
+      assert($('.highlight.jsx').length)
+    })
+
     it('wraps code highlighter output in div.highlight', function () {
       // the idea here is that we have a 1:1 correspondence of <div class='highlight'>
       // and their contained <pre class='editor'> elements coming from the highlighter
@@ -220,6 +225,10 @@ describe('markdown processing', function () {
     it('applies inline syntax highlighting classes to diffs', function () {
       assert($('.diff.inserted').length)
       assert($('.diff.deleted').length)
+    })
+
+    it('applies inline syntax highlighting classes to jsx', function () {
+      assert($('.jsx .js.keyword').length)
     })
 
     it('does not encode entities within code blocks', function () {

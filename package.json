@@ -47,7 +47,7 @@
     "atom-language-nginx": "^0.6.1",
     "github-slugger": "^1.0.0",
     "github-url-to-object": "^4.0.0",
-    "highlights": "^2.1.1",
+    "highlights": "^3.1.0",
     "highlights-tokens": "^1.0.1",
     "innertext": "^1.0.2",
     "is-plain-obj": "^1.1.0",

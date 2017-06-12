@@ -40,6 +40,19 @@ alert "hi"
 +added
 ```
 
+```jsx
+class Thinger extends React.Component {
+  constructor(props) {
+    super(props)
+  }
+  render() {
+    return (
+      <div>{this.whatever}</div>
+    )
+  }
+}
+```
+
 Mustache {{template}} variable {{do.not.replace}}
 
 ```js
