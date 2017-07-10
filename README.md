@@ -132,7 +132,15 @@ Here is an example using HTML5 to render text inside `<marky-markdown>` tags.
 
 Note: Usage with [webpack](https://webpack.github.io/) requires that your
 `webpack.config.js` configure a loader (such as
-[json-loader](https://github.com/webpack/json-loader)) for .json files.
+[json-loader](https://github.com/webpack/json-loader)) for .json files. Also, you need to config `process.browser` in `webpack.config.js` when you target browser:
+
+```js
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.browser': true
+    })
+  ],
+```
 
 ## Tests
 
