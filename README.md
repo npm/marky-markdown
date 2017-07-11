@@ -35,8 +35,10 @@ support for that version for marky-markdown.
 
 For more information on Node.js LTS and support, click [here](https://github.com/nodejs/LTS).
 
+- marky-markdown >= `11.x` supports `4`, `6`, `8`
+- marky-markdown `10.x` supports `4`, `6`
+- marky-markdown `9.x` supports `0.12`, `4`, `6`
 - marky-markdown < `9.0.0` supports `0.10`, `0.12`, `iojs`, `4`, `5`
-- marky-markdown >= `9.0.0` supports `0.12`, `4`, `6`
 
 ## Installation
 
@@ -196,8 +198,6 @@ marky(
 - [lodash](https://github.com/lodash/lodash): A utility library delivering consistency, customization, performance, &amp; extras.
 - [markdown-it](https://github.com/markdown-it/markdown-it): Markdown-it - modern pluggable markdown parser.
 - [markdown-it-emoji](https://github.com/markdown-it/markdown-it-emoji): Markdown-it-emoji extension for Markdown-it that parses markdown emoji syntax to unicode.
-- [markdown-it-expand-tabs](https://github.com/revin/markdown-it-expand-tabs): Replace leading tabs with spaces in fenced code blocks
-- [markdown-it-lazy-headers](https://github.com/Galadirith/markdown-it-lazy-headers): Lazy ATX headers plugin for markdown-it
 - [markdown-it-task-lists](https://github.com/revin/markdown-it-task-lists): Render GitHub-style [task lists](https://github.com/blog/1375-task-lists-in-gfm-issues-pulls-comments)
 - [property-ttl](https://github.com/soldair/property-ttl): Save memory by nulling out a property after ttl if it has not been accessed
 - [sanitize-html](https://github.com/punkave/sanitize-html): Clean up user-submitted HTML, preserving whitelisted elements and whitelisted attributes on a per-element basis
