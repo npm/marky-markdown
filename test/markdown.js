@@ -178,6 +178,12 @@ describe('markdown processing', function () {
       assert($('.highlight.sh').length)
     })
 
+    it('adds sh class to bash blocks', function () {
+      assert(~fixtures.basic.indexOf('```bash'))
+      assert($('.highlight.sh').length)
+      assert.equal($('.highlight.bash').length, 0)
+    })
+
     it('adds coffeescript class to coffee blocks', function () {
       assert(~fixtures.basic.indexOf('```coffee'))
       assert($('.highlight.coffeescript').length)
