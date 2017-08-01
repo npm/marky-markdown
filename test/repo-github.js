@@ -82,6 +82,16 @@ describe('when package repo is on github', function () {
     assert($short("img[src='https://raw.githubusercontent.com/mark/wahlberg/HEAD/html-page-and-image.png']").length)
   })
 
+  it('replaces relative img URLs with github URLs (HTML, multiline)', function () {
+    var src = "<p>\n<img src='html-image.png'/>\n</p>"
+    var $$ = cheerio.load(marky(src, {package: pkg}))
+    var $$short = cheerio.load(marky(src, {package: shortPkg}))
+    assert($("img[src='https://raw.githubusercontent.com/mark/wahlberg/HEAD/html-image.png']").length)
+    assert($$short("img[src='https://raw.githubusercontent.com/mark/wahlberg/HEAD/html-image.png']").length)
+    assert.equal(-1, $$.html().indexOf('<p></p>'))
+    assert.equal(-1, $$short.html().indexOf('<p></p>'))
+  })
+
   it('replaces slashy relative img URLs with github URLs', function () {
     assert(~fixtures.github.indexOf('![](/slashy/deep.png)'))
     assert($("img[src='https://raw.githubusercontent.com/mark/wahlberg/HEAD/slashy/deep.png']").length)
