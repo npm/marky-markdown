@@ -2,6 +2,7 @@
 
 var assert = require('assert')
 var marky = require('..')
+var sanitize = require('../lib/sanitize')
 var fixtures = require('./fixtures')
 var cheerio = require('cheerio')
 
@@ -158,6 +159,57 @@ describe('markdown processing', function () {
         var $ = cheerio.load(marky(markdown))
         assert(!$('a[href="#destination"]').length)
         assert($('a[href="or%20is%20it"]').length)
+      })
+    })
+
+    describe('auto-escaping HTML', function () {
+      var $doc
+      var html
+      before(function () {
+        $doc = cheerio.load(marky(fixtures['html-auto-escape']))
+        html = $doc.html()
+      })
+
+      it('auto-escapes <iframe>', function () {
+        assert.equal($doc('iframe').length, 0)
+        assert(~html.indexOf('&lt;iframe'))
+        assert(~html.indexOf('&lt;/iframe&gt;'))
+      })
+
+      it('auto-escapes <script>', function () {
+        assert.equal($doc('script').length, 0)
+        assert(~html.indexOf('&lt;script'))
+        assert(~html.indexOf('&lt;/script&gt;'))
+      })
+
+      it('auto-escapes <style>', function () {
+        assert.equal($doc('style').length, 0)
+        assert(~html.indexOf('&lt;style&gt;'))
+        assert(~html.indexOf('&lt;/style&gt;'))
+      })
+
+      it('auto-escapes <textarea>', function () {
+        assert.equal($doc('textarea').length, 0)
+        assert(~html.indexOf('&lt;textarea&gt;'))
+        assert(~html.indexOf('&lt;/textarea&gt;'))
+      })
+
+      it('auto-escapes <title>', function () {
+        assert.equal($doc('title').length, 0)
+        assert(~html.indexOf('&lt;title&gt;'))
+        assert(~html.indexOf('&lt;/title&gt;'))
+      })
+
+      it('does not auto-escape other HTML tags', function () {
+        function isAllowed (tag) {
+          // TODO: figure out how we should handle iframes
+          return tag !== 'iframe'
+        }
+
+        sanitize.config.allowedTags.filter(isAllowed).forEach(function (tag) {
+          assert(!~html.indexOf('&lt;' + tag + '&gt;'))
+          assert(!~html.indexOf('&lt;/' + tag + '&gt;'))
+        })
       })
     })
   })
