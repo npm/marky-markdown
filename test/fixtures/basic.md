@@ -27,6 +27,10 @@ app.listen(3000)
 echo hi
 ```
 
+```bash
+echo hi
+```
+
 ```coffeescript
 alert "hi"
 ```
