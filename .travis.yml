@@ -4,8 +4,7 @@ notifications:
   email: false
 
 node_js:
-  - 4
-  - 6
+  - 6.9.5
   - 8
 
 before_install:
