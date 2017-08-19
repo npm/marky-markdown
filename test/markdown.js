@@ -199,6 +199,13 @@ describe('markdown processing', function () {
       assert($('.highlight.jsx').length)
     })
 
+    it('adds ts class to typescript blocks', function () {
+      assert(~fixtures.basic.indexOf('```ts'))
+      assert(~fixtures.basic.indexOf('```typescript'))
+      assert.equal($('.highlight.ts').length, 2)
+      assert.equal($('.highlight.typescript').length, 0)
+    })
+
     it('wraps code highlighter output in div.highlight', function () {
       // the idea here is that we have a 1:1 correspondence of <div class='highlight'>
       // and their contained <pre class='editor'> elements coming from the highlighter
@@ -229,6 +236,12 @@ describe('markdown processing', function () {
 
     it('applies inline syntax highlighting classes to jsx', function () {
       assert($('.jsx .js.keyword').length)
+    })
+
+    it('applies inline syntax highlighting classes to typescript', function () {
+      assert.equal($('.highlight.typescript').length, 0)
+      assert($('.ts .storage.type').length)
+      assert($('.ts .entity.name.type.class').length)
     })
 
     it('does not encode entities within code blocks', function () {
