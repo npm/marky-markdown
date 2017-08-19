@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="11.1.0"></a>
+# [11.1.0](https://github.com/npm/marky-markdown/compare/v11.0.0...v11.1.0) (2017-08-19)
+
+
+### Bug Fixes
+
+* make github package-relative url rewriting work in multi-line html blocks ([#405](https://github.com/npm/marky-markdown/issues/405)) ([3cf4691](https://github.com/npm/marky-markdown/commit/3cf4691))
+
+
+### Features
+
+* add support for JSX syntax highlighting in code blocks ([#396](https://github.com/npm/marky-markdown/issues/396)) ([4c24348](https://github.com/npm/marky-markdown/commit/4c24348))
+* treat `bash` the same as `sh` for specifying code fence language ([#401](https://github.com/npm/marky-markdown/issues/401)) ([8ba4368](https://github.com/npm/marky-markdown/commit/8ba4368))
+
+
+
 <a name="11.0.0"></a>
 # [11.0.0](https://github.com/npm/marky-markdown/compare/v10.1.4...v11.0.0) (2017-06-09)
 
