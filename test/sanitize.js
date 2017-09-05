@@ -194,4 +194,13 @@ describe('sanitize', function () {
     var $ = cheerio.load(marky('<div id="oh-no">Foo.</div>'))
     assert.equal($('div').attr('id'), 'user-content-oh-no')
   })
+
+  it('allow h1/h2/h3/h4/h5/h6 alignment', function () {
+    assert($('<h1 align="center">foobar</h1>').length)
+    assert($('<h2 align="center">foobar</h2>').length)
+    assert($('<h3 align="center">foobar</h3>').length)
+    assert($('<h4 align="center">foobar</h4>').length)
+    assert($('<h5 align="center">foobar</h5>').length)
+    assert($('<h6 align="center">foobar</h6>').length)
+  })
 })
