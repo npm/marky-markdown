@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="11.3.0"></a>
+# [11.3.0](https://github.com/npm/marky-markdown/compare/v11.2.0...v11.3.0) (2017-09-19)
+
+
+### Features
+
+* allow heading alignment ([62ae4c6](https://github.com/npm/marky-markdown/commit/62ae4c6))
+* **dep:** bump oniguruma ([2c5eaf2](https://github.com/npm/marky-markdown/commit/2c5eaf2))
+* **test:** do not hard code 6.9.5 in travis.yml ([4fba622](https://github.com/npm/marky-markdown/commit/4fba622))
+
+
+
 <a name="11.2.0"></a>
 # [11.2.0](https://github.com/npm/marky-markdown/compare/v11.1.0...v11.2.0) (2017-08-19)
 
