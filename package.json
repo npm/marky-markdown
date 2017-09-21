@@ -67,7 +67,7 @@
     "markdown-it-lazy-headers": "^0.1.3",
     "markdown-it-task-lists": "^2.0.1",
     "property-ttl": "^1.0.0",
-    "sanitize-html": "^1.6.1",
+    "sanitize-html": "^1.14.1",
     "similarity": "^1.0.1"
   },
   "devDependencies": {
