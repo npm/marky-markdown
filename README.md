@@ -3,8 +3,8 @@
 [![Build Status](https://travis-ci.org/npm/marky-markdown.svg?branch=master)](https://travis-ci.org/npm/marky-markdown)
 [![Code Climate](https://codeclimate.com/github/npm/marky-markdown/badges/gpa.svg)](https://codeclimate.com/github/npm/marky-markdown)
 [![Dependency Status](https://david-dm.org/npm/marky-markdown.svg)](https://david-dm.org/npm/marky-markdown)
-[![Issue Stats](http://issuestats.com/github/npm/marky-markdown/badge/pr)](http://issuestats.com/github/npm/marky-markdown)
-[![Issue Stats](http://issuestats.com/github/npm/marky-markdown/badge/issue)](http://issuestats.com/github/npm/marky-markdown)
+[![Pull Requests](https://img.shields.io/github/issues-pr/npm/marky-markdown.svg)](https://github.com/npm/marky-markdown/pulls)
+[![Issues](https://img.shields.io/github/issues/npm/marky-markdown.svg)](https://github.com/npm/marky-markdown/issues)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 
 `marky-markdown` is a markdown parser, written in NodeJS, that aims for
