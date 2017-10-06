@@ -49,10 +49,13 @@ describe('when package repo is on github', function () {
   it('rewrites slashy relative links hrefs to absolute (HTML)', function () {
     assert(~fixtures.github.indexOf('<a href="nested/link/image">'))
     assert(~fixtures.github.indexOf('<a href="html/block.html">Link in an HTML block</a>'))
+    assert(~fixtures.github.indexOf('<a href="html/block2.html">second link</a>'))
     assert($("a[href='https://github.com/mark/wahlberg/blob/HEAD/nested/link/image']").length)
     assert($("a[href='https://github.com/mark/wahlberg/blob/HEAD/html/block.html']").length)
+    assert($("a[href='https://github.com/mark/wahlberg/blob/HEAD/html/block2.html']").length)
     assert($short("a[href='https://github.com/mark/wahlberg/blob/HEAD/nested/link/image']").length)
     assert($short("a[href='https://github.com/mark/wahlberg/blob/HEAD/html/block.html']").length)
+    assert($short("a[href='https://github.com/mark/wahlberg/blob/HEAD/html/block2.html']").length)
   })
 
   it('leaves protocol-relative URLs alone', function () {
@@ -101,10 +104,13 @@ describe('when package repo is on github', function () {
   it('replaces slashy relative img URLs with github URLs (HTML)', function () {
     assert(~fixtures.github.indexOf('<img src="nested/link/image/image.png">'))
     assert(~fixtures.github.indexOf('<img src="html/block.png" />'))
+    assert(~fixtures.github.indexOf('<img src="html/block2.png" />'))
     assert($("img[src='https://raw.githubusercontent.com/mark/wahlberg/HEAD/nested/link/image/image.png']").length)
     assert($("img[src='https://raw.githubusercontent.com/mark/wahlberg/HEAD/html/block.png']").length)
+    assert($("img[src='https://raw.githubusercontent.com/mark/wahlberg/HEAD/html/block2.png']").length)
     assert($short("img[src='https://raw.githubusercontent.com/mark/wahlberg/HEAD/nested/link/image/image.png']").length)
     assert($short("img[src='https://raw.githubusercontent.com/mark/wahlberg/HEAD/html/block.png']").length)
+    assert($short("img[src='https://raw.githubusercontent.com/mark/wahlberg/HEAD/html/block2.png']").length)
   })
 
   it('leaves protocol relative URLs alone', function () {

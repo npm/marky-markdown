@@ -55,6 +55,9 @@ Smiley! :)
 # Heading with nested image/link: <a href="nested/link/image"><img src="nested/link/image/image.png"></a>. Nice.
 
 <img src="html/block.png" />
+<br />
+<img src="html/block2.png" />
 
-<p><a href="html/block.html">Link in an HTML block</a></p>
+<p><a href="html/block.html">Link in an HTML block</a>
+and <a href="html/block2.html">second link</a></p>
 
