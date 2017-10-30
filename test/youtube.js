@@ -10,7 +10,7 @@ describe('youtube', function () {
   var iframes
 
   before(function () {
-    $ = cheerio.load(marky(fixtures.basic))
+    $ = cheerio.load(marky(fixtures.basic, {allowDeprecatedYoutubeEmbeds: true}))
     iframes = $('.youtube-video > iframe')
   })
 
