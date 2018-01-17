@@ -27,7 +27,7 @@ describe('youtube', function () {
 
   it('preserves existing src, frameborder, and allowfullscreen properties', function () {
     var iframe = iframes.eq(0)
-    assert.equal(iframe.attr('src'), '//www.youtube.com/embed/3I78ELjTzlQ')
+    assert.equal(iframe.attr('src'), 'https://www.youtube.com/embed/3I78ELjTzlQ')
     assert.equal(iframe.attr('frameborder'), '0')
     assert.equal(iframe.attr('allowfullscreen'), '')
   })

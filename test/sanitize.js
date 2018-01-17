@@ -63,7 +63,7 @@ describe('sanitize', function () {
     assert(~fixtures.basic.indexOf('<iframe src="//www.youtube.com/embed/3I78ELjTzlQ'))
     assert(~fixtures.basic.indexOf('<iframe src="//malware.com'))
     assert.equal($('iframe').length, 2)
-    assert.equal($('iframe').eq(0).attr('src'), '//www.youtube.com/embed/3I78ELjTzlQ')
+    assert.equal($('iframe').eq(0).attr('src'), 'https://www.youtube.com/embed/3I78ELjTzlQ')
     assert.equal($('iframe').eq(1).attr('src'), 'https://www.youtube.com/embed/DN4yLZB1vUQ')
   })
 
@@ -108,20 +108,21 @@ describe('sanitize', function () {
 
   it('allows table cell left alignment', function () {
     var html = marky(fixtures.dirty)
-    assert(html.indexOf('<th style="text-align:left">') > -1)
-    assert(html.indexOf('<td style="text-align:left">') > -1)
+    console.info(html)
+    assert(html.indexOf('<th style="text-align:left;">') > -1)
+    assert(html.indexOf('<td style="text-align:left;">') > -1)
   })
 
   it('allows table cell right alignment', function () {
     var html = marky(fixtures.dirty)
-    assert(html.indexOf('<th style="text-align:right">') > -1)
-    assert(html.indexOf('<td style="text-align:right">') > -1)
+    assert(html.indexOf('<th style="text-align:right;">') > -1)
+    assert(html.indexOf('<td style="text-align:right;">') > -1)
   })
 
   it('allows table cell center alignment', function () {
     var html = marky(fixtures.dirty)
-    assert(html.indexOf('<th style="text-align:center">') > -1)
-    assert(html.indexOf('<td style="text-align:center">') > -1)
+    assert(html.indexOf('<th style="text-align:center;">') > -1)
+    assert(html.indexOf('<td style="text-align:center;">') > -1)
   })
 
   it('strips non-alignment table cell style', function () {

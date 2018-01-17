@@ -68,6 +68,7 @@ The default options are as follows:
 ```js
 {
   sanitize: true,               // remove script tags and stuff
+  nofollow: true,               // add rel=nofollow to all links
   linkify: true,                // turn orphan URLs into hyperlinks
   highlightSyntax: true,        // run highlights on fenced code blocks
   prefixHeadingIds: true,       // prevent DOM id collisions
