@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="12.0.0"></a>
+# [12.0.0](https://github.com/npm/marky-markdown/compare/v11.3.2...v12.0.0) (2018-01-17)
+
+
+### Features
+
+* add rel=nofollow to links if the `nofollow` option is set ([#426](https://github.com/npm/marky-markdown/issues/426)) ([bb36977](https://github.com/npm/marky-markdown/commit/bb36977))
+
+
+### BREAKING CHANGES
+
+* links now default to having rel=nofollow set
+
+
+
 <a name="11.3.2"></a>
 ## [11.3.2](https://github.com/npm/marky-markdown/compare/v11.3.1...v11.3.2) (2017-09-28)
 
