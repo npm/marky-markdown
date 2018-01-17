@@ -63,7 +63,7 @@ var marky = module.exports = function (markdown, options) {
 }
 
 marky.parsePackageDescription = function (description) {
-  return sanitize(render.renderPackageDescription(description))
+  return sanitize(render.renderPackageDescription(description), defaultOptions)
 }
 
 marky.getParser = function (options) {
@@ -74,7 +74,7 @@ marky.getParser = function (options) {
   if (options.sanitize) {
     var originalRender = parser.render
     parser.render = function (markdown) {
-      return sanitize(originalRender.call(parser, markdown))
+      return sanitize(originalRender.call(parser, markdown), options)
     }
   }
   return parser

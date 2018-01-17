@@ -74,7 +74,7 @@ describe('packagize', function () {
 
     it('parses description as markdown and removes script tags', function () {
       var description = marky.parsePackageDescription('bad <script>/xss</script> [hax](http://hax.com)')
-      assert.equal(description, 'bad  <a href="http://hax.com">hax</a>')
+      assert.equal(description, 'bad  <a href="http://hax.com" rel="nofollow">hax</a>')
     })
 
     it('safely handles inline code blocks', function () {
