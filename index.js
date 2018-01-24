@@ -15,7 +15,8 @@ var defaultOptions = {
   debug: false,
   package: null,
   headingAnchorClass: 'anchor',
-  headingSvgClass: ['octicon', 'octicon-link']
+  headingSvgClass: ['octicon', 'octicon-link'],
+  allowDeprecatedYoutubeEmbeds: false
 }
 
 var marky = module.exports = function (markdown, options) {

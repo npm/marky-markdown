@@ -58,10 +58,15 @@ describe('sanitize', function () {
     assert.equal($('s').text(), 'orange')
   })
 
-  it('disallows iframes from sources other than youtube', function () {
+  it('disallows all iframes by default', function () {
     var $ = cheerio.load(marky(fixtures.basic))
     assert(~fixtures.basic.indexOf('<iframe src="//www.youtube.com/embed/3I78ELjTzlQ'))
     assert(~fixtures.basic.indexOf('<iframe src="//malware.com'))
+    assert.equal($('iframe').length, 0)
+  })
+
+  it('allows iframes from youtube if `allowDeprecatedYoutubeEmbeds` is set to true', function () {
+    var $ = cheerio.load(marky(fixtures.basic, {allowDeprecatedYoutubeEmbeds: true}))
     assert.equal($('iframe').length, 2)
     assert.equal($('iframe').eq(0).attr('src'), 'https://www.youtube.com/embed/3I78ELjTzlQ')
     assert.equal($('iframe').eq(1).attr('src'), 'https://www.youtube.com/embed/DN4yLZB1vUQ')
