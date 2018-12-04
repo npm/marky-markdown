@@ -134,4 +134,20 @@ describe('when package repo is on github', function () {
     errorPkg.url = ''
     assert(marky(fixtures.github, {package: errorPkg}).length)
   })
+
+  it('handles subdirectories in repository.url', function () {
+    var errorPkg = {
+      name: 'wahlberg',
+      repository: {
+        type: 'git',
+        url: 'https://github.com/mark/wahlberg/tree/master/subdir'
+      }}
+    var $ = cheerio.load(marky(fixtures.github, { package: errorPkg }))
+
+    assert(~fixtures.github.indexOf('(relative/file.js)'))
+    assert($("a[href='https://github.com/mark/wahlberg/tree/master/subdir/relative/file.js']").length)
+
+    assert(~fixtures.github.indexOf('(/slashy/poo)'))
+    assert($("a[href='https://github.com/mark/wahlberg/tree/master/slashy/poo']").length)
+  })
 })
