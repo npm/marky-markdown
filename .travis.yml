@@ -6,6 +6,8 @@ notifications:
 node_js:
   - 6
   - 8
+  - 10
+  - 12
 
 before_install:
   - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
