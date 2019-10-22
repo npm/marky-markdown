@@ -49,13 +49,13 @@ describe('marky-markdown', function () {
   it('getParser.render returns the same as marky.render (sanitize: true)', function () {
     var html = marky(fixtures.benchmark)
     var parserHtml = marky.getParser().render(fixtures.benchmark)
-    assert.equal(html, parserHtml)
+    assert.strictEqual(html, parserHtml)
   })
 
   it('getParser.render returns the same as marky.render (sanitize: false)', function () {
-    var html = marky(fixtures.benchmark, {sanitize: false})
-    var parserHtml = marky.getParser({sanitize: false}).render(fixtures.benchmark)
-    assert.equal(html, parserHtml)
+    var html = marky(fixtures.benchmark, { sanitize: false })
+    var parserHtml = marky.getParser({ sanitize: false }).render(fixtures.benchmark)
+    assert.strictEqual(html, parserHtml)
   })
 })
 
@@ -108,25 +108,25 @@ describe('debug', function () {
   it('prepends a debug comment to the rendered HTML', function () {
     var unhookIntercept = intercept(hideOutput)
 
-    var output = marky(fixtures.benchmark, {debug: true})
+    var output = marky(fixtures.benchmark, { debug: true })
     var firstLine = output.split('\n')[0].trim()
 
     unhookIntercept()
 
     assert(firstLine.indexOf(markyPackage.version) > -1)
-    assert.equal(firstLine.indexOf('<!--'), 0)
-    assert.equal(firstLine.indexOf('-->'), firstLine.length - 3)
+    assert.strictEqual(firstLine.indexOf('<!--'), 0)
+    assert.strictEqual(firstLine.indexOf('-->'), firstLine.length - 3)
   })
 
   it('produces the same HTML in debug mode as in normal mode', function () {
     var unhookIntercept = intercept(hideOutput)
 
     var normal = marky(fixtures.benchmark)
-    var debug = marky(fixtures.benchmark, {debug: true})
+    var debug = marky(fixtures.benchmark, { debug: true })
 
     unhookIntercept()
 
-    assert.equal(normal, debug.split('\n').slice(1).join('\n'))
+    assert.strictEqual(normal, debug.split('\n').slice(1).join('\n'))
   })
 })
 
@@ -138,9 +138,9 @@ describe('after', function () {
       // node <= 0.12 lacks assert.deepStrictEqual(), just compare manually
       oldkeys.sort()
       var currentkeys = Object.keys(global).sort()
-      assert.equal(currentkeys.length, oldkeys.length)
+      assert.strictEqual(currentkeys.length, oldkeys.length)
       currentkeys.forEach(function (key, index) {
-        assert.equal(key, oldkeys[index])
+        assert.strictEqual(key, oldkeys[index])
       })
     }
   })

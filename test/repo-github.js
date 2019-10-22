@@ -21,8 +21,8 @@ describe('when package repo is on github', function () {
   }
 
   before(function () {
-    $ = cheerio.load(marky(fixtures.github, {package: pkg}))
-    $short = cheerio.load(marky(fixtures.github, {package: shortPkg}))
+    $ = cheerio.load(marky(fixtures.github, { package: pkg }))
+    $short = cheerio.load(marky(fixtures.github, { package: shortPkg }))
   })
 
   it('rewrites relative link hrefs to absolute', function () {
@@ -84,12 +84,12 @@ describe('when package repo is on github', function () {
 
   it('replaces relative img URLs with github URLs (HTML, multiline)', function () {
     var src = "<p>\n<img src='html-image.png'/>\n</p>"
-    var $$ = cheerio.load(marky(src, {package: pkg}))
-    var $$short = cheerio.load(marky(src, {package: shortPkg}))
+    var $$ = cheerio.load(marky(src, { package: pkg }))
+    var $$short = cheerio.load(marky(src, { package: shortPkg }))
     assert($("img[src='https://raw.githubusercontent.com/mark/wahlberg/HEAD/html-image.png']").length)
     assert($$short("img[src='https://raw.githubusercontent.com/mark/wahlberg/HEAD/html-image.png']").length)
-    assert.equal(-1, $$.html().indexOf('<p></p>'))
-    assert.equal(-1, $$short.html().indexOf('<p></p>'))
+    assert.strictEqual(-1, $$.html().indexOf('<p></p>'))
+    assert.strictEqual(-1, $$short.html().indexOf('<p></p>'))
   })
 
   it('replaces slashy relative img URLs with github URLs', function () {
@@ -125,13 +125,14 @@ describe('when package repo is on github', function () {
       repository: {
         type: 'git',
         url: undefined
-      }}
-    assert(marky(fixtures.github, {package: errorPkg}).length)
+      }
+    }
+    assert(marky(fixtures.github, { package: errorPkg }).length)
 
     errorPkg.url = null
-    assert(marky(fixtures.github, {package: errorPkg}).length)
+    assert(marky(fixtures.github, { package: errorPkg }).length)
 
     errorPkg.url = ''
-    assert(marky(fixtures.github, {package: errorPkg}).length)
+    assert(marky(fixtures.github, { package: errorPkg }).length)
   })
 })

@@ -17,17 +17,17 @@ var pkg = {
 
 marky(
   '# hello, I am the foo readme',
-  {package: pkg}
+  { package: pkg }
 ).html()
 
 // Disable syntax highlighting
 marky(
   "# I'm a file with github flavored markdown",
-  {highlightSyntax: false}
+  { highlightSyntax: false }
 ).html()
 
 // Pass in a `debug` for verbose output
 marky(
   "# hello, I'm an evil document",
-  {debug: true}
+  { debug: true }
 ).html()

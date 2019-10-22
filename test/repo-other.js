@@ -16,7 +16,7 @@ describe('when package repo is NOT on github', function () {
   }
 
   before(function () {
-    $ = cheerio.load(marky(fixtures.github, {package: pkg}))
+    $ = cheerio.load(marky(fixtures.github, { package: pkg }))
   })
 
   it('leaves relative URLs alone', function () {

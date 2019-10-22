@@ -18,7 +18,7 @@ describe('cdn', function () {
         serveImagesWithCDN: true
       }
       var html = marky(fixtures.basic, options)
-      assert.equal(html, controlHtml)
+      assert.strictEqual(html, controlHtml)
     })
 
     it('skips CDN remap when the package lacks a name', function () {
@@ -27,7 +27,7 @@ describe('cdn', function () {
         serveImagesWithCDN: true
       }
       var html = marky(fixtures.basic, options)
-      assert.equal(html, controlHtml)
+      assert.strictEqual(html, controlHtml)
     })
 
     it('skips CDN remap when the package lacks a version', function () {
@@ -36,7 +36,7 @@ describe('cdn', function () {
         serveImagesWithCDN: true
       }
       var html = marky(fixtures.basic, options)
-      assert.equal(html, controlHtml)
+      assert.strictEqual(html, controlHtml)
     })
   })
 

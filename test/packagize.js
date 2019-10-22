@@ -27,64 +27,64 @@ describe('packagize', function () {
 
   describe('name', function () {
     it("adds .package-name-redundant class to first h1 if it's similar to package.name", function () {
-      var $ = cheerio.load(marky(fixtures.wibble, {package: packages.wibble}))
-      assert.equal($('h1.package-name-redundant').length, 1)
+      var $ = cheerio.load(marky(fixtures.wibble, { package: packages.wibble }))
+      assert.strictEqual($('h1.package-name-redundant').length, 1)
     })
 
     it("adds .package-name-redundant class to first h1 if it's similar to a scoped package.name", function () {
-      var $ = cheerio.load(marky(fixtures.burblewibble, {package: packages['@burble/wibble']}))
-      assert.equal($('h1.package-name-redundant').length, 1)
+      var $ = cheerio.load(marky(fixtures.burblewibble, { package: packages['@burble/wibble'] }))
+      assert.strictEqual($('h1.package-name-redundant').length, 1)
     })
 
     it('leaves first h1 alone if it differs from package.name', function () {
-      var $ = cheerio.load(marky(fixtures.wibble, {package: packages.dangledor}))
-      assert.equal($('h1.package-name-redundant').length, 0)
-      assert.equal($('h1:not(.package-name)').text(), 'wibble.js')
+      var $ = cheerio.load(marky(fixtures.wibble, { package: packages.dangledor }))
+      assert.strictEqual($('h1.package-name-redundant').length, 0)
+      assert.strictEqual($('h1:not(.package-name)').text(), 'wibble.js')
     })
   })
 
   describe('description', function () {
     it("adds .package-description-redundant class to first h1 if it's similar to package.description", function () {
-      var $ = cheerio.load(marky(fixtures.wibble, {package: packages.wobble}))
-      assert.equal($('h1.package-description-redundant').length, 1)
+      var $ = cheerio.load(marky(fixtures.wibble, { package: packages.wobble }))
+      assert.strictEqual($('h1.package-description-redundant').length, 1)
     })
 
     it('leaves first h1 alone if it differs from package.description', function () {
-      var $ = cheerio.load(marky(fixtures.wibble, {package: packages.dangledor}))
-      assert.equal($('h1.package-description-redundant').length, 0)
-      assert.equal($('h1:not(.package-name)').text(), 'wibble.js')
+      var $ = cheerio.load(marky(fixtures.wibble, { package: packages.dangledor }))
+      assert.strictEqual($('h1.package-description-redundant').length, 0)
+      assert.strictEqual($('h1:not(.package-name)').text(), 'wibble.js')
     })
 
     it("adds .package-description-redundant class to first p if it's similar to package.description", function () {
-      var $ = cheerio.load(marky(fixtures.wibble, {package: packages.wibble}))
-      assert.equal($('p.package-description-redundant').length, 1)
+      var $ = cheerio.load(marky(fixtures.wibble, { package: packages.wibble }))
+      assert.strictEqual($('p.package-description-redundant').length, 1)
     })
 
     it('leaves first p alone if it differs from package.description', function () {
-      var $ = cheerio.load(marky(fixtures.wibble, {package: packages.dangledor}))
-      assert.equal($('p.package-description-redundant').length, 0)
-      assert.equal($('p:not(.package-description)').first().text(), 'A package called wibble!')
+      var $ = cheerio.load(marky(fixtures.wibble, { package: packages.dangledor }))
+      assert.strictEqual($('p.package-description-redundant').length, 0)
+      assert.strictEqual($('p:not(.package-description)').first().text(), 'A package called wibble!')
     })
   })
 
   describe('parsePackageDescription()', function () {
     it('is a method for parsing package descriptions', function () {
-      assert.equal(typeof marky.parsePackageDescription, 'function')
+      assert.strictEqual(typeof marky.parsePackageDescription, 'function')
     })
 
     it('parses description as markdown and removes script tags', function () {
       var description = marky.parsePackageDescription('bad <script>/xss</script> [hax](http://hax.com)')
-      assert.equal(description, 'bad  <a href="http://hax.com" rel="nofollow">hax</a>')
+      assert.strictEqual(description, 'bad  <a href="http://hax.com" rel="nofollow">hax</a>')
     })
 
     it('safely handles inline code blocks', function () {
       var description = marky.parsePackageDescription('Browser `<input type="text">` Helpers')
-      assert.equal(description, 'Browser <code>&lt;input type=&quot;text&quot;&gt;</code> Helpers')
+      assert.strictEqual(description, 'Browser <code>&lt;input type=&quot;text&quot;&gt;</code> Helpers')
     })
 
     it('safely handles script tags in inline code blocks', function () {
       var description = marky.parsePackageDescription('Here comes a `<script>` tag')
-      assert.equal(description, 'Here comes a <code>&lt;script&gt;</code> tag')
+      assert.strictEqual(description, 'Here comes a <code>&lt;script&gt;</code> tag')
     })
   })
 })

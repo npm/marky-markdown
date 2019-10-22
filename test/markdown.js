@@ -8,12 +8,12 @@ var cheerio = require('cheerio')
 describe('markdown processing', function () {
   var $
   before(function () {
-    $ = cheerio.load(marky(fixtures.basic, {highlightSyntax: true}))
+    $ = cheerio.load(marky(fixtures.basic, { highlightSyntax: true }))
   })
 
   it('preserves query parameters in URLs when making them into links', function () {
     assert(~fixtures.basic.indexOf('watch?v=dQw4w9WgXcQ'))
-    assert.equal($("a[href*='youtube.com']").attr('href'), 'https://www.youtube.com/watch?v=dQw4w9WgXcQ')
+    assert.strictEqual($("a[href*='youtube.com']").attr('href'), 'https://www.youtube.com/watch?v=dQw4w9WgXcQ')
   })
 
   describe('github flavored markdown', function () {
@@ -24,7 +24,7 @@ describe('markdown processing', function () {
       var $relaxed = cheerio.load(marky(fixtures['link-ref-relaxed']))
       assert($normal('a[href="/actual/link/here"]').length)
       assert($relaxed('a[href="/actual/link/here"]').length)
-      assert.equal($normal.html(), $relaxed.html())
+      assert.strictEqual($normal.html(), $relaxed.html())
     })
 
     it('converts leading tabs in code blocks to spaces', function () {
@@ -52,12 +52,12 @@ describe('markdown processing', function () {
 
       it('renders items marked up as [ ] as unchecked', function () {
         var shouldBeUnchecked = (fixtures['task-list'].match(/[.*+-]\s+\[ ]/g) || []).length
-        assert.equal(shouldBeUnchecked, $todo('input[type=checkbox].task-list-item-checkbox:not(:checked)').length)
+        assert.strictEqual(shouldBeUnchecked, $todo('input[type=checkbox].task-list-item-checkbox:not(:checked)').length)
       })
 
       it('renders items marked up as [x] as checked', function () {
         var shouldBeChecked = (fixtures['task-list'].match(/[.*+-]\s+\[x]/g) || []).length
-        assert.equal(shouldBeChecked, $todo('input[type=checkbox].task-list-item-checkbox:checked').length)
+        assert.strictEqual(shouldBeChecked, $todo('input[type=checkbox].task-list-item-checkbox:checked').length)
       })
 
       it('always disables the rendered checkboxes', function () {
@@ -88,7 +88,7 @@ describe('markdown processing', function () {
     describe('tables', function () {
       var tables
       before(function () {
-        tables = marky(fixtures['tables'])
+        tables = marky(fixtures.tables)
       })
 
       it('does not escape backticks inside code blocks', function () {
@@ -130,8 +130,8 @@ describe('markdown processing', function () {
         markdown += '[two]: #destination "with a title"\n'
         markdown += '[three]: #destination (with a title)\n'
         var $ = cheerio.load(marky(markdown))
-        assert.equal($('a').length, 3)
-        assert.equal($('a[title="with a title"]').length, 3)
+        assert.strictEqual($('a').length, 3)
+        assert.strictEqual($('a[title="with a title"]').length, 3)
       })
 
       it('allows whitespace between link labels and destinations', function () {
@@ -181,7 +181,7 @@ describe('markdown processing', function () {
     it('adds sh class to bash blocks', function () {
       assert(~fixtures.basic.indexOf('```bash'))
       assert($('.highlight.sh').length)
-      assert.equal($('.highlight.bash').length, 0)
+      assert.strictEqual($('.highlight.bash').length, 0)
     })
 
     it('adds coffeescript class to coffee blocks', function () {
@@ -202,14 +202,14 @@ describe('markdown processing', function () {
     it('adds ts class to typescript blocks', function () {
       assert(~fixtures.basic.indexOf('```ts'))
       assert(~fixtures.basic.indexOf('```typescript'))
-      assert.equal($('.highlight.ts').length, 2)
-      assert.equal($('.highlight.typescript').length, 0)
+      assert.strictEqual($('.highlight.ts').length, 2)
+      assert.strictEqual($('.highlight.typescript').length, 0)
     })
 
     it('wraps code highlighter output in div.highlight', function () {
       // the idea here is that we have a 1:1 correspondence of <div class='highlight'>
       // and their contained <pre class='editor'> elements coming from the highlighter
-      assert.equal($('div.highlight').length, $('div.highlight > pre.editor').length)
+      assert.strictEqual($('div.highlight').length, $('div.highlight > pre.editor').length)
     })
 
     it('skips code highlighter wrapper when no language is specified', function () {
@@ -239,7 +239,7 @@ describe('markdown processing', function () {
     })
 
     it('applies inline syntax highlighting classes to typescript', function () {
-      assert.equal($('.highlight.typescript').length, 0)
+      assert.strictEqual($('.highlight.typescript').length, 0)
       assert($('.ts .storage.type').length)
       assert($('.ts .entity.name.type.class').length)
     })
@@ -253,10 +253,10 @@ describe('markdown processing', function () {
 
     it("omits code blocks' highlighting wrapper element when syntax highlighting is off", function () {
       assert(~fixtures.basic.indexOf('```js'))
-      var html = marky(fixtures.basic, {highlightSyntax: false})
+      var html = marky(fixtures.basic, { highlightSyntax: false })
       var $ = cheerio.load(html)
       assert(~html.indexOf("var express = require('express')"))
-      assert.equal($('.highlight').length, 0)
+      assert.strictEqual($('.highlight').length, 0)
     })
   })
 
@@ -272,7 +272,7 @@ describe('markdown processing', function () {
     assert(~fixtures.basic.indexOf('{{name.lastName}}'))
     assert(~fixtures.basic.indexOf('{{name.firstName}}'))
     assert(~fixtures.basic.indexOf('{{name.suffix}}'))
-    var html = marky(fixtures.basic, {highlightSyntax: true})
+    var html = marky(fixtures.basic, { highlightSyntax: true })
     assert(~html.indexOf('{{name.lastName}}'))
     assert(~html.indexOf('{{name.firstName}}'))
     assert(~html.indexOf('{{name.suffix}}'))
@@ -282,7 +282,7 @@ describe('markdown processing', function () {
     assert(~fixtures.basic.indexOf('{{name.lastName}}'))
     assert(~fixtures.basic.indexOf('{{name.firstName}}'))
     assert(~fixtures.basic.indexOf('{{name.suffix}}'))
-    var html = marky(fixtures.basic, {highlightSyntax: false})
+    var html = marky(fixtures.basic, { highlightSyntax: false })
     assert(~html.indexOf('{{name.lastName}}'))
     assert(~html.indexOf('{{name.firstName}}'))
     assert(~html.indexOf('{{name.suffix}}'))
@@ -300,7 +300,7 @@ describe('markdown processing', function () {
       // into <a href="http://www.foo-bar%25spam@eggs">...</a> but we're not going
       // to test for that (we currently "fail" anyway)
       var $ = cheerio.load(marky('www.example.name \n www.test.example.name \n www.fakesite'))
-      assert.equal($('a').length, 3)
+      assert.strictEqual($('a').length, 3)
       assert($("a[href='http://www.example.name']").length)
       assert($("a[href='http://www.test.example.name']").length)
       assert($("a[href='http://www.fakesite']").length)
@@ -308,7 +308,7 @@ describe('markdown processing', function () {
 
     it('omits trailing dots from linkified quasi-hostnames', function () {
       var $ = cheerio.load(marky('www.example.name. \n www.test.example.name. \n www.fakesite.'))
-      assert.equal($('a').length, 3)
+      assert.strictEqual($('a').length, 3)
       assert($("a[href='http://www.example.name']").length)
       assert($("a[href='http://www.test.example.name']").length)
       assert($("a[href='http://www.fakesite']").length)
@@ -316,13 +316,13 @@ describe('markdown processing', function () {
 
     it('linkifies "www." but not "www"', function () {
       var $ = cheerio.load(marky('this is a www. www test.'))
-      assert.equal($('a').length, 1)
+      assert.strictEqual($('a').length, 1)
       assert($("a[href='http://www']").length)
     })
 
     it('linkifies www.[tld]', function () {
       var $ = cheerio.load(marky('www.md \n www.com \n www.name'))
-      assert.equal($('a').length, 3)
+      assert.strictEqual($('a').length, 3)
       assert($("a[href='http://www.md']").length)
       assert($("a[href='http://www.com']").length)
       assert($("a[href='http://www.name']").length)
@@ -357,7 +357,7 @@ describe('markdown processing', function () {
 
     it('includes path components', function () {
       var $ = cheerio.load(marky('[www.example.name/marky/markdown] www.example.name/marky/markdown (www.example.name/marky/markdown)'))
-      assert.equal($("a[href='http://www.example.name/marky/markdown']").length, 3)
+      assert.strictEqual($("a[href='http://www.example.name/marky/markdown']").length, 3)
     })
 
     it('includes query', function () {

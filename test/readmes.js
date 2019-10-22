@@ -12,7 +12,7 @@ describe('real readmes in the wild', function () {
     packages.forEach(function (name) {
       console.log('\t' + name)
       assert(typeof fixtures[name] === 'string')
-      var html = marky(fixtures[name], {package: getPackage(name)})
+      var html = marky(fixtures[name], { package: getPackage(name) })
       assert(html.length > 100)
 
       if (name === packages[packages.length - 1]) {
@@ -23,7 +23,7 @@ describe('real readmes in the wild', function () {
 
   it('parses all saved fixture readmes', function (done) {
     parsePackages(fixtures.examples, done, function (name) {
-      return {name: name}
+      return { name: name }
     })
   })
 
