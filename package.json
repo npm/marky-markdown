@@ -1,6 +1,6 @@
 {
-  "name": "marky-markdown",
-  "version": "12.0.0",
+  "name": "@npmcorp/marky-markdown",
+  "version": "12.0.3",
   "description": "npm's markdown parser",
   "main": "index.js",
   "scripts": {

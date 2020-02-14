@@ -88,13 +88,15 @@ console.log(faker.fake('{{name.lastName}}, {{name.firstName}} {{name.suffix}}'))
 ![](http://insecure.com/bad.png)
 ![](https://secure.com/good.png)
 
+<img style="width:100%;position:fixed;top:0;left:0;">
+
 #### h4, anyone
 
 [youtube video link](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
 
 <iframe src="//www.youtube.com/embed/3I78ELjTzlQ" frameborder="0" allowfullscreen></iframe>
 
-<iframe src="https://www.youtube.com/embed/DN4yLZB1vUQ"></iframe>
+<iframe src="https://www.youtube.com/embed/DN4yLZB1vUQ" frameborder="0" allowfullscreen></iframe>
 
 <iframe src="//malware.com" allowfullscreen></iframe>
 
