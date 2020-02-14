@@ -62,9 +62,8 @@ describe('sanitize', function () {
     var $ = cheerio.load(marky(fixtures.basic))
     assert(~fixtures.basic.indexOf('<iframe src="//www.youtube.com/embed/3I78ELjTzlQ'))
     assert(~fixtures.basic.indexOf('<iframe src="//malware.com'))
-    assert.equal($('iframe').length, 2)
-    assert.equal($('iframe').eq(0).attr('src'), 'https://www.youtube.com/embed/3I78ELjTzlQ')
-    assert.equal($('iframe').eq(1).attr('src'), 'https://www.youtube.com/embed/DN4yLZB1vUQ')
+    assert.equal($('iframe').length, 1)
+    assert.equal($('iframe').eq(0).attr('src'), 'https://www.youtube.com/embed/DN4yLZB1vUQ')
   })
 
   it('allows the <ins> element', function () {
@@ -140,6 +139,11 @@ describe('sanitize', function () {
     var title = 'Image title'
     var $ = cheerio.load(marky("![alt text](#url '" + title + "')"))
     assert.equal($('img').attr('title'), title)
+  })
+
+  it('removes style attributes from img elements', function () {
+    var $ = cheerio.load(marky('<img style="width:100%;position:fixed;top:0;left:0;">'))
+    assert.equal($('img').attr('style'), undefined)
   })
 
   it('allows title attributes on links', function () {
