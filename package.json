@@ -1,12 +1,13 @@
 {
   "name": "@npmcorp/marky-markdown",
-  "version": "12.0.3",
+  "version": "13.0.0",
   "description": "npm's markdown parser",
   "main": "index.js",
   "scripts": {
     "prebuild": "node bin/build-marky-info.js",
     "build": "rm -rf dist && mkdir dist && touch dist/marky-markdown.js && browserify index.js -i highlights -s markyMarkdown > dist/marky-markdown.js",
     "test": "standard --fix && mocha --timeout 8000",
+    "test:debug": "standard --fix && mocha --inspect-brk --timeout 8000",
     "pretest": "npm run build",
     "prepublish": "npm run build",
     "release": "standard-version --commit-all"
@@ -47,7 +48,7 @@
     "atom-language-nginx": "^0.6.1",
     "github-slugger": "^1.2.0",
     "github-url-to-object": "^4.0.0",
-    "highlights": "^3.2.0-candidate.1",
+    "highlights": "^3.1.4",
     "highlights-tokens": "^1.0.1",
     "innertext": "^1.0.2",
     "is-plain-obj": "^1.1.0",
