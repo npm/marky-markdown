@@ -8,6 +8,7 @@ var cheerio = require('cheerio')
 describe('when package repo is on github', function () {
   var $
   var $short
+  var $long
   var pkg = {
     name: 'wahlberg',
     repository: {
@@ -19,16 +20,26 @@ describe('when package repo is on github', function () {
     name: 'wahlberg',
     repository: 'mark/wahlberg'
   }
+  var longPkg = {
+    name: '@wahlberg/boogie-nights',
+    repository: {
+      type: 'git',
+      url: 'https://github.com/mark/wahlberg',
+      directory: 'packages/boogie-nights'
+    }
+  }
 
   before(function () {
     $ = cheerio.load(marky(fixtures.github, {package: pkg}))
     $short = cheerio.load(marky(fixtures.github, {package: shortPkg}))
+    $long = cheerio.load(marky(fixtures.github, {package: longPkg}))
   })
 
   it('rewrites relative link hrefs to absolute', function () {
     assert(~fixtures.github.indexOf('(relative/file.js)'))
     assert($("a[href='https://github.com/mark/wahlberg/blob/HEAD/relative/file.js']").length)
     assert($short("a[href='https://github.com/mark/wahlberg/blob/HEAD/relative/file.js']").length)
+    assert($long("a[href='https://github.com/mark/wahlberg/blob/HEAD/packages/boogie-nights/relative/file.js']").length)
   })
 
   it('rewrites relative link hrefs to absolute (HTML)', function () {
@@ -38,12 +49,15 @@ describe('when package repo is on github', function () {
     assert($("a[href='https://github.com/mark/wahlberg/blob/HEAD/html-page-and-image.html']").length)
     assert($short("a[href='https://github.com/mark/wahlberg/blob/HEAD/html-page.html']").length)
     assert($short("a[href='https://github.com/mark/wahlberg/blob/HEAD/html-page-and-image.html']").length)
+    assert($long("a[href='https://github.com/mark/wahlberg/blob/HEAD/packages/boogie-nights/html-page.html']").length)
+    assert($long("a[href='https://github.com/mark/wahlberg/blob/HEAD/packages/boogie-nights/html-page-and-image.html']").length)
   })
 
   it('rewrites slashy relative links hrefs to absolute', function () {
     assert(~fixtures.github.indexOf('(/slashy/poo)'))
     assert($("a[href='https://github.com/mark/wahlberg/blob/HEAD/slashy/poo']").length)
     assert($short("a[href='https://github.com/mark/wahlberg/blob/HEAD/slashy/poo']").length)
+    assert($long("a[href='https://github.com/mark/wahlberg/blob/HEAD/packages/boogie-nights/slashy/poo']").length)
   })
 
   it('rewrites slashy relative links hrefs to absolute (HTML)', function () {
@@ -53,24 +67,29 @@ describe('when package repo is on github', function () {
     assert($("a[href='https://github.com/mark/wahlberg/blob/HEAD/html/block.html']").length)
     assert($short("a[href='https://github.com/mark/wahlberg/blob/HEAD/nested/link/image']").length)
     assert($short("a[href='https://github.com/mark/wahlberg/blob/HEAD/html/block.html']").length)
+    assert($long("a[href='https://github.com/mark/wahlberg/blob/HEAD/packages/boogie-nights/nested/link/image']").length)
+    assert($long("a[href='https://github.com/mark/wahlberg/blob/HEAD/packages/boogie-nights/html/block.html']").length)
   })
 
   it('leaves protocol-relative URLs alone', function () {
     assert(~fixtures.github.indexOf('(//protocollie.com)'))
     assert($("a[href='//protocollie.com']").length)
     assert($short("a[href='//protocollie.com']").length)
+    assert($long("a[href='//protocollie.com']").length)
   })
 
   it('leaves hashy URLs alone', function () {
     assert(~fixtures.github.indexOf('(#header)'))
     assert($("a[href='#header']").length)
     assert($short("a[href='#header']").length)
+    assert($long("a[href='#header']").length)
   })
 
   it('replaces relative img URLs with github URLs', function () {
     assert(~fixtures.github.indexOf('![](relative.png)'))
     assert($("img[src='https://raw.githubusercontent.com/mark/wahlberg/HEAD/relative.png']").length)
     assert($short("img[src='https://raw.githubusercontent.com/mark/wahlberg/HEAD/relative.png']").length)
+    assert($long("img[src='https://raw.githubusercontent.com/mark/wahlberg/HEAD/packages/boogie-nights/relative.png']").length)
   })
 
   it('replaces relative img URLs with github URLs (HTML)', function () {
@@ -80,22 +99,28 @@ describe('when package repo is on github', function () {
     assert($("img[src='https://raw.githubusercontent.com/mark/wahlberg/HEAD/html-page-and-image.png']").length)
     assert($short("img[src='https://raw.githubusercontent.com/mark/wahlberg/HEAD/html-image.png']").length)
     assert($short("img[src='https://raw.githubusercontent.com/mark/wahlberg/HEAD/html-page-and-image.png']").length)
+    assert($long("img[src='https://raw.githubusercontent.com/mark/wahlberg/HEAD/packages/boogie-nights/html-image.png']").length)
+    assert($long("img[src='https://raw.githubusercontent.com/mark/wahlberg/HEAD/packages/boogie-nights/html-page-and-image.png']").length)
   })
 
   it('replaces relative img URLs with github URLs (HTML, multiline)', function () {
     var src = "<p>\n<img src='html-image.png'/>\n</p>"
     var $$ = cheerio.load(marky(src, {package: pkg}))
     var $$short = cheerio.load(marky(src, {package: shortPkg}))
+    var $$long = cheerio.load(marky(src, {package: longPkg}))
     assert($("img[src='https://raw.githubusercontent.com/mark/wahlberg/HEAD/html-image.png']").length)
     assert($$short("img[src='https://raw.githubusercontent.com/mark/wahlberg/HEAD/html-image.png']").length)
+    assert($$long("img[src='https://raw.githubusercontent.com/mark/wahlberg/HEAD/packages/boogie-nights/html-image.png']").length)
     assert.equal(-1, $$.html().indexOf('<p></p>'))
     assert.equal(-1, $$short.html().indexOf('<p></p>'))
+    assert.equal(-1, $$long.html().indexOf('<p></p>'))
   })
 
   it('replaces slashy relative img URLs with github URLs', function () {
     assert(~fixtures.github.indexOf('![](/slashy/deep.png)'))
     assert($("img[src='https://raw.githubusercontent.com/mark/wahlberg/HEAD/slashy/deep.png']").length)
     assert($short("img[src='https://raw.githubusercontent.com/mark/wahlberg/HEAD/slashy/deep.png']").length)
+    assert($long("img[src='https://raw.githubusercontent.com/mark/wahlberg/HEAD/packages/boogie-nights/slashy/deep.png']").length)
   })
 
   it('replaces slashy relative img URLs with github URLs (HTML)', function () {
@@ -105,18 +130,22 @@ describe('when package repo is on github', function () {
     assert($("img[src='https://raw.githubusercontent.com/mark/wahlberg/HEAD/html/block.png']").length)
     assert($short("img[src='https://raw.githubusercontent.com/mark/wahlberg/HEAD/nested/link/image/image.png']").length)
     assert($short("img[src='https://raw.githubusercontent.com/mark/wahlberg/HEAD/html/block.png']").length)
+    assert($long("img[src='https://raw.githubusercontent.com/mark/wahlberg/HEAD/packages/boogie-nights/nested/link/image/image.png']").length)
+    assert($long("img[src='https://raw.githubusercontent.com/mark/wahlberg/HEAD/packages/boogie-nights/html/block.png']").length)
   })
 
   it('leaves protocol relative URLs alone', function () {
     assert(~fixtures.github.indexOf('![](//protocollie.com/woof.png)'))
     assert($("img[src='//protocollie.com/woof.png']").length)
     assert($short("img[src='//protocollie.com/woof.png']").length)
+    assert($long("img[src='//protocollie.com/woof.png']").length)
   })
 
   it('leaves HTTPS URLs alone', function () {
     assert(~fixtures.github.indexOf('![](https://secure.com/good.png)'))
     assert($("img[src='https://secure.com/good.png']").length)
     assert($short("img[src='https://secure.com/good.png']").length)
+    assert($long("img[src='https://secure.com/good.png']").length)
   })
 
   it('survives a falsy repository.url', function () {
