@@ -75,7 +75,7 @@
     "cheerio": "^0.22.0",
     "glob": "^7.1.1",
     "intercept-stdout": "^0.1.2",
-    "mocha": "^3.5.3",
+    "mocha": "^10.2.0",
     "oniguruma": "^7.0.0",
     "standard": "^10.0.0",
     "standard-version": "^4.1.0"
